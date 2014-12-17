@@ -1,5 +1,12 @@
 package bang.model.cards;
 
-public class PafCardModel {
-
+public class PafCardModel extends YellowCardModel{
+	
+	public PafCardModel()
+	{
+		super();
+		this.setName("paf");
+	}
+	
+	
 }

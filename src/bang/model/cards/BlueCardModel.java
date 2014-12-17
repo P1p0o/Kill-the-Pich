@@ -1,5 +1,9 @@
 package bang.model.cards;
 
-public class BlueCardModel {
-
+public class BlueCardModel extends CardModel {
+	
+	private BlueCardModel()
+	{
+		
+	}
 }
