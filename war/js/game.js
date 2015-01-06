@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 $(function() {
 	
@@ -37,3 +38,10 @@ function dropIt(theEvent) {
 	theEvent.preventDefault();
 	
 }
+=======
+$(window).load(function(){
+	console.log("coucou");
+	$('.image_in_slot').draggable();
+	$('#defausse').draggable();
+})
+>>>>>>> parent of 5f4c0c2... drag an drop

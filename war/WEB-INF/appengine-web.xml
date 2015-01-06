@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
+<<<<<<< HEAD
 
   <application>killthepich</application>
+=======
+  <application></application>
+>>>>>>> parent of 5f4c0c2... drag an drop
   <version>1</version>
 
   <!--
