@@ -21,6 +21,9 @@ public class GameModel {
 		
 		HandOutCards();
 		
+		//Sherif starts
+		
+		
 		System.out.println("ready to play!");
 	}
 	
