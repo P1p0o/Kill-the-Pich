@@ -1,4 +1,7 @@
 /META-INF/
 /bang/
+<<<<<<< HEAD
 /com/
+=======
+>>>>>>> parent of f0c9b63... web socket
 /log4j.properties

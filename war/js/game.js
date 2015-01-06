@@ -1,5 +1,8 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of f0c9b63... web socket
 $(function() {
 	
     $( ".image_in_slot" ).draggable();
@@ -10,6 +13,7 @@ $(function() {
     });
   });
 
+<<<<<<< HEAD
 
 /*$(window).load(function(){
 	console.log("coucou");
@@ -45,3 +49,5 @@ $(window).load(function(){
 	$('#defausse').draggable();
 })
 >>>>>>> parent of 5f4c0c2... drag an drop
+=======
+>>>>>>> parent of f0c9b63... web socket
