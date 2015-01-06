@@ -48,4 +48,16 @@
 	</welcome-file-list>
 >>>>>>> Stashed changes
 
+  <servlet>
+    <servlet-name>ServletTest</servlet-name>
+    <servlet-class>com.test.ServletTest</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletTest</servlet-name>
+    <url-pattern>/test</url-pattern>
+  </servlet-mapping>
+	<welcome-file-list>
+		<welcome-file>Logger.jsp</welcome-file>
+	</welcome-file-list>
+  
 </web-app>
