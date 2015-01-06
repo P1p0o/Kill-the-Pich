@@ -1,5 +1,10 @@
-$(window).load(function(){
-	console.log("coucou");
-	$('.image_in_slot').draggable();
-	$('#defausse').draggable();
-})
+$(function() {
+	
+    $( ".image_in_slot" ).draggable();
+    $( "#dropper" ).droppable({
+      drop: function( event, ui ) {  
+    	  $(this).alert("bonjour");
+      }
+    });
+  });
+
