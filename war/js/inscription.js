@@ -5,6 +5,7 @@ function inscription()
 	var pass = $('#pass').val();
 	var pass2 = $('#pass2').val();
 	var email = $('#email').val();
+	var score = 0;
 
 	var comment = "";
 	document.getElementById('errors').innerHTML = comment;
@@ -49,6 +50,7 @@ function inscription()
 			json.login = login;
 			json.pass = pass;
 			json.email = email;
+			json.score = score;
 
 			$.ajax({
 				type: "POST",

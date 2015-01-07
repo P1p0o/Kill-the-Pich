@@ -67,6 +67,7 @@ public class InscriptionServlet extends HttpServlet {
 			user.setProperty("login", login);
 			user.setProperty("pass", decoded);
 			user.setProperty("email", email);
+			user.setProperty("score",0);
 
 			datastore.put(user);
 			try {
