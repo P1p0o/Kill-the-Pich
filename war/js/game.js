@@ -1,4 +1,7 @@
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 $(function() {
 	
     $( ".image_in_slot" ).draggable();
@@ -37,9 +40,25 @@ function dropIt(theEvent) {
 	theEvent.preventDefault();
 	
 }
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 $(window).load(function(){
 	console.log("coucou");
 	$('.image_in_slot').draggable();
 	$('#defausse').draggable();
+	
+	
 })
+<<<<<<< Updated upstream
+=======
+
+function openMenu(){
+	
+	
+	alert("bonjour !");
+	
+}
+
+>>>>>>> Stashed changes

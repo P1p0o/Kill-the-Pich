@@ -20,7 +20,7 @@
     <servlet-name>Inscription</servlet-name>
     <servlet-class>servlet.InscriptionServlet</servlet-class>
   </servlet>
-  
+
   <servlet-mapping>
     <servlet-name>greetServlet</servlet-name>
     <url-pattern>/bang/greet</url-pattern>
@@ -38,7 +38,7 @@
   
   <!-- Default page to serve -->
   <welcome-file-list>
-    <welcome-file>Bang.html</welcome-file>
+    <welcome-file>splashScreen.html</welcome-file>
   </welcome-file-list>
 
 </web-app>

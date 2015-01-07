@@ -1,0 +1,66 @@
+@CHARSET "UTF-8";
+
+#login_area{
+display:inline-block;
+width:30%;
+vertical-align:middle;
+position:absolute;
+right:0;
+}
+
+#main_title{
+	
+	margin-left:72%;
+	vertical-align:middle;
+}
+
+#header{
+	width:100%;
+	background-color:green;
+	
+}
+#title{
+	width:65%;
+	display:inline-block;
+	vertical-align:middle;
+}
+
+#content{
+	margin-top:2%;
+	heigth:100%;
+	width:100%;
+	
+}
+#footer{
+	margin-top:5%;
+	heigth:14%;
+	background-color:red;
+}
+#sign_in{
+	margin-left:25%;
+	heigth:14%;
+}
+
+body{
+	
+	height:100%;
+	width:100%;
+	background-color:yellow;
+}
+
+#start_game{
+	display:inline-block;
+	margin-right:2%;
+
+}
+
+#regle_button{
+	display:inline-block;
+	margin-left:2%;
+
+}
+
+#challenge_button{
+	margin-top:2%;
+
+}
