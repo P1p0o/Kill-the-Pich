@@ -12,19 +12,41 @@ public class GameModel {
 	
 	private ArrayList<CardModel> CardsDeck = new ArrayList<CardModel>();
 	private ArrayList<PlayerModel> Players = new ArrayList<PlayerModel>();
+	private Integer availableSlots = 4;
+	private Integer nbPlayers = 4;
 	
 	public GameModel()
 	{
 		GenerateCardsDeck();
 		
-		CreatePlayers(4);
+		//CreatePlayers(4);
 		
-		HandOutCards();
+		//HandOutCards();
+		
+		
 		
 		//Sherif starts
+		//if(Players.get(0).hasCard("paf"))
+		//{
+		//	Players.get(0).playCard("paf");
+		//	PafCardModel SherifPaf = new PafCardModel();
+		//	SherifPaf.action(Players.get(1));
+		//}
 		
 		
-		System.out.println("ready to play!");
+		//System.out.println("ready to play!");
+	}
+	
+	public boolean startGame()
+	{
+		if(availableSlots == 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 	
 	private void GenerateCardsDeck()
@@ -52,10 +74,10 @@ public class GameModel {
 		
 		if( nbPlayers == 4 )
 		{
-			Players.add( new RenegatPlayerModel() );
-			Players.add( new SherifPlayerModel() );
-			Players.add( new HLLPlayerModel() );
-			Players.add( new AdjointPlayerModel() );
+			//Players.add( new SherifPlayerModel() );
+			//Players.add( new RenegatPlayerModel() );
+			//Players.add( new HLLPlayerModel() );
+			//Players.add( new AdjointPlayerModel() );
 		}
 	}
 	
@@ -63,7 +85,7 @@ public class GameModel {
 	{
 		int i = 1;
 		Iterator<CardModel> it = CardsDeck.iterator();
-		CardModel currentCard = new CardModel();
+		CardModel currentCard;
 		for ( i=1 ; i<=5 ; i++ ) //Jamais plus de 5 cartes pour un joueur
 		{
 			for (PlayerModel P : Players) {
@@ -76,5 +98,27 @@ public class GameModel {
 				}
 			}
 		}
+	}
+	
+	public void addPlayer (String token)
+	{
+		PlayerModel lNewPlayer = new PlayerModel(token);
+		Players.add(lNewPlayer);
+	}
+
+	public Integer getAvailableSlots() {
+		return availableSlots;
+	}
+
+	public void setAvailableSlots(Integer availableSlots) {
+		this.availableSlots = availableSlots;
+	}
+
+	public Integer getNbPlayers() {
+		return nbPlayers;
+	}
+
+	public void setNbPlayers(Integer nbPlayers) {
+		this.nbPlayers = nbPlayers;
 	}
 }

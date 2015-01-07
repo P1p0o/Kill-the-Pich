@@ -1,6 +1,8 @@
 package bang.model.cards;
 
-public class CardModel {
+import bang.model.game.PlayerModel;
+
+public abstract class CardModel {
 	
 	private boolean FaceUp = false;
 	protected String name;
@@ -9,6 +11,10 @@ public class CardModel {
 	{
 		
 	}
+	
+	public void action(){}
+	
+	public void action(PlayerModel pPlayer){}
 	
 	public boolean isFaceUp() {
 		return FaceUp;

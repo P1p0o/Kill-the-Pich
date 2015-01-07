@@ -10,6 +10,35 @@ public class PlayerModel {
 	private int Life = 4;
 	private ArrayList<CardModel> Hand = new ArrayList<CardModel>();
 	private String name;
+	private String token;
+	
+	public PlayerModel(String pToken)
+	{
+		setToken(pToken);
+	}
+	
+	public boolean hasCard(String pName)
+	{
+		for (CardModel C : Hand) {
+			if( C.getName().equals(pName) )
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public void playCard(String pName)
+	{
+		CardModel lPlayedCard;
+		for (CardModel C : Hand) {
+			if( C.getName().equals(pName) )
+			{
+				Hand.remove(C);
+				break;
+			}
+		}
+	}
 	
 	public int getLife() {
 		return Life;
@@ -31,6 +60,14 @@ public class PlayerModel {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 	
 	
