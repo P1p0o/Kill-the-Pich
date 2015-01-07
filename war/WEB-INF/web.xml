@@ -16,6 +16,11 @@
     <servlet-class>bang.server.TestFaftozServlet</servlet-class>
   </servlet>
   
+  <servlet>
+    <servlet-name>Inscription</servlet-name>
+    <servlet-class>servlet.InscriptionServlet</servlet-class>
+  </servlet>
+  
   <servlet-mapping>
     <servlet-name>greetServlet</servlet-name>
     <url-pattern>/bang/greet</url-pattern>
@@ -26,26 +31,14 @@
     <url-pattern>/faftoz</url-pattern>
   </servlet-mapping>
   
+   <servlet-mapping>
+    <servlet-name>Inscription</servlet-name>
+    <url-pattern>/inscription</url-pattern>
+  </servlet-mapping>
+  
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>Bang.html</welcome-file>
   </welcome-file-list>
-
-	<!-- Servlets -->
-	<servlet>
-		<servlet-name>greetServlet</servlet-name>
-		<servlet-class>bang.server.GreetingServiceImpl</servlet-class>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>greetServlet</servlet-name>
-		<url-pattern>/bang/greet</url-pattern>
-	</servlet-mapping>
-
-	<!-- Default page to serve -->
-	<welcome-file-list>
-		<welcome-file>Bang.html</welcome-file>
-	</welcome-file-list>
-
 
 </web-app>

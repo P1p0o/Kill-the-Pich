@@ -74,15 +74,5 @@
 
 .image_in_slot{
 	width: 100%;
-<<<<<<< HEAD
 	height:100%;
-<<<<<<< HEAD
-=======
-	transition: all .5s ease-in-out; 
->>>>>>> parent of 5f4c0c2... drag an drop
 }
-
-=======
-	height: 100%;
-}
->>>>>>> parent of f0c9b63... web socket
