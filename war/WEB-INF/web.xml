@@ -41,4 +41,36 @@
     <welcome-file>splashScreen.html</welcome-file>
   </welcome-file-list>
 
+	<!-- Servlets -->
+	<servlet>
+		<servlet-name>greetServlet</servlet-name>
+		<servlet-class>bang.server.GreetingServiceImpl</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>greetServlet</servlet-name>
+		<url-pattern>/bang/greet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+    <servlet-name>ServletTest</servlet-name>
+    <servlet-class>com.test.ServletTest</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ServletTest</servlet-name>
+    <url-pattern>/test</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>GameServlet</servlet-name>
+    <servlet-class>com.test.GameServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GameServlet</servlet-name>
+    <url-pattern>/game</url-pattern>
+  </servlet-mapping>
+  
+	<welcome-file-list>
+		<welcome-file>Logger.jsp</welcome-file>
+	</welcome-file-list>
 </web-app>

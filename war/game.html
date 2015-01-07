@@ -1,260 +1,47 @@
 <html>
-<<<<<<< Updated upstream
   <head>
     <meta charset="utf-8">
     <title>Kill the Pich</title>
     
     <link href="css/game.css" rel="stylesheet">
     
-=======
-<head>
-<meta charset="utf-8">
-<title>Kill the Pich</title>
-
-<link href="css/game.css" rel="stylesheet">
-
->>>>>>> Stashed changes
 </head>
 <body>
 	<div id="plateau">
-		<div id="player1">
-			<div id="card_player1">
-				<div class="slot_horizontal_p4">
-					<button type="button" onclick="openMenu()">
-						<img id="image1" class="image_in_slot" src="img/test.jpg"
-							draggable="true" ondragstart="dragIt(event);" />
-					</button>
-				</div>
-				<div class="slot_horizontal_p4">
-					<button type="button" onclick="openMenu()">
-						<img id="image2" class="image_in_slot" src="img/test.jpg"
-							draggable="true" ondragstart="dragIt(event);" />
-					</button>
-				</div>
-				<div class="slot_horizontal_p4">
-					<button type="button" onclick="openMenu()">
-						<img id="image3" class="image_in_slot" src="img/test.jpg"
-							draggable="true" ondragstart="dragIt(event);" />
-					</button>
-				</div>
-				<div class="slot_horizontal_p4">
-					<button type="button" onclick="openMenu()">
-						<img id="image4" class="image_in_slot" src="img/test.jpg"
-							draggable="true" ondragstart="dragIt(event);" />
-					</button>
-				</div>
-				<div class="slot_horizontal_p4">
-					<button type="button" onclick="openMenu()">
-						<img id="image5" class="image_in_slot" src="img/test.jpg"
-							draggable="true" ondragstart="dragIt(event);" />
-					</button>
-				</div>
-			</div>
-			<div id="life_player1">
-				<div class="slot_life_p4">
-					<img class="image_in_slot" src="img/poulet.png" />
-				</div>
-				<div class="slot_life_p4">
-					<img class="image_in_slot" src="img/poulet.png" />
-				</div>
-				<div class="slot_life_p4">
-					<img class="image_in_slot" src="img/poulet.png" />
-				</div>
-				<div class="slot_life_p4">
-					<img class="image_in_slot" src="img/poulet.png" />
-				</div>
-				<div class="slot_life_p4"></div>
-			</div>
-
-
-		</div>
-		<div id="player2">
-			<div id="card_player2">
-				<div class="slot_horizontal_pGD">
-					<button type="button" onclick="openMenu()">
-						<img id="image1" class="image_in_slot" src="img/test.jpg"
-							draggable="true" ondragstart="dragIt(event);" />
-					</button>
-				</div>
-				<div class="slot_horizontal_pGD">
-					<button type="button" onclick="openMenu()">
-						<img id="image2" class="image_in_slot" src="img/test.jpg"
-							draggable="true" ondragstart="dragIt(event);" />
-					</button>
-				</div>
-				<div class="slot_horizontal_pGD">
-					<button type="button" onclick="openMenu()">
-						<img id="image3" class="image_in_slot" src="img/test.jpg"
-							draggable="true" ondragstart="dragIt(event);" />
-					</button>
-				</div>
-				<div class="slot_horizontal_pGD">
-					<button type="button" onclick="openMenu()">
-						<img id="image4" class="image_in_slot" src="img/test.jpg"
-							draggable="true" ondragstart="dragIt(event);" />
-					</button>
-				</div>
-				<div class="slot_horizontal_pGD">
-					<button type="button" onclick="openMenu()">
-						<img id="image5" class="image_in_slot" src="img/test.jpg"
-							draggable="true" ondragstart="dragIt(event);" />
-					</button>
-				</div>
-			</div>
-			
-			<div id="life_player2">
-				<div class="slot_life_pGD">
-					<img class="image_in_slot" src="img/poulet.png" />
-				</div>
-				<div class="slot_life_pGD">
-					<img class="image_in_slot" src="img/poulet.png" />
-				</div>
-				<div class="slot_life_pGD">
-					<img class="image_in_slot" src="img/poulet.png" />
-				</div>
-				<div class="slot_life_pGD">
-					<img class="image_in_slot" src="img/poulet.png" />
-				</div>
-				<div class="slot_life_pGD"></div>
-			</div>
-			
-		</div>
+		<div id="player1">1</div>
+		<div id="player2">2</div>
 		<div id="pioche">pioche</div>
-<<<<<<< Updated upstream
-		<div id="defausse" class="dropper">dep</div>
+		<div id="defausse" class="dropper">def</div>
+		<div id="action">
+			<div id="action_play" class="action_div" onclick="play()">Play card</div>
+			<div id="action_defausse" class="action_div" onclick="defausse()">Defausse card</div>
+			<div id="action_cancel" class="action_div" onclick="cancel()">Cancel</div>
+		</div>
 		<div id="player3">3</div>
-=======
-		<div id="defausse" ondrop="dropIt(event);"
-			ondragover="event.preventDefault();">def</div>
-		<div id="player3">
-3
-			<div class="life">
-				<div class="slot_life_pDG">
-					<img class="image_in_slot" src="img/poulet.png" />
-				</div>
-				<div class="slot_life_pDG">
-					<img class="image_in_slot" src="img/poulet.png" />
-				</div>
-				<div class="slot_life_pDG">
-					<img class="image_in_slot" src="img/poulet.png" />
-				</div>
-				<div class="slot_life_pDG">
-					<img class="image_in_slot" src="img/poulet.png" />
-				</div>
-				<div class="slot_life_pDG"></div>
-			</div>
-			<div class="card">
-				<div class="slot_horizontal_pDG">
-					<button type="button" onclick="openMenu()">
-						<img id="image1" class="image_in_slot" src="img/test.jpg"
-							draggable="true" ondragstart="dragIt(event);" />
-					</button>
-				</div>
-				<div class="slot_horizontal_pDG">
-					<button type="button" onclick="openMenu()">
-						<img id="image2" class="image_in_slot" src="img/test.jpg"
-							draggable="true" ondragstart="dragIt(event);" />
-					</button>
-				</div>
-				<div class="slot_horizontal_pDG">
-					<button type="button" onclick="openMenu()">
-						<img id="image3" class="image_in_slot" src="img/test.jpg"
-							draggable="true" ondragstart="dragIt(event);" />
-					</button>
-				</div>
-				<div class="slot_horizontal_pDG">
-					<button type="button" onclick="openMenu()">
-						<img id="image4" class="image_in_slot" src="img/test.jpg"
-							draggable="true" ondragstart="dragIt(event);" />
-					</button>
-				</div>
-				<div class="slot_horizontal_pDG">
-					<button type="button" onclick="openMenu()">
-						<img id="image5" class="image_in_slot" src="img/test.jpg"
-							draggable="true" ondragstart="dragIt(event);" />
-					</button>
-				</div>
-			</div>
-
-		</div>
->>>>>>> Stashed changes
 		<div id="player4">
-			<div class="life_horizontal">
-				5
-				<div class="slot_life">
-					<img class="image_in_slot_pGD" src="img/poulet.png" />
-				</div>
-				<div class="slot_life">
-					<img class="image_in_slot_pGD" src="img/poulet.png" />
-				</div>
-				<div class="slot_life">
-					<img class="image_in_slot_pGD" src="img/poulet.png" />
-				</div>
-				<div class="slot_life">
-					<img class="image_in_slot_pGD" src="img/poulet.png" />
-				</div>
-				<div class="slot_life"></div>
+			<div class="life_horizontal">5</div>
+			<div class="slot_horizontal" id="card1">
+				<img class="image_in_slot" onclick="showAction(1)" src="img/test.jpg"/>
 			</div>
-			<div class="slot_horizontal" ondrop="dropIt(event);"
-				ondragover="event.preventDefault();">
-				<button type="button" onclick="openMenu()">
-					<img id="image1" class="image_in_slot" src="img/test.jpg"
-						draggable="true" ondragstart="dragIt(event);" />
-				</button>
+			<div class="slot_horizontal" id="card2">
+				<img class="image_in_slot" onclick="showAction(2)" src="img/bang.jpg"/>
 			</div>
-<<<<<<< Updated upstream
-			<div class="slot_horizontal">
-				<img class="image_in_slot"  src="img/test.jpg"/>
+			<div class="slot_horizontal" id="card3">
+				<img class="image_in_slot" onclick="showAction(3)" src="img/test3.jpg"/>
+			</div> 
+			<div class="slot_horizontal" id="card4">
+				<img class="image_in_slot" onclick="showAction(4)" src="img/test4.jpg"/>
 			</div>
-			<div class="slot_horizontal">
-				<img class="image_in_slot" src="img/test.jpg"/>
-=======
-			<div class="slot_horizontal" ondrop="dropIt(event);"
-				ondragover="event.preventDefault();">
-				<button type="button" onclick="openMenu()">
-					<img id="image2" class="image_in_slot" src="img/test.jpg"
-						draggable="true" ondragstart="dragIt(event);" />
-				</button>
-			</div>
-			<div class="slot_horizontal" ondrop="dropIt(event);"
-				ondragover="event.preventDefault();">
-				<button type="button" onclick="openMenu()">
-					<img id="image3" class="image_in_slot" src="img/test.jpg"
-						draggable="true" ondragstart="dragIt(event);" />
-				</button>
->>>>>>> Stashed changes
-			</div>
-			<div class="slot_horizontal" ondrop="dropIt(event);"
-				ondragover="event.preventDefault();">
-				<button type="button" onclick="openMenu()">
-					<img id="image4" class="image_in_slot" src="img/test.jpg"
-						draggable="true" ondragstart="dragIt(event);" />
-				</button>
-			</div>
-<<<<<<< Updated upstream
-			<div class="slot_horizontal">
-				<img class="image_in_slot"  src="img/test.jpg"/>
-=======
-			<div class="slot_horizontal" ondrop="dropIt(event);"
-				ondragover="event.preventDefault();">
-				<button type="button" onclick="openMenu()">
-					<img id="image5" class="image_in_slot" src="img/test.jpg"
-						draggable="true" ondragstart="dragIt(event);" />
-				</button>
->>>>>>> Stashed changes
+			<div class="slot_horizontal" id="card5">
+				<img class="image_in_slot" onclick="showAction(5)" src="img/test5.jpg"/>
 			</div>
 		</div>
-		<ul id="messages"></ul>
 	</div>
 
-	<script src="js/jquery-2.1.1.js"></script>
-	<script
-		src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+	<script src="js/jquery.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 	<script src="js/jquery-ui.js"></script>
-<<<<<<< Updated upstream
-=======
+	<script src="js/jquery-2.1.1.js"></script>
 	<script src="js/game.js"></script>
-
->>>>>>> Stashed changes
 </body>
 </html>
