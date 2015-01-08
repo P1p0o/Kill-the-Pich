@@ -11,7 +11,7 @@ import bang.model.cards.RateCardModel;
 public class GameModel {
 	
 	private ArrayList<CardModel> CardsDeck = new ArrayList<CardModel>();
-	private ArrayList<PlayerModel> Players = new ArrayList<PlayerModel>();
+	private ArrayList<PlayerModel> listPlayers = new ArrayList<PlayerModel>();
 	private Integer availableSlots = 4;
 	private Integer nbPlayers = 4;
 	
@@ -88,7 +88,7 @@ public class GameModel {
 		CardModel currentCard;
 		for ( i=1 ; i<=5 ; i++ ) //Jamais plus de 5 cartes pour un joueur
 		{
-			for (PlayerModel P : Players) {
+			for (PlayerModel P : listPlayers) {
 				if( P.getLife() >= i )
 				{
 					currentCard = it.next();
@@ -103,7 +103,7 @@ public class GameModel {
 	public void addPlayer (String token)
 	{
 		PlayerModel lNewPlayer = new PlayerModel(token);
-		Players.add(lNewPlayer);
+		listPlayers.add(lNewPlayer);
 	}
 
 	public Integer getAvailableSlots() {
@@ -121,4 +121,9 @@ public class GameModel {
 	public void setNbPlayers(Integer nbPlayers) {
 		this.nbPlayers = nbPlayers;
 	}
+
+	public ArrayList<PlayerModel> getListPlayers() {
+		return listPlayers;
+	}
+
 }
