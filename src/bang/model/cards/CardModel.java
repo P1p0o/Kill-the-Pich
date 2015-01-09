@@ -1,9 +1,11 @@
 package bang.model.cards;
 
+import javax.persistence.Id;
+
 import bang.model.game.PlayerModel;
 
 public abstract class CardModel {
-	
+	@Id Long id;
 	private boolean FaceUp = false;
 	protected String name;
 	

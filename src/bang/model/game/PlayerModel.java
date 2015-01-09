@@ -3,10 +3,12 @@ package bang.model.game;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Id;
+
 import bang.model.cards.CardModel;
 
 public class PlayerModel {
-	
+	@Id Long id;
 	private int Life = 4;
 	private ArrayList<CardModel> Hand = new ArrayList<CardModel>();
 	private String name;
@@ -16,6 +18,8 @@ public class PlayerModel {
 	{
 		setToken(pToken);
 	}
+	
+	public PlayerModel(){}
 	
 	public boolean hasCard(String pName)
 	{

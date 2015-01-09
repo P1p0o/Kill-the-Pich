@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 
+import javax.persistence.Id;
+
 import bang.model.cards.CardModel;
 import bang.model.cards.PafCardModel;
 import bang.model.cards.RateCardModel;
 
 public class GameModel {
-	
+	@Id Long id;
 	private ArrayList<CardModel> CardsDeck = new ArrayList<CardModel>();
 	private ArrayList<PlayerModel> listPlayers = new ArrayList<PlayerModel>();
 	private Integer availableSlots = 4;
