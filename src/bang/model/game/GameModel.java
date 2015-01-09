@@ -3,6 +3,7 @@ package bang.model.game;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.Random;
 
 import javax.persistence.Id;
 
@@ -13,7 +14,7 @@ import bang.model.cards.RateCardModel;
 public class GameModel {
 	@Id Long id;
 	private ArrayList<CardModel> CardsDeck = new ArrayList<CardModel>();
-	private ArrayList<PlayerModel> listPlayers = new ArrayList<PlayerModel>();
+	private ArrayList<PlayerModel> mListPlayers = new ArrayList<PlayerModel>();
 	private Integer availableSlots = 4;
 	private Integer nbPlayers = 4;
 	
@@ -21,9 +22,9 @@ public class GameModel {
 	{
 		GenerateCardsDeck();
 		
-		//CreatePlayers(4);
+		CreatePlayers(4);
 		
-		//HandOutCards();
+		HandOutCards();
 		
 		
 		
@@ -73,13 +74,29 @@ public class GameModel {
 	
 	private void CreatePlayers(int nbPlayers)
 	{
+		ArrayList<String> lRoles = new ArrayList<String>();
 		
-		if( nbPlayers == 4 )
+		//Building roles array
+		lRoles.add("sherif");
+		lRoles.add("adjoint");
+		lRoles.add("renegat");
+		lRoles.add("hll");
+		
+		//Randomize roles array
+		Random rnd = new Random();
+		for (int i = lRoles.size() - 1; i > 0; i--)
 		{
-			//Players.add( new SherifPlayerModel() );
-			//Players.add( new RenegatPlayerModel() );
-			//Players.add( new HLLPlayerModel() );
-			//Players.add( new AdjointPlayerModel() );
+			int index = rnd.nextInt(i + 1);
+			String a = lRoles.get(index);
+			lRoles.set(index, lRoles.get(i));
+			lRoles.set(i, a);
+		}
+		
+		//Set players' roles
+		for( PlayerModel Player : mListPlayers )
+		{
+			Player.setName(lRoles.get(0));
+			lRoles.remove(0);
 		}
 	}
 	
@@ -90,7 +107,7 @@ public class GameModel {
 		CardModel currentCard;
 		for ( i=1 ; i<=5 ; i++ ) //Jamais plus de 5 cartes pour un joueur
 		{
-			for (PlayerModel P : listPlayers) {
+			for (PlayerModel P : mListPlayers) {
 				if( P.getLife() >= i )
 				{
 					currentCard = it.next();
@@ -105,7 +122,7 @@ public class GameModel {
 	public void addPlayer (String token)
 	{
 		PlayerModel lNewPlayer = new PlayerModel(token);
-		listPlayers.add(lNewPlayer);
+		mListPlayers.add(lNewPlayer);
 	}
 
 	public Integer getAvailableSlots() {
@@ -125,7 +142,7 @@ public class GameModel {
 	}
 
 	public ArrayList<PlayerModel> getListPlayers() {
-		return listPlayers;
+		return mListPlayers;
 	}
 
 }
