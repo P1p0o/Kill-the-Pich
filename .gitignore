@@ -1,3 +1,9 @@
 /test-classes/
 
+<<<<<<< Updated upstream
 gwt-unitCache/gwt-unitCache-b43fe07841b100c5f8cde7d5e855fc294f6a56f4-0000014AC5254F33
+=======
+war/WEB-INF/classes/bang/model/cards/PafCardModel.class
+
+gwt-unitCache/gwt-unitCache-b43fe07841b100c5f8cde7d5e855fc294f6a56f4-0000014AC4F23250
+>>>>>>> Stashed changes

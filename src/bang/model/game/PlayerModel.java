@@ -12,6 +12,7 @@ public class PlayerModel {
 	private int Life = 4;
 	private ArrayList<CardModel> Hand = new ArrayList<CardModel>();
 	private String name;
+	private String mRole;
 	private String token;
 	
 	public PlayerModel(String pToken)
@@ -72,6 +73,14 @@ public class PlayerModel {
 
 	public void setToken(String token) {
 		this.token = token;
+	}
+
+	public String getmRole() {
+		return mRole;
+	}
+
+	public void setmRole(String mRole) {
+		this.mRole = mRole;
 	}
 	
 	
