@@ -150,7 +150,23 @@ function addPlayer(token){
 	$.ajax({
 		type: "POST",
 		dataType: "json",
-		url: "session",
+		url: "game",
 	    data: json			
-	});
+	})
 }
+
+function getStartingHand(nb){
+	var json = {};
+	json.number = nb;
+	
+	$.ajax({
+		type: "POST",
+		dataType: "json",
+		url: "hand",
+	    data: json			
+	}).then(function(json){
+		console.log(json);
+	})
+}
+
+

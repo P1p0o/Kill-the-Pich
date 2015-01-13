@@ -1,0 +1,34 @@
+#player2{
+	background-color:yellow;
+	width: 60%;
+	height: 20%;
+	margin-left:20%;
+	border: 1px solid black;
+}
+
+#player1{
+	background-color:blue;
+	width :10%;
+	height: 60%;
+	display: inline-block;
+	vertical-align:middle;
+	border: 1px solid black;
+}
+
+#player3{
+	background-color:green;
+	width :10%;
+	height: 60%;
+	display: inline-block;
+	vertical-align:middle;
+	margin-left: 10%;
+	border: 1px solid black;
+}
+
+#player4{
+	background-color:red;
+	width: 60%;
+	height: 20%;
+	margin-left:20%;
+	border: 1px solid black;
+}

@@ -24,8 +24,6 @@ public class GameModel {
 		
 		CreatePlayers(4);
 		
-		HandOutCards();
-		
 		
 		
 		//Sherif starts
@@ -37,13 +35,14 @@ public class GameModel {
 		//}
 		
 		
-		//System.out.println("ready to play!");
-	}
-	
-	public boolean startGame()
+			//System.out.println("ready to play!");
+		}
+		
+		public boolean startGame()
 	{
 		if(availableSlots == 0)
 		{
+			HandOutCards();
 			return true;
 		}
 		else

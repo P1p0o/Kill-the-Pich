@@ -70,6 +70,15 @@
     <url-pattern>/game</url-pattern>
   </servlet-mapping>
   
+   <servlet>
+    <servlet-name>HandServlet</servlet-name>
+    <servlet-class>com.test.HandServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HandServlet</servlet-name>
+    <url-pattern>/hand</url-pattern>
+  </servlet-mapping>
+  
 	<welcome-file-list>
 		<welcome-file>Logger.jsp</welcome-file>
 	</welcome-file-list>
