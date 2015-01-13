@@ -20,11 +20,23 @@
     <servlet-name>Inscription</servlet-name>
     <servlet-class>servlet.InscriptionServlet</servlet-class>
   </servlet>
+  
+  <servlet>
+    <servlet-name>Rank</servlet-name>
+    <servlet-class>servlet.RankServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>Rank</servlet-name>
+    <url-pattern>/rank</url-pattern>
+  </servlet-mapping>
 
   <servlet-mapping>
     <servlet-name>greetServlet</servlet-name>
     <url-pattern>/bang/greet</url-pattern>
   </servlet-mapping>
+  
+  
   
   <servlet-mapping>
     <servlet-name>testFaftoz</servlet-name>
