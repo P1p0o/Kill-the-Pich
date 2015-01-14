@@ -1,11 +1,11 @@
 var cardNumber;
 
 $(document).ready(function() { 
+	
 	playerReady = 0;
 	$("#action_defausse").css( "visibility", "hidden" );
 	$("#action_play").css( "visibility", "hidden" );
 	$("#action_cancel").css( "visibility", "hidden" );
-
 	
 });
 
