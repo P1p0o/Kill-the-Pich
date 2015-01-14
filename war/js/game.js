@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 var cardNumber;
 
 $(document).ready(function() { 
@@ -6,9 +5,6 @@ $(document).ready(function() {
 	$("#action_defausse").css( "visibility", "hidden" );
 	$("#action_play").css( "visibility", "hidden" );
 	$("#action_cancel").css( "visibility", "hidden" );
-=======
-$(function() {
->>>>>>> Stashed changes
 	
 })
 
@@ -57,11 +53,13 @@ function play(){
 	var currentPlayer = document.URL;
 	currentPlayer = currentPlayer.split("player")[1];
 	currentPlayer = currentPlayer.split(".jsp")[0];
-	
+	console.log(image);
 	image = image.split("img/")[1];
-	image = image.split("\">")[0];
+	image = image.split("\"")[0];
 
-	if(image == "bang.jpg"){
+	console.log(image);
+	
+	if(image == "paf.jpg"){
 
 		$("#action_defausse").css( "visibility", "hidden" );
 		$("#action_play").css( "visibility", "hidden" );
@@ -99,10 +97,9 @@ function play(){
 		}
 		
 	}
-	else{
-		alert("pas bang :(");
+	if(image == "missed.jpg"){
+		missed(currentPlayer);
 	}
-	
 }
 function paff(player){
 	$("#player1").css("border","1px solid black");
@@ -119,15 +116,46 @@ function paff(player){
 	
 	var json ={};
 	json.player = player; 
+	json.card = "paf";
 	$.ajax({
-		type: "GET",
+		type: "POST",
 		dataType: "json",
-		url: "test",
+		url: "card",
+	    data: json			
+	})
+		
+	defausse();
+	
+}
+
+function missed(player){
+	var json ={};
+	json.card = "missed";
+	json.player = player;
+	$.ajax({
+		type: "POST",
+		dataType: "json",
+		url: "card",
 	    data: json			
 	});
 	
 	defausse();
 }
+
+function loseLife(player){
+	console.log("loseLife");
+	var json ={};
+	json.card = "loseLife";
+	json.player = player;
+	console.log(json);
+	$.ajax({
+		type: "POST",
+		dataType: "json",
+		url: "card",
+	    data: json			
+	});
+}
+
 
 function checkForMissed(){
 	var currentPlayer = document.URL;
@@ -144,7 +172,14 @@ function checkForMissed(){
 			var cardFound = $(player).find(elt);
 			$(cardFound).css("border", "1px solid red");
 		}
+		else{
+			var cardFound = $(player).find(elt);
+			$(cardFound).removeAttr( 'class' );
+			$(cardFound).addClass('defausseCard');
+			$(cardFound).removeAttr('onclick');
+		}
 	});
+	
 }
 
 function addPlayer(token){
@@ -170,7 +205,23 @@ function getStartingHand(nb){
 	    data: json			
 	}).then(function(json){
 		console.log(json);
-	})
+		$(json.cards).each(function(i,elt){
+			i++;
+			if(elt.name == "paf"){
+				$("#cards").append('<div class="slot_horizontal" id="card'+i+'">\
+				<img class="image_in_slot" onclick="showAction('+i+')" src="img/paf.jpg"/>\
+				</div>');
+			}
+			if(elt.name == "rate"){
+				$("#cards").append('<div class="slot_horizontal" id="card'+i+'">\
+				<img class="image_in_slot" onclick="showAction('+i+')" src="img/missed.jpg"/>\
+				</div>');
+			}
+		});
+		
+		$("#life").text(json.life);
+		$("#role").text(json.role);
+	});
 }
 
 

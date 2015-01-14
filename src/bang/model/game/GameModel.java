@@ -22,10 +22,6 @@ public class GameModel {
 	{
 		GenerateCardsDeck();
 		
-		CreatePlayers(4);
-		
-		
-		
 		//Sherif starts
 		//if(Players.get(0).hasCard("paf"))
 		//{
@@ -42,6 +38,7 @@ public class GameModel {
 	{
 		if(availableSlots == 0)
 		{
+			AssignRoles(4);
 			HandOutCards();
 			return true;
 		}
@@ -65,13 +62,9 @@ public class GameModel {
 			this.CardsDeck.add( NewRate );
 		}
 		Collections.shuffle(CardsDeck);
-		
-		for (CardModel C : CardsDeck) {
-			System.out.println(C.getName());
-		}
 	}
 	
-	private void CreatePlayers(int nbPlayers)
+	private void AssignRoles(int nbPlayers)
 	{
 		ArrayList<String> lRoles = new ArrayList<String>();
 		
@@ -94,7 +87,10 @@ public class GameModel {
 		//Set players' roles
 		for( PlayerModel Player : mListPlayers )
 		{
-			Player.setName(lRoles.get(0));
+			Player.setmRole(lRoles.get(0));
+			if(lRoles.get(0).equals("sherif")){
+				Player.setLife(Player.getLife()+1);
+			}
 			lRoles.remove(0);
 		}
 	}
@@ -112,16 +108,17 @@ public class GameModel {
 					currentCard = it.next();
 					P.addToHand(currentCard);
 					it.remove();
-					System.out.println(P.getName()+": "+currentCard.getName());
+					
 				}
 			}
 		}
 	}
 	
-	public void addPlayer (String token)
+	public void addPlayer (String name, String token)
 	{
-		PlayerModel lNewPlayer = new PlayerModel(token);
+		PlayerModel lNewPlayer = new PlayerModel(name, token);
 		mListPlayers.add(lNewPlayer);
+		availableSlots --;
 	}
 
 	public Integer getAvailableSlots() {

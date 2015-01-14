@@ -66,6 +66,20 @@ public class HandServlet extends HttpServlet {
 						e.printStackTrace();
 					}
 				}
+				
+				try {
+					jsonToReturn.put("life", player.getLife());
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				try {
+					jsonToReturn.put("role", player.getmRole());
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			
 			try {
@@ -75,6 +89,9 @@ public class HandServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		PrintWriter out = response.getWriter();
+        out.print(jsonToReturn);
+        out.flush();
 	}
 
 }

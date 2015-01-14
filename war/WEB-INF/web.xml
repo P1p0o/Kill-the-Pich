@@ -65,12 +65,12 @@
 	</servlet-mapping>
 	
 	<servlet>
-    <servlet-name>ServletTest</servlet-name>
-    <servlet-class>com.test.ServletTest</servlet-class>
+    <servlet-name>CardServlet</servlet-name>
+    <servlet-class>com.test.CardServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>ServletTest</servlet-name>
-    <url-pattern>/test</url-pattern>
+    <servlet-name>CardServlet</servlet-name>
+    <url-pattern>/card</url-pattern>
   </servlet-mapping>
   
   <servlet>

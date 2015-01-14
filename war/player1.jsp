@@ -30,8 +30,13 @@ String token = channelService.createChannel("player1");
     	<div id="plateau">
 		<div id="player3">3</div>
 		<div id="player2">2</div>
-		<div id="pioche">pioche</div>
-		<div id="defausse" class="dropper">def</div>
+		<div id="centerPlateau">
+			<div id="piocheDef">
+				<div id="pioche">pioche</div>
+				<div id="defausse" class="dropper">def</div>
+			</div>
+			<div id="notifications">Notifications</div>
+		</div>
 		<div id="action">
 			<div id="action_play" class="action_div" onclick="play()">Play card</div>
 			<div id="action_defausse" class="action_div" onclick="defausse()">Defausse card</div>
@@ -39,21 +44,15 @@ String token = channelService.createChannel("player1");
 		</div>
 		<div id="player4">4</div>
 		<div id="player1">
-			<div class="life_horizontal">1</div>
-			<div class="slot_horizontal" id="card1">
-				<img class="image_in_slot" onclick="showAction(1)" src="img/test.jpg"/>
+			<div id="information">
+				<div id="life">
+					life
+				</div>
+				<div id="role">
+					role
+				</div>
 			</div>
-			<div class="slot_horizontal" id="card2">
-				<img class="image_in_slot" onclick="showAction(2)" src="img/bang.jpg"/>
-			</div>
-			<div class="slot_horizontal" id="card3">
-				<img class="image_in_slot" onclick="showAction(3)" src="img/test3.jpg"/>
-			</div> 
-			<div class="slot_horizontal" id="card4">
-				<img class="image_in_slot" onclick="showAction(4)" src="img/test4.jpg"/>
-			</div>
-			<div class="slot_horizontal" id="card5">
-				<img class="image_in_slot" onclick="showAction(5)" src="img/missed.jpg"/>
+			<div id="cards">
 			</div>
 		</div>
 	</div>
@@ -71,14 +70,31 @@ String token = channelService.createChannel("player1");
 		socket = channel.open();    
 		
 		socket.onopen = function() {
-			addPlayer(token);
+			addPlayer("player1",token);
 		}
 		
 		socket.onmessage = function(message) {
 
-			if(message.data.indexOf("bang") > -1){
-				alert("U just got banged !");
-				checkForMissed();
+			if(message.data.indexOf("paf") > -1){
+				if(message.data.indexOf("paf1") > -1){
+					$("#notifications").text("You got pafed !!");
+					checkForMissed();
+				}
+				else{
+					var player = message.data.split("paf")[1];
+					$("#notifications").text("player "+player+" got pafed!!");
+				}
+			}
+			
+			if(message.data.indexOf("missed") > -1){
+				if(message.data.indexOf("missed1") > -1){
+					$("#notifications").text("Tu ne perds pas de vie !!");
+					checkForMissed();
+				}
+				else{
+					var player = message.data.split("missed")[1];
+					$("#notifications").text("player "+player+" dodged the paf!!");
+				}
 			}
 			
 			if(message.data.indexOf("gameStart") > -1){

@@ -61,6 +61,7 @@ public class GameServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String token = request.getParameter("token");
+		String name = request.getParameter("name");
 		GameModel gameModel = (GameModel) cacheManager.get("game");
 		
 		if(gameModel == null){
@@ -68,7 +69,7 @@ public class GameServlet extends HttpServlet {
 		}
 		
 		if(gameModel.getListPlayers().size() < 4){
-			gameModel.addPlayer(token);
+			gameModel.addPlayer(name, token);
 		}
 		
 		

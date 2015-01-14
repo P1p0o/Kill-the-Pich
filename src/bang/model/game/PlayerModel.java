@@ -15,8 +15,9 @@ public class PlayerModel {
 	private String mRole;
 	private String token;
 	
-	public PlayerModel(String pToken)
+	public PlayerModel(String name, String pToken)
 	{
+		setName(name);
 		setToken(pToken);
 	}
 	
