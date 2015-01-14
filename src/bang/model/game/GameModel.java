@@ -7,6 +7,10 @@ import java.util.Random;
 
 import javax.persistence.Id;
 
+import com.google.appengine.api.channel.ChannelMessage;
+import com.google.appengine.api.channel.ChannelService;
+import com.google.appengine.api.channel.ChannelServiceFactory;
+
 import bang.model.cards.CardModel;
 import bang.model.cards.PafCardModel;
 import bang.model.cards.RateCardModel;
@@ -50,6 +54,7 @@ public class GameModel {
 		{
 			AssignRoles(4);
 			HandOutCards();
+			
 			return true;
 		}
 		else
@@ -102,7 +107,6 @@ public class GameModel {
 			if(lRoles.get(0).equals("sherif")){
 				Player.setLife(Player.getLife()+1);
 			}
-			System.out.println(lRoles.get(0));
 			lRoles.remove(0);
 		}
 	}
@@ -121,6 +125,10 @@ public class GameModel {
 					P.addToHand(currentCard);
 					it.remove();
 					
+				}
+				if(P.getmRole().equals("sherif"))
+				{
+					mTurn = mListPlayers.indexOf(P);
 				}
 			}
 		}

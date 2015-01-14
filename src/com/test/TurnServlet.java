@@ -38,25 +38,32 @@ public class TurnServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		GameModel gameModel = (GameModel) cacheManager.get("game");
-		int lTurn = gameModel.getmTurn();
+		GameModel lCurrentGame = (GameModel) cacheManager.get("game");
+		int lNbPlayers = Integer.parseInt(request.getParameter("NbPlayers"));
+
 		
-		if ( lTurn == 4 )
+		int lTurn = lCurrentGame.getmTurn();
+		do
 		{
-			lTurn=1;
+			if ( lTurn == lNbPlayers)
+			{
+				lTurn=1;
+			}
+			else
+			{
+				lTurn++;
+			}
 		}
-		else
-		{
-			lTurn++;
-		}
+		while( lCurrentGame.getListPlayers().get(lTurn-1).getLife() == 0 );
 		
-		gameModel.setmTurn(lTurn);
+		lCurrentGame.setmTurn(lTurn);
+		cacheManager.put("game", lCurrentGame);
 		
 		ChannelService channelService = ChannelServiceFactory.getChannelService();
-		channelService.sendMessage(new ChannelMessage("player1", "gameStart"));
-		channelService.sendMessage(new ChannelMessage("player2", "gameStart"));
-		channelService.sendMessage(new ChannelMessage("player3", "gameStart"));
-		channelService.sendMessage(new ChannelMessage("player4", "gameStart"));
+		channelService.sendMessage(new ChannelMessage("player1", "turn"+lTurn));
+		channelService.sendMessage(new ChannelMessage("player2", "turn"+lTurn));
+		channelService.sendMessage(new ChannelMessage("player3", "turn"+lTurn));
+		channelService.sendMessage(new ChannelMessage("player4", "turn"+lTurn));
 		
 		
 	}
