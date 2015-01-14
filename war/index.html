@@ -2,35 +2,53 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Need to paf</title>
+<title>PAF - Accueil</title>
 <link href="css/index.css" rel="stylesheet">
-<<<<<<< Updated upstream
- <script src="js/jquery.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
-<script src="js/jquery-ui.js"></script>
-<script src="js/jquery-2.1.1.js"></script>		
-=======
->>>>>>> Stashed changes
-<script src="js/index.js"></script>
+
+ <script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.js"></script>
+<script type="text/javascript" src="js/jquery-2.1.1.js"></script>		
+
+<script type="text/javascript" src="js/index.js"></script>
+
+<script type="text/javascript" src="js/jquery.js"></script>
+
+<script type="text/javascript" language="javascript" src="js/login.js"></script>
+
 </head>
 <body>
 
 	<div id="header">
 
 		<div id="title">
-			<h1 id="main_title">PAF !</h1>
+			<h1 id="main_title">Bonjour !</h1>
 		</div>
 
 		<div id="login_area">
-			<p>
-				Login <input size="23px" type="text" />
-			</p>
-			<p>
-				Password <input type="text" /> <span> <a href="">Connexion</a></span>
-			</p>
-			<p>
-				<a id="sign_in" href="">Create account</a>
-			</p>
+			<table>
+				<tr>
+					<td>E-mail</td>
+					<td><input id="email" name="email" type="email" /></td>
+				</tr>
+				<tr>
+					<td>Password</td>
+					<td><input id="pass" name="pass" type="password" /></td>
+				</tr>
+				<tr>
+					<td><button name="register" value="Connexion"
+							onclick="login()">Connexion</button></td>
+				</tr>
+				<tr>
+					<td><a id="sign_in" href="inscription.html">Creer un
+							profil</a></td>
+				</tr>
+			</table>
+		</div>
+		<p id="errors"></p>
+		<div id="logout_area">
+			<p id="score"></p>
+			<button name="logout" value="Deconnexion" onclick="logout()">Deconnexion</button>
 		</div>
 
 	</div>
@@ -45,12 +63,12 @@
 		</div>
 		<div id="regle_button">
 			<button id="button" type="button">
-				<img src="img/regles.jpg" height="150" width="200"/><br>REGLES
+				<img src="img/regles.jpg" height="150" width="200" /><br>REGLES
 			</button>
-			</div>
+		</div>
 
 		<div id="challenge_button">
-			<button id="button_hall" type="button" onclick="goToHall()">
+			<button onclick="goToHall()">
 				<img src="img/challenge.jpg" /><br>LA GROTTE DES CHAMPIONS
 			</button>
 
@@ -58,6 +76,9 @@
 
 	</div>
 
-	<div id="footer">Paf - 2015</div>
+	<div id="footer">PAF - 2015</div>
 </body>
+<script src="js/jquery.js"></script>
+
+<script type="text/javascript" language="javascript" src="js/login.js"></script>
 </html>

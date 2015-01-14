@@ -61,12 +61,15 @@ function inscription()
 				if(json.response == "true")
 				{
 					alert("Nouvel utlisateur ajoute avec succes");
+					window.location.href="index.html";
+					return;
 				}
 
 				else
 				{
 					comment="Un compte est deja associe a cette adresse email.";
 					document.getElementById('errors').innerHTML = comment;
+					
 					return;
 				}
 			});

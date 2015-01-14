@@ -28,6 +28,7 @@ String token = channelService.createChannel("player1");
     </head>
     <body>
     	<div id="plateau">
+
 		<div id="player3">3</div>
 		<div id="player2">2</div>
 		<div id="centerPlateau">
@@ -53,9 +54,9 @@ String token = channelService.createChannel("player1");
 				</div>
 			</div>
 			<div id="cards">
+
 			</div>
 		</div>
-	</div>
     
    	    <script src='//code.jquery.com/jquery-1.7.2.min.js'></script>
 	    <script src="/_ah/channel/jsapi"></script>

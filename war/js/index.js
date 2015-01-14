@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 function joinGame(){
 	$.ajax({
 		type: "GET",
@@ -23,10 +22,22 @@ function joinGame(){
 		if(json.numberOfPlayer == 4){
 			alert("trop de gens dsl trou de balle");
 		}
-	})
-=======
+	})}
+
 function goToHall(){
 	
+	window.location.href="Hall.html";
+}
+
+function backMainMenu(){
+	
+	window.location.href="index.html"; 
+
+}
+
+function goToHall()
+{
+	
 	window.location.replace("Hall.html"); 
->>>>>>> Stashed changes
+
 }

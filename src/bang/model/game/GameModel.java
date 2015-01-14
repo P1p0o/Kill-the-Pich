@@ -88,9 +88,11 @@ public class GameModel {
 		for( PlayerModel Player : mListPlayers )
 		{
 			Player.setmRole(lRoles.get(0));
+
 			if(lRoles.get(0).equals("sherif")){
 				Player.setLife(Player.getLife()+1);
 			}
+			System.out.println(lRoles.get(0));
 			lRoles.remove(0);
 		}
 	}
