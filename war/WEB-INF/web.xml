@@ -40,6 +40,16 @@
     <servlet-name>Rank</servlet-name>
     <servlet-class>servlet.RankServlet</servlet-class>
   </servlet>
+  
+  <servlet>
+    <servlet-name>Turn</servlet-name>
+    <servlet-class>servlet.TurnServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>Turn</servlet-name>
+    <url-pattern>/turn</url-pattern>
+  </servlet-mapping>
 
   <servlet-mapping>
     <servlet-name>Rank</servlet-name>
