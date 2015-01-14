@@ -7,8 +7,6 @@ $(document).ready(function() {
 	$("#action_cancel").css( "visibility", "hidden" );
 
 	
-})
-
 });
 
 function showAction(id){
