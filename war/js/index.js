@@ -22,6 +22,7 @@ function joinGame(){
 		if(json.numberOfPlayer == 4){
 			alert("trop de gens dsl trou de balle");
 		}
+<<<<<<< Updated upstream
 	})}
 
 function goToHall(){
@@ -32,4 +33,14 @@ function goToHall(){
 function backMainMenu(){
 	
 	window.location.href="index.html"; 
+=======
+	});
+}
+
+function goToHall()
+{
+	
+	window.location.replace("Hall.html"); 
+
+>>>>>>> Stashed changes
 }
