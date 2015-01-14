@@ -26,5 +26,10 @@ function joinGame(){
 
 function goToHall(){
 	
-	window.location.replace("Hall.html"); 
+	window.location="Hall.html"; 
+}
+
+function backMainMenu(){
+	
+	window.location="index.html"; 
 }
