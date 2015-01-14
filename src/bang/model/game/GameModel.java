@@ -17,7 +17,17 @@ public class GameModel {
 	private ArrayList<PlayerModel> mListPlayers = new ArrayList<PlayerModel>();
 	private Integer availableSlots = 4;
 	private Integer nbPlayers = 4;
+	private int mTurn;
 	
+	
+	public int getmTurn() {
+		return mTurn;
+	}
+
+	public void setmTurn(int mTurn) {
+		this.mTurn = mTurn;
+	}
+
 	public GameModel()
 	{
 		GenerateCardsDeck();

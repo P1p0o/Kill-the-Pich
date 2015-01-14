@@ -18,7 +18,7 @@ import com.google.appengine.labs.repackaged.org.json.JSONException;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
 
 import bang.manager.CacheManager;
-import bang.manager.ChannelManager;
+import bang.manager.CustomChannelManager;
 import bang.model.game.GameModel;
 import bang.model.game.PlayerModel;
 
@@ -81,8 +81,11 @@ public class GameServlet extends HttpServlet {
 		
 		if(listPlayers.size() == 4){
 			gameModel.startGame();
-			ChannelManager lChannel = new ChannelManager("game");
-			lChannel.NotifyAll("gameStart");
+			ChannelService channelService = ChannelServiceFactory.getChannelService();
+			channelService.sendMessage(new ChannelMessage("player1", "gameStart"));
+			channelService.sendMessage(new ChannelMessage("player2", "gameStart"));
+			channelService.sendMessage(new ChannelMessage("player3", "gameStart"));
+			channelService.sendMessage(new ChannelMessage("player4", "gameStart"));
 		}
 		
 	}
