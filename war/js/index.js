@@ -26,10 +26,10 @@ function joinGame(){
 
 function goToHall(){
 	
-	window.location="Hall.html"; 
+	window.open("Hall.html",'_self');
 }
 
 function backMainMenu(){
 	
-	window.location="index.html"; 
+	window.open("index.html",'_self'); 
 }
