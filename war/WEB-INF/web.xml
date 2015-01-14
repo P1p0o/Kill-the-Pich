@@ -12,6 +12,16 @@
   </servlet>
   
   <servlet>
+    <servlet-name>Login</servlet-name>
+    <servlet-class>servlet.LoginServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>Logout</servlet-name>
+    <servlet-class>servlet.LogoutServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
     <servlet-name>testFaftoz</servlet-name>
     <servlet-class>bang.server.TestFaftozServlet</servlet-class>
   </servlet>
@@ -20,6 +30,11 @@
     <servlet-name>Inscription</servlet-name>
     <servlet-class>servlet.InscriptionServlet</servlet-class>
   </servlet>
+  
+  <servlet>
+    <servlet-name>Retournesession</servlet-name>
+     <servlet-class>servlet.RetournesessionServlet</servlet-class>
+   </servlet>
   
   <servlet>
     <servlet-name>Rank</servlet-name>
@@ -46,6 +61,21 @@
    <servlet-mapping>
     <servlet-name>Inscription</servlet-name>
     <url-pattern>/inscription</url-pattern>
+  </servlet-mapping>
+  
+   <servlet-mapping>
+    <servlet-name>Login</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>Logout</servlet-name>
+    <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>Retournesession</servlet-name>
+    <url-pattern>/retournesession</url-pattern>
   </servlet-mapping>
   
   <!-- Default page to serve -->

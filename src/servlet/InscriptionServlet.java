@@ -42,32 +42,44 @@ public class InscriptionServlet extends HttpServlet {
 		String login =request.getParameter("login");
 		String pass = request.getParameter("pass");
 		String email = request.getParameter("email");
-		//System.out.println("COUCOUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU");
-
-
+		
 		Query q = new Query("user").setFilter(new Query.FilterPredicate("email", Query.FilterOperator.EQUAL, email));
 		Entity s = datastore.prepare(q).asSingleEntity();
+		
 		JSONObject json = new JSONObject();
 		if(s==null)
 		{
+
+			//// hashage password avec salting + login + string arbitraire
+
 			MessageDigest md=null;
 			try {
 				md = MessageDigest.getInstance("SHA-256");
-			} catch (NoSuchAlgorithmException e) {
+			} catch (NoSuchAlgorithmException e1) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				e1.printStackTrace();
 			}
-			String text = pass;
+			String passw = pass + login + "killthepich"; // Salting avant hashage
+			md.update(passw.getBytes());
 
-			md.update(text.getBytes("UTF-8")); // Change this to "UTF-16" if needed
-			byte[] digest = md.digest();
+			byte byteData[] = md.digest();
+
+			//convert the byte to hex format method 2
+			StringBuffer hexString = new StringBuffer();
+			for (int i=0;i<byteData.length;i++) {
+				String hex=Integer.toHexString(0xff & byteData[i]);
+				if(hex.length()==1) hexString.append('0');
+				hexString.append(hex);
+			}
+			String hash = hexString.toString();
+
 			//Create Entity for the datastore
 			Entity user = new Entity("user");
-			String decoded = new String(digest, "UTF-8");
+			//String decoded = new String(digest, "UTF-8");
 			user.setProperty("login", login);
-			user.setProperty("pass", decoded);
+			user.setProperty("pass", hash);//decoded);
 			user.setProperty("email", email);
-			user.setProperty("score",0);
+			user.setProperty("score", "0");
 
 			datastore.put(user);
 			try {

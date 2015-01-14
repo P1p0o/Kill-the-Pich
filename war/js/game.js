@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 var cardNumber;
 
 $(document).ready(function() { 
@@ -6,11 +5,8 @@ $(document).ready(function() {
 	$("#action_defausse").css( "visibility", "hidden" );
 	$("#action_play").css( "visibility", "hidden" );
 	$("#action_cancel").css( "visibility", "hidden" );
-=======
-$(function() {
->>>>>>> Stashed changes
-	
-})
+
+});
 
 function showAction(id){
 	$("#action_defausse").css( "visibility", "visible" );

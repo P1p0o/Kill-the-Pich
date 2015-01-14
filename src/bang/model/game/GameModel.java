@@ -94,7 +94,8 @@ public class GameModel {
 		//Set players' roles
 		for( PlayerModel Player : mListPlayers )
 		{
-			Player.setName(lRoles.get(0));
+			Player.setmRole(lRoles.get(0));
+			System.out.println(lRoles.get(0));
 			lRoles.remove(0);
 		}
 	}
