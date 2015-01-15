@@ -1,7 +1,5 @@
-<<<<<<< Updated upstream
-/bang
-/com
-=======
+/META-INF/
 /bang/
 /com/
->>>>>>> Stashed changes
+/log4j.properties
+/servlet/

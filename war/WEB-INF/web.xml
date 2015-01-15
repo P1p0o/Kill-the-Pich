@@ -43,7 +43,7 @@
   
   <servlet>
     <servlet-name>Turn</servlet-name>
-    <servlet-class>servlet.TurnServlet</servlet-class>
+    <servlet-class>com.test.TurnServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
