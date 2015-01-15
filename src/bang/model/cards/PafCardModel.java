@@ -39,13 +39,22 @@ public class PafCardModel extends YellowCardModel{
 				ArrayList<CardModel> cardHand = playerModel.getHand();
 				int cpt = 0;
 				for(CardModel cardModel : cardHand){
-					if(cardModel.getName().equals("rate")){
+					if(cardModel.getName().equals("missed")){
 						cpt ++;
 					}
 				}
 				if(cpt == 0){
 					playerModel.setLife(playerModel.getLife()-1);
-					System.out.println("on enleve une vie");	
+					channelService.sendMessage(new ChannelMessage("player1", "loseLife"+pPlayer));
+					channelService.sendMessage(new ChannelMessage("player2", "loseLife"+pPlayer));
+					channelService.sendMessage(new ChannelMessage("player3", "loseLife"+pPlayer));
+					channelService.sendMessage(new ChannelMessage("player4", "loseLife"+pPlayer));
+				}
+				else{
+					channelService.sendMessage(new ChannelMessage("player1", "waitAnswer"+pPlayer));
+					channelService.sendMessage(new ChannelMessage("player2", "waitAnswer"+pPlayer));
+					channelService.sendMessage(new ChannelMessage("player3", "waitAnswer"+pPlayer));
+					channelService.sendMessage(new ChannelMessage("player4", "waitAnswer"+pPlayer));
 				}
 			}
 		}

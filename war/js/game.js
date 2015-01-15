@@ -6,6 +6,7 @@ $(document).ready(function() {
 	$("#action_defausse").css( "visibility", "hidden" );
 	$("#action_play").css( "visibility", "hidden" );
 	$("#action_cancel").css( "visibility", "hidden" );
+	$("#action_endOfTurn").css( "visibility", "hidden" );
 	
 });
 
@@ -45,6 +46,29 @@ function defausse(){
 	$("#action_defausse").css( "visibility", "hidden" );
 	$("#action_play").css( "visibility", "hidden" );
 	$("#action_cancel").css( "visibility", "hidden" );
+	
+	var currentPlayer = document.URL;
+	currentPlayer = currentPlayer.split("player")[1];
+	currentPlayer = currentPlayer.split(".jsp")[0];
+
+	var json ={};
+	var src = $(image).attr('src');
+	src = src.split("img/")[1];
+	src = src.split(".jpg")[0];
+	json.player = currentPlayer; 
+	json.card = src;
+	json.defausse = "true";
+	$.ajax({
+		type: "POST",
+		dataType: "json",
+		url: "card",
+	    data: json			
+	})/*.always(function() {
+		getStartingHand(currentPlayer);	
+	});*/
+	
+	
+	
 }
 
 function play(){
@@ -54,7 +78,7 @@ function play(){
 	var currentPlayer = document.URL;
 	currentPlayer = currentPlayer.split("player")[1];
 	currentPlayer = currentPlayer.split(".jsp")[0];
-	console.log(image);
+	
 	image = image.split("img/")[1];
 	image = image.split("\"")[0];
 
@@ -103,6 +127,7 @@ function play(){
 	}
 }
 function paff(player){
+	console.log("paf");
 	$("#player1").css("border","1px solid black");
 	$("#player1").css("cursor", "default");
 
@@ -123,9 +148,9 @@ function paff(player){
 		dataType: "json",
 		url: "card",
 	    data: json			
+	}).always(function(){
+		defausse();
 	})
-		
-	defausse();
 	
 }
 
@@ -183,8 +208,9 @@ function checkForMissed(){
 	
 }
 
-function addPlayer(token){
+function addPlayer(name, token){
 	var json = {};
+	json.name = name;
 	json.token = token;
 	
 	$.ajax({
@@ -195,7 +221,7 @@ function addPlayer(token){
 	})
 }
 
-function getStartingHand(nb){
+function refreshHand(nb){
 	var json = {};
 	json.number = nb;
 	
@@ -205,24 +231,69 @@ function getStartingHand(nb){
 		url: "hand",
 	    data: json			
 	}).then(function(json){
-		console.log(json);
+		$("#cards").empty();
 		$(json.cards).each(function(i,elt){
 			i++;
-			if(elt.name == "paf"){
-				$("#cards").append('<div class="slot_horizontal" id="card'+i+'">\
-				<img class="image_in_slot" onclick="showAction('+i+')" src="img/paf.jpg"/>\
-				</div>');
-			}
-			if(elt.name == "rate"){
-				$("#cards").append('<div class="slot_horizontal" id="card'+i+'">\
-				<img class="image_in_slot" onclick="showAction('+i+')" src="img/missed.jpg"/>\
-				</div>');
-			}
+			$("#cards").append('<div class="slot_horizontal" id="card'+i+'">\
+			<img class="image_in_slot" onclick="showAction('+i+')" src="img/'+elt.name+'.jpg"/>\
+			</div>');
+			
 		});
+		
+		if(json.defausse){
+			$("#defausse").text("");
+			$("#defausse").append('<img class="defausseCard" src="img/'+json.defausse+'.jpg"/>');
+			
+		}
 		
 		$("#life").text(json.life);
 		$("#role").text(json.role);
+		
+		$(json.otherPlayers).each(function(i,elt){
+			var playerName = "#"+elt.name;
+			if(elt.role == "sherif"){
+				$(playerName).text("life : "+elt.life + " nb cards : "+ elt.nbCards + "WHATHUP I AM THE SHERIF");
+			}
+			else{
+				$(playerName).text("life : "+elt.life + " nb cards : "+ elt.nbCards);	
+			}
+		});
 	});
 }
 
+function enablePlayer(){
+	console.log("enable");
+	var currentPlayer = document.URL;
+	currentPlayer = currentPlayer.split("player")[1];
+	currentPlayer = currentPlayer.split(".jsp")[0];
+	
+	var player = $("#player"+currentPlayer);
+	var images =  $(player).find('img').map(function() { return this; }).get();
+	
+	$(images).each(function(i,elt){
+		var cardFound = $(player).find(elt);
+		$(cardFound).removeAttr( 'class' );
+		$(cardFound).addClass('image_in_slot');
+		$(cardFound).removeAttr('onclick');
+	});
+}
+
+function disablePlayer(){
+	console.log("disable");
+	var currentPlayer = document.URL;
+	currentPlayer = currentPlayer.split("player")[1];
+	currentPlayer = currentPlayer.split(".jsp")[0];
+	
+	var player = $("#player"+currentPlayer);
+	console.log(player);
+	var images =  $(player).find('img').map(function() { return this; }).get();
+	console.log(images);
+	$(images).each(function(i,elt){
+		var cardFound = $(player).find(elt);
+		console.log(cardFound);
+		$(cardFound).removeAttr( 'class' );
+		$(cardFound).addClass('defausseCard');
+		$(cardFound).removeAttr('onclick');
+	});
+}
 

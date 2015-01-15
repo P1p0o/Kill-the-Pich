@@ -13,7 +13,7 @@ import com.google.appengine.api.channel.ChannelServiceFactory;
 
 import bang.model.cards.CardModel;
 import bang.model.cards.PafCardModel;
-import bang.model.cards.RateCardModel;
+import bang.model.cards.MissedCardModel;
 
 public class GameModel {
 	@Id Long id;
@@ -22,6 +22,7 @@ public class GameModel {
 	private Integer availableSlots = 4;
 	private Integer nbPlayers = 4;
 	private int mTurn;
+	private ArrayList<CardModel> defausse = new ArrayList<CardModel>();
 	
 	
 	public int getmTurn() {
@@ -73,7 +74,7 @@ public class GameModel {
 			this.CardsDeck.add( NewPaf );
 		}
 		for(i=0;i<7;i++){
-			RateCardModel NewRate = new RateCardModel();
+			MissedCardModel NewRate = new MissedCardModel();
 			this.CardsDeck.add( NewRate );
 		}
 		Collections.shuffle(CardsDeck);
@@ -128,7 +129,7 @@ public class GameModel {
 				}
 				if(P.getmRole().equals("sherif"))
 				{
-					mTurn = mListPlayers.indexOf(P);
+					mTurn = mListPlayers.indexOf(P)+1;
 				}
 			}
 		}
@@ -159,6 +160,18 @@ public class GameModel {
 
 	public ArrayList<PlayerModel> getListPlayers() {
 		return mListPlayers;
+	}
+
+	public ArrayList<CardModel> getDefausse() {
+		return defausse;
+	}
+
+	public void setDefausse(ArrayList<CardModel> defausse) {
+		this.defausse = defausse;
+	}
+	
+	public void addToDefausse(CardModel pCard) {
+		this.getDefausse().add(pCard);
 	}
 
 }

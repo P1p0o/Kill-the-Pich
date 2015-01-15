@@ -41,6 +41,7 @@ String token = channelService.createChannel("player4");
 			<div id="action_play" class="action_div" onclick="play()">Play card</div>
 			<div id="action_defausse" class="action_div" onclick="defausse()">Defausse card</div>
 			<div id="action_cancel" class="action_div" onclick="cancel()">Cancel</div>
+			<div id="action_endOfTurn" class="action_div" onclick="endOfTurn()">End of turn</div>
 		</div>
 		<div id="player3">3</div>
 		<div id="player4">
@@ -88,20 +89,53 @@ String token = channelService.createChannel("player4");
 			
 			if(message.data.indexOf("missed") > -1){
 				if(message.data.indexOf("missed4") > -1){
-					$("#notifications").text("Tu ne perds pas de vie !!");
-					checkForMissed();
+					$("#notifications").append("<p>Tu ne perds pas de vie !!</p>");
 				}
 				else{
 					var player = message.data.split("missed")[1];
-					$("#notifications").text("player "+player+" dodged the paf!!");
+					$("#notifications").append("<p>player "+player+" dodged the paf!!</p>");
 				}
 			}
 			
-			if(message.data.indexOf("gameStart") > -1){
+			if(message.data.indexOf("startGame") > -1){
+				$("#notifications").text("4 players. The game begins");
+				refreshHand(4);
+				if(message.data.indexOf("Turn4") > -1){
+					$("#notifications").append("<p>You are the sherif !! Your turn to play</p>");
+					enablePlayer();
+				}
+				else{
+					var player = message.data.split("Turn")[1];
+					$("#notifications").append("<p>player "+player+" is the sherif. It's his turn to play</p>");
+					disablePlayer();
+				}
+				
+			}	
+			
+			if(message.data.indexOf("refreshHand") > -1){
 				//alert("4 joueurs, la partie va commencer");
-				getStartingHand(4);
+				refreshHand(4);
 			}
 			    
+			if(message.data.indexOf("loseLife") > -1){
+				if(message.data.indexOf("loseLife4") > -1){
+					$("#notifications").append("<p>Tu perds une vie !!</p>");
+				}
+				else{
+					var player = message.data.split("loseLife")[1];
+					$("#notifications").append("<p>player "+player+" lost 1 life!!</p>");
+				}
+				refreshHand(4);
+			}	
+			if(message.data.indexOf("waitAnswer") > -1){
+				if(message.data.indexOf("waitAnswer4") > -1){
+					$("#notifications").append("<p>You can dodge !!</p>");
+				}
+				else{
+					var player = message.data.split("waitAnswer")[1];
+					$("#notifications").append("<p>player "+player+" can dodge!!</p>");
+				}
+			}
 	    };
     	</script>
     </body>

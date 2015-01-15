@@ -48,45 +48,102 @@ public class HandServlet extends HttpServlet {
 		
 		JSONObject jsonToReturn = new JSONObject();
         JSONArray array = new JSONArray();
+        JSONArray newArray = new JSONArray();
 		
 		if(gameModel != null){
 			
 			if(gameModel.getListPlayers().size() == 4){
 				ArrayList<PlayerModel> listPlayers = gameModel.getListPlayers();
-				PlayerModel player = listPlayers.get(numberInt-1);
-				ArrayList<CardModel> cardHand = player.getHand();
-				for(int i = 0; i < cardHand.size(); i++){
-					JSONObject json = new JSONObject();
-			        
-			        try {
-			        	json.put("name", cardHand.get(i).getName());
-				        array.put(json);
-		
-					} catch (JSONException e) {
-						e.printStackTrace();
+				for(PlayerModel playerModel : listPlayers){		
+								
+					if(playerModel == listPlayers.get(numberInt-1)){
+						ArrayList<CardModel> cardHand = playerModel.getHand();
+						for(int i = 0; i < cardHand.size(); i++){
+							JSONObject json = new JSONObject();
+					        
+					        try {
+					        	json.put("name", cardHand.get(i).getName());
+						        array.put(json);
+				
+							} catch (JSONException e) {
+								e.printStackTrace();
+							}
+						}
+					
+						try {
+							jsonToReturn.put("life", playerModel.getLife());
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+						try {
+							jsonToReturn.put("role", playerModel.getmRole());
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+				
+					}
+					
+					else{
+						JSONObject newJson = new JSONObject();
+						try {
+							newJson.put("name", playerModel.getName());
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+				        try {
+							newJson.put("life", playerModel.getLife());
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						try {
+							newJson.put("nbCards", playerModel.getHand().size());
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+						if(playerModel.getmRole().equals("sherif")){
+							try {
+								newJson.put("role", playerModel.getmRole());
+							} catch (JSONException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+						
+						newArray.put(newJson);	
 					}
 				}
-				
-				try {
-					jsonToReturn.put("life", player.getLife());
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-				try {
-					jsonToReturn.put("role", player.getmRole());
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
+			//	PlayerModel player = listPlayers.get(numberInt-1);
+					}
 			
 			try {
 				jsonToReturn.put("cards", array);
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}
+			try {
+				jsonToReturn.put("otherPlayers", newArray);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ArrayList<CardModel> defausse = gameModel.getDefausse();
+			if(defausse.size() != 0){
+				int size = gameModel.getDefausse().size();
+				String defausseName = gameModel.getDefausse().get(size-1).getName();
+				try {
+					jsonToReturn.put("defausse", defausseName);
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 		PrintWriter out = response.getWriter();

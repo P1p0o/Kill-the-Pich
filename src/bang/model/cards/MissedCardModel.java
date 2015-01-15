@@ -5,12 +5,12 @@ import com.google.appengine.api.channel.ChannelService;
 import com.google.appengine.api.channel.ChannelServiceFactory;
 
 
-public class RateCardModel extends YellowCardModel{
+public class MissedCardModel extends YellowCardModel{
 
-	public RateCardModel()
+	public MissedCardModel()
 	{
 		super();
-		this.setName("rate");
+		this.setName("missed");
 	}
 	
 	public void action(String pPlayer){

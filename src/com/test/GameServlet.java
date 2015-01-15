@@ -84,16 +84,16 @@ public class GameServlet extends HttpServlet {
 			
 			//Le jeu commence
 			ChannelService channelService = ChannelServiceFactory.getChannelService();
-			channelService.sendMessage(new ChannelMessage("player1", "gameStart"));
-			channelService.sendMessage(new ChannelMessage("player2", "gameStart"));
-			channelService.sendMessage(new ChannelMessage("player3", "gameStart"));
-			channelService.sendMessage(new ChannelMessage("player4", "gameStart"));
+			channelService.sendMessage(new ChannelMessage("player1", "startGameTurn"+gameModel.getmTurn()));
+			channelService.sendMessage(new ChannelMessage("player2", "startGameTurn"+gameModel.getmTurn()));
+			channelService.sendMessage(new ChannelMessage("player3", "startGameTurn"+gameModel.getmTurn()));
+			channelService.sendMessage(new ChannelMessage("player4", "startGameTurn"+gameModel.getmTurn()));
 			
 			//C'est le tour du sherif!
-			channelService.sendMessage(new ChannelMessage("player1", "turn"+gameModel.getmTurn()));
+			/*channelService.sendMessage(new ChannelMessage("player1", "turn"));
 			channelService.sendMessage(new ChannelMessage("player2", "turn"+gameModel.getmTurn()));
 			channelService.sendMessage(new ChannelMessage("player3", "turn"+gameModel.getmTurn()));
-			channelService.sendMessage(new ChannelMessage("player4", "turn"+gameModel.getmTurn()));
+			channelService.sendMessage(new ChannelMessage("player4", "turn"+gameModel.getmTurn()));*/
 		}
 		
 	}

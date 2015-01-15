@@ -40,7 +40,6 @@ public class TurnServlet extends HttpServlet {
 		
 		GameModel lCurrentGame = (GameModel) cacheManager.get("game");
 		int lNbPlayers = Integer.parseInt(request.getParameter("NbPlayers"));
-
 		
 		int lTurn = lCurrentGame.getmTurn();
 		do
