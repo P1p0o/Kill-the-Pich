@@ -2,7 +2,9 @@ package bang.model.game;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Random;
 
 import javax.persistence.Id;
@@ -131,6 +133,102 @@ public class GameModel {
 				{
 					mTurn = mListPlayers.indexOf(P)+1;
 				}
+			}
+		}
+	}
+	
+	public void EndOfAction()
+	{
+		Map<String, String> lPlayers = new HashMap<String, String>();
+		for( PlayerModel P : mListPlayers)
+		{
+			if(P.isAlive())
+			{
+				lPlayers.put(P.getmRole(), "alive");
+			}
+			else
+			{
+				lPlayers.put(P.getmRole(), "alive");
+			}
+		}
+		
+		//Victoire du Hors la Loi
+		if(lPlayers.get("sherif").equals("dead") && lPlayers.get("hll").equals("alive"))
+		{
+			if(lPlayers.get("renegat").equals("dead"))
+			{
+				if(lPlayers.get("adjoint").equals("alive"))
+				{
+					EndOfGame("hll", "adjoint");
+					return;
+				}
+				else
+				{
+					EndOfGame("hll", "");
+					return;
+				}
+			}
+			else
+			{
+				if(lPlayers.get("adjoint").equals("alive"))
+				{
+					EndOfGame("hll", "renegatadjoint");
+					return;
+				}
+				else
+				{
+					EndOfGame("hll", "renegat");
+					return;
+				}
+			}
+		}
+		
+		//Victoire du sherif (et adjoint)
+		if(lPlayers.get("sherif").equals("alive") && lPlayers.get("hll").equals("dead") && lPlayers.get("renegat").equals("dead") )
+		{
+			if(lPlayers.get("adjoint").equals("alive"))
+			{
+				EndOfGame("sherifadjoint", "");
+				return;
+			}
+			else
+			{
+				EndOfGame("sherif", "");
+				return;
+			}
+		}
+		
+		//Victoire du renegat
+		if(lPlayers.get("sherif").equals("dead") && lPlayers.get("adjoint").equals("dead") && lPlayers.get("hll").equals("dead") && lPlayers.get("renegat").equals("alive"))
+		{
+			EndOfGame("renegat", "");
+		}
+		
+		//CAS EX AEQUO: adjoint seul
+		if( lPlayers.get("sherif").equals("dead") && lPlayers.get("hll").equals("dead") )
+		{
+			if( lPlayers.get("renegat").equals("dead") && lPlayers.get("adjoint").equals("true") )
+			{
+				EndOfGame("adjoint", "");
+			}
+			
+		}
+		
+	}
+	
+	public void EndOfGame( String pWinners, String pLosers)
+	{
+		for(PlayerModel P : mListPlayers)
+		{
+			if(pWinners.contains(P.getmRole()))
+			{
+				ChannelService channelService = ChannelServiceFactory.getChannelService();
+				channelService.sendMessage(new ChannelMessage( P.getName(), "win"));
+			}
+			if(pLosers.contains(P.getmRole()))
+			{
+				ChannelService channelService = ChannelServiceFactory.getChannelService();
+				channelService.sendMessage(new ChannelMessage( P.getName(), "lose"));
 			}
 		}
 	}

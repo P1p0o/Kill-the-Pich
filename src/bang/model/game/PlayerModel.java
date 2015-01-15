@@ -5,6 +5,10 @@ import java.util.List;
 
 import javax.persistence.Id;
 
+import com.google.appengine.api.channel.ChannelMessage;
+import com.google.appengine.api.channel.ChannelService;
+import com.google.appengine.api.channel.ChannelServiceFactory;
+
 import bang.model.cards.CardModel;
 
 public class PlayerModel {
@@ -46,11 +50,38 @@ public class PlayerModel {
 		}
 	}
 	
+	public boolean isAlive()
+	{
+		if( this.getLife() == 0)
+		{
+			return false;
+		}
+		return true;
+	}
+	
 	public int getLife() {
 		return Life;
 	}
-	public void setLife(int life) {
-		Life = life;
+	
+	public void setLife(int pLife) {
+		
+		Life = pLife;
+		
+		if( Life == 0 && this.hasCard("poulemouth") )
+		{
+			//Chance de boire une biere
+			ChannelService channelService = ChannelServiceFactory.getChannelService();
+			channelService.sendMessage(new ChannelMessage(this.getName(), "chancepoulemouth"));
+			
+		}
+		else
+		{
+			//Mort
+			if(Life < 0)
+			{
+				Life = 0;
+			}
+		}
 	}
 	public ArrayList<CardModel> getHand() {
 		return Hand;
