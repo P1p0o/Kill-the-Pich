@@ -1,7 +1,11 @@
 package bang.model.cards;
 
+import java.util.ArrayList;
+
 import javax.persistence.Id;
 
+import bang.manager.CacheManager;
+import bang.model.game.GameModel;
 import bang.model.game.PlayerModel;
 
 public abstract class CardModel {
@@ -29,6 +33,21 @@ public abstract class CardModel {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public void incrementLife(String pPlayer){
+		CacheManager cacheManager;
+		cacheManager = CacheManager.getInstance();
+		GameModel gameModel = (GameModel) cacheManager.get("game");
+		ArrayList<PlayerModel> listPlayers = gameModel.getListPlayers();
+		for(PlayerModel playerModel : listPlayers){
+			System.out.println(playerModel.getLife());
+			if(playerModel.getName().equals("player"+pPlayer)){
+				
+				playerModel.setLife(playerModel.getLife()+1);
+			}
+			System.out.println(playerModel.getLife());			
+		}
 	}
 	
 	

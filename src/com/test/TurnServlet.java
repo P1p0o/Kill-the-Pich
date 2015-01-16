@@ -18,10 +18,12 @@ import com.google.appengine.api.channel.ChannelService;
 import com.google.appengine.api.channel.ChannelServiceFactory;
 
 public class TurnServlet extends HttpServlet {
-   CacheManager cacheManager;
+	
+   private CacheManager cacheManager;
+   
     public TurnServlet() {
         super();
-        cacheManager = cacheManager.getInstance();
+        cacheManager = CacheManager.getInstance();
     }
     
 
@@ -32,11 +34,6 @@ public class TurnServlet extends HttpServlet {
    }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
-		
-		
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		GameModel lCurrentGame = (GameModel) cacheManager.get("game");
 		int lNbPlayers = Integer.parseInt(request.getParameter("NbPlayers"));
@@ -64,7 +61,10 @@ public class TurnServlet extends HttpServlet {
 		channelService.sendMessage(new ChannelMessage("player3", "turn"+lTurn));
 		channelService.sendMessage(new ChannelMessage("player4", "turn"+lTurn));
 		
-		
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 	}
 
 }

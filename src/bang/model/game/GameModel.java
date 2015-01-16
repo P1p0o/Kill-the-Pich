@@ -233,6 +233,25 @@ public class GameModel {
 		}
 	}
 	
+	public String drawCard( String pPlayer) //Piocher une carte
+	{
+		PlayerModel lPlayer;
+		CardModel lFirstCard;
+		
+		lFirstCard = CardsDeck.get(0);
+		CardsDeck.remove(0);
+		
+		for( PlayerModel P : mListPlayers )
+		{
+			if(P.getName().equals("player"+pPlayer))
+			{
+				P.addToHand(lFirstCard);
+				break;
+			}
+		}
+		return lFirstCard.getName();
+	}
+	
 	public void addPlayer (String name, String token)
 	{
 		PlayerModel lNewPlayer = new PlayerModel(name, token);

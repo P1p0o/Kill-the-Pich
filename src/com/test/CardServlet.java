@@ -24,31 +24,46 @@ public class CardServlet extends HttpServlet {
 		String card = req.getParameter("card");
 		String player = req.getParameter("player");
 		String defausse = req.getParameter("defausse");
+		String pioche = req.getParameter("pioche");
 		
-		if(defausse != null){
-			CacheManager cacheManager;
-			cacheManager = CacheManager.getInstance();
-			GameModel gameModel = (GameModel) cacheManager.get("game");
-			ArrayList<PlayerModel> listPlayers = gameModel.getListPlayers();
-			for(PlayerModel playerModel : listPlayers){
-				if(playerModel.getName().equals("player"+player)){
-					ArrayList<CardModel> cardHand = playerModel.getHand();
-					for(CardModel cardModel : cardHand){
-						if(cardModel.getName().equals(card)){
-							cardHand.remove(cardModel);
-							gameModel.addToDefausse(cardModel);
-							break;
+		if(defausse != null || pioche != null){
+			if( defausse != null )
+			{
+				CacheManager cacheManager;
+				cacheManager = CacheManager.getInstance();
+				GameModel gameModel = (GameModel) cacheManager.get("game");
+				ArrayList<PlayerModel> listPlayers = gameModel.getListPlayers();
+				for(PlayerModel playerModel : listPlayers){
+					if(playerModel.getName().equals("player"+player)){
+						ArrayList<CardModel> cardHand = playerModel.getHand();
+						for(CardModel cardModel : cardHand){
+							if(cardModel.getName().equals(card)){
+								cardHand.remove(cardModel);
+								gameModel.addToDefausse(cardModel);
+								break;
+							}
+							
 						}
-						
 					}
 				}
 			}
-
+			if( pioche != null)
+			{
+				CacheManager cacheManager;
+				cacheManager = CacheManager.getInstance();
+				GameModel gameModel = (GameModel) cacheManager.get("game");
+				ArrayList<PlayerModel> listPlayers = gameModel.getListPlayers();
+				String lNewCard = gameModel.drawCard(player);
+				ChannelService channelService = ChannelServiceFactory.getChannelService();
+				channelService.sendMessage(new ChannelMessage("player"+player, "draw"+lNewCard));
+			}
+			
 			ChannelService channelService = ChannelServiceFactory.getChannelService();
 			channelService.sendMessage(new ChannelMessage("player1", "refreshHand"));
 			channelService.sendMessage(new ChannelMessage("player2", "refreshHand"));
 			channelService.sendMessage(new ChannelMessage("player3", "refreshHand"));
 			channelService.sendMessage(new ChannelMessage("player4", "refreshHand"));
+			
 		}
 		else{
 			if(card.equals("paf")){

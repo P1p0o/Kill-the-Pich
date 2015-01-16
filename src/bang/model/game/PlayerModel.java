@@ -63,7 +63,7 @@ public class PlayerModel {
 		return Life;
 	}
 	
-	public void setLife(int pLife) {
+	public String setLife(int pLife) {
 		
 		Life = pLife;
 		
@@ -73,15 +73,18 @@ public class PlayerModel {
 			ChannelService channelService = ChannelServiceFactory.getChannelService();
 			channelService.sendMessage(new ChannelMessage(this.getName(), "chancepoulemouth"));
 			
+			return "alive";
 		}
 		else
 		{
 			//Mort
-			if(Life < 0)
+			if(Life < 0 || Life == 0)
 			{
 				Life = 0;
+				return "dead";
 			}
 		}
+		return "alive";
 	}
 	public ArrayList<CardModel> getHand() {
 		return Hand;
