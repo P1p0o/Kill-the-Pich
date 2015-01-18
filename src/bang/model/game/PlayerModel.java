@@ -71,7 +71,10 @@ public class PlayerModel {
 		{
 			//Chance de boire une biere
 			ChannelService channelService = ChannelServiceFactory.getChannelService();
-			channelService.sendMessage(new ChannelMessage(this.getName(), "chancepoulemouth"));
+			channelService.sendMessage(new ChannelMessage("player1", "chancepoulemouth"+this.getName()));
+			channelService.sendMessage(new ChannelMessage("player2", "chancepoulemouth"+this.getName()));
+			channelService.sendMessage(new ChannelMessage("player3", "chancepoulemouth"+this.getName()));
+			channelService.sendMessage(new ChannelMessage("player4", "chancepoulemouth"+this.getName()));
 			
 			return "alive";
 		}

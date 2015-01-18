@@ -188,7 +188,7 @@ public class GameModel {
 		{
 			if(lPlayers.get("adjoint").equals("alive"))
 			{
-				EndOfGame("sherifadjoint", "");
+				EndOfGame("sherif", "");
 				return;
 			}
 			else
@@ -209,7 +209,7 @@ public class GameModel {
 		{
 			if( lPlayers.get("renegat").equals("dead") && lPlayers.get("adjoint").equals("true") )
 			{
-				EndOfGame("adjoint", "");
+				EndOfGame("", "adjoint");
 			}
 			
 		}
@@ -218,16 +218,12 @@ public class GameModel {
 	
 	public void EndOfGame( String pWinners, String pLosers)
 	{
+		ChannelService channelService = ChannelServiceFactory.getChannelService();
 		for(PlayerModel P : mListPlayers)
 		{
-			if(pWinners.contains(P.getmRole()))
-			{
-				ChannelService channelService = ChannelServiceFactory.getChannelService();
-				channelService.sendMessage(new ChannelMessage( P.getName(), "win"));
-			}
+			channelService.sendMessage(new ChannelMessage( P.getName(), "win"));
 			if(pLosers.contains(P.getmRole()))
 			{
-				ChannelService channelService = ChannelServiceFactory.getChannelService();
 				channelService.sendMessage(new ChannelMessage( P.getName(), "lose"));
 			}
 		}
