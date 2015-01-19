@@ -4,15 +4,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-import javax.cache.Cache;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.appengine.api.channel.ChannelMessage;
-import com.google.appengine.api.channel.ChannelService;
-import com.google.appengine.api.channel.ChannelServiceFactory;
 import com.google.appengine.labs.repackaged.org.json.JSONArray;
 import com.google.appengine.labs.repackaged.org.json.JSONException;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
@@ -134,12 +130,30 @@ public class HandServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
+			JSONArray deckArray = new JSONArray();
+				
+			ArrayList<CardModel> cardDeck = gameModel.getCardsDeck();
+			
+			try {
+				jsonToReturn.put("pioche", cardDeck.size());
+			} catch (JSONException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
 			ArrayList<CardModel> defausse = gameModel.getDefausse();
 			if(defausse.size() != 0){
 				int size = gameModel.getDefausse().size();
 				String defausseName = gameModel.getDefausse().get(size-1).getName();
 				try {
 					jsonToReturn.put("defausse", defausseName);
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				try {
+					jsonToReturn.put("defausseSize", defausse.size());
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

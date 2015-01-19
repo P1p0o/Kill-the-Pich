@@ -5,7 +5,6 @@ import com.google.appengine.api.channel.ChannelService;
 import com.google.appengine.api.channel.ChannelServiceFactory;
 
 import bang.model.game.GameModel;
-import bang.model.game.PlayerModel;
 import java.lang.Integer;
 import bang.manager.CacheManager;
 

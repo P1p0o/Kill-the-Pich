@@ -11,6 +11,7 @@ $(document).ready(function(){ //au chargement on affiche tantot la login area, t
 			document.getElementById('errors').innerHTML = comment;
 			score = " votre score est de " + json.score;
 			document.getElementById('score').innerHTML = score;
+			$("#joinGameButton").attr('onclick', "joinGame()");
 		}
 
 		else
@@ -18,10 +19,15 @@ $(document).ready(function(){ //au chargement on affiche tantot la login area, t
 			$("#logout_area").hide();
 			comment="Vous n'etes pas connecte";
 			document.getElementById('errors').innerHTML = comment;
+			$("#joinGameButton").attr('onclick', "alertedNotConnected()");
 			return;
 		}
 	});
 });
+
+function alertedNotConnected(){
+	alert("Veuillez vous connectez pour pouvoir jouer");
+}
 
 function logout()
 {

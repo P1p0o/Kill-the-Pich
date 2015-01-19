@@ -4,8 +4,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import bang.model.game.GameModel;
-
 public class CacheManager {
 
     private static CacheManager instance;

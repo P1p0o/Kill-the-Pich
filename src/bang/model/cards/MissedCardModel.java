@@ -21,5 +21,4 @@ public class MissedCardModel extends YellowCardModel{
 		channelService.sendMessage(new ChannelMessage("player4", "missed"+pPlayer));
 		
 	}
-	
 }

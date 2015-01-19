@@ -37,7 +37,6 @@ public class GameModel {
 
 	public GameModel()
 	{
-		GenerateCardsDeck();
 		
 		//Sherif starts
 		//if(Players.get(0).hasCard("paf"))
@@ -56,6 +55,7 @@ public class GameModel {
 		if(availableSlots == 0)
 		{
 			AssignRoles(4);
+			GenerateCardsDeck();
 			HandOutCards();
 			
 			return true;
@@ -132,6 +132,13 @@ public class GameModel {
 				if(P.getmRole().equals("sherif"))
 				{
 					mTurn = mListPlayers.indexOf(P)+1;
+				}
+				if(i == 5){
+					if(P.getmRole().equals("sherif")){
+						currentCard = it.next();
+						P.addToHand(currentCard);
+						it.remove();
+					}
 				}
 			}
 		}
@@ -285,6 +292,14 @@ public class GameModel {
 	
 	public void addToDefausse(CardModel pCard) {
 		this.getDefausse().add(pCard);
+	}
+	
+	public ArrayList<CardModel> getCardsDeck(){
+		return CardsDeck;
+	}
+	
+	public void setCardsDeck(ArrayList<CardModel> cardDeck){
+		CardsDeck = cardDeck;
 	}
 
 }

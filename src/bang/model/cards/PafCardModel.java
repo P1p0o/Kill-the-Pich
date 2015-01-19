@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 import bang.manager.CacheManager;
 import bang.model.game.GameModel;
-import bang.model.game.PlayerModel;
 
 public class PafCardModel extends YellowCardModel{
 	
@@ -43,19 +42,19 @@ public class PafCardModel extends YellowCardModel{
 						cpt ++;
 					}
 				}
-				if(cpt == 0){
+	/*			if(cpt == 0){
 					playerModel.setLife(playerModel.getLife()-1);
 					channelService.sendMessage(new ChannelMessage("player1", "loseLife"+pPlayer));
 					channelService.sendMessage(new ChannelMessage("player2", "loseLife"+pPlayer));
 					channelService.sendMessage(new ChannelMessage("player3", "loseLife"+pPlayer));
 					channelService.sendMessage(new ChannelMessage("player4", "loseLife"+pPlayer));
 				}
-				else{
+				else{*/
 					channelService.sendMessage(new ChannelMessage("player1", "waitAnswer"+pPlayer));
 					channelService.sendMessage(new ChannelMessage("player2", "waitAnswer"+pPlayer));
 					channelService.sendMessage(new ChannelMessage("player3", "waitAnswer"+pPlayer));
 					channelService.sendMessage(new ChannelMessage("player4", "waitAnswer"+pPlayer));
-				}
+				//}
 			}
 		}
 		//Notify players
@@ -68,11 +67,9 @@ public class PafCardModel extends YellowCardModel{
 		GameModel gameModel = (GameModel) cacheManager.get("game");
 		ArrayList<PlayerModel> listPlayers = gameModel.getListPlayers();
 		for(PlayerModel playerModel : listPlayers){
-			System.out.println(playerModel.getLife());
 			if(playerModel.getName().equals("player"+pPlayer)){
 				playerModel.setLife(playerModel.getLife()-1);
-			}
-			System.out.println(playerModel.getLife());			
+			}			
 		}
 	}
 }

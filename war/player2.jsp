@@ -32,8 +32,8 @@ String token = channelService.createChannel("player2");
 		<div id="player3">3</div>
 		<div id="centerPlateau">
 			<div id="piocheDef">
-				<div id="pioche">pioche</div>
-				<div id="defausse" class="dropper">def</div>
+				<div id="pioche">Pioche</div>
+				<div id="defausse" class="dropper">Defausse</div>
 			</div>
 			<div id="notifications">Notifications</div>
 		</div>
@@ -79,7 +79,6 @@ String token = channelService.createChannel("player2");
 			if(message.data.indexOf("paf") > -1){
 				if(message.data.indexOf("paf2") > -1){
 					$("#notifications").text("You got pafed !!");
-					checkForMissed();
 				}
 				else{
 					var player = message.data.split("paf")[1];
@@ -102,15 +101,39 @@ String token = channelService.createChannel("player2");
 				refreshHand(2);
 				if(message.data.indexOf("Turn2") > -1){
 					$("#notifications").append("<p>You are the sherif !! Your turn to play</p>");
-					enablePlayer();
+					$(document).ajaxStop(function () {
+					     enablePlayer();
+					  });
 				}
 				else{
 					var player = message.data.split("Turn")[1];
 					$("#notifications").append("<p>player "+player+" is the sherif. It's his turn to play</p>");
-					disablePlayer();
+					$(document).ajaxStop(function () {
+					     disablePlayer();
+					  });
 				}
 				
 			}	
+			
+			if(message.data.indexOf("turn") > -1){
+				refreshHand(2);
+				if(message.data.indexOf("turn2") > -1){
+					$("#notifications").text("Your turn to play");
+
+					$(document).ajaxStop(function () {
+					     enablePlayer();
+					  });
+				}
+				else{
+					var player = message.data.split("turn")[1];
+					$("#notifications").text("player "+player+" turn to play");
+					
+					$(document).ajaxStop(function () {
+					      disablePlayer();
+					  });
+				}
+				
+			}
 			
 			if(message.data.indexOf("refreshHand") > -1){
 				//alert("4 joueurs, la partie va commencer");
@@ -128,7 +151,12 @@ String token = channelService.createChannel("player2");
 			}	
 			if(message.data.indexOf("waitAnswer") > -1){
 				if(message.data.indexOf("waitAnswer2") > -1){
-					$("#notifications").append("<p>You can dodge !!</p>");
+					$("#notifications").text("Your turn to dodge!!");
+			        $("#notifications").append("<p>If you dont wan't or can't to dodge just click here</p>");
+			       $("#notifications").append("<button onclick='skipDodge()'>Skip</button>");
+					$(document).ajaxStop(function () {
+					     enableMissed();
+    				});
 				}
 				else{
 					var player = message.data.split("waitAnswer")[1];

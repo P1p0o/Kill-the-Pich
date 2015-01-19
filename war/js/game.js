@@ -17,6 +17,13 @@ function showAction(id){
 	cardNumber = id;
 }
 
+function showDefausse(id){
+	$("#action_defausse").css( "visibility", "visible" );
+	$("#action_play").css( "visibility", "hidden" );
+	$("#action_cancel").css( "visibility", "visible" );
+	cardNumber = id;
+}
+
 function cancel(){
 	$("#action_defausse").css( "visibility", "hidden" );
 	$("#action_play").css( "visibility", "hidden" );
@@ -53,6 +60,7 @@ function defausse(){
 
 	var json ={};
 	var src = $(image).attr('src');
+	
 	src = src.split("img/")[1];
 	src = src.split(".jpg")[0];
 	json.player = currentPlayer; 
@@ -81,8 +89,6 @@ function play(){
 	
 	image = image.split("img/")[1];
 	image = image.split("\"")[0];
-
-	console.log(image);
 	
 	if(image == "paf.jpg"){
 
@@ -127,7 +133,6 @@ function play(){
 	}
 }
 function paff(player){
-	console.log("paf");
 	$("#player1").css("border","1px solid black");
 	$("#player1").css("cursor", "default");
 
@@ -150,7 +155,10 @@ function paff(player){
 	    data: json			
 	}).always(function(){
 		defausse();
-	})
+	});
+	$(document).ajaxStop(function () {
+		disablePlayer();
+	});
 	
 }
 
@@ -163,17 +171,16 @@ function missed(player){
 		dataType: "json",
 		url: "card",
 	    data: json			
-	});
-	
-	defausse();
+	}).always(function(){
+		defausse();
+		reEnablePlayer();
+	})
 }
 
 function loseLife(player){
-	console.log("loseLife");
 	var json ={};
 	json.card = "loseLife";
 	json.player = player;
-	console.log(json);
 	$.ajax({
 		type: "POST",
 		dataType: "json",
@@ -183,7 +190,7 @@ function loseLife(player){
 }
 
 
-function checkForMissed(){
+function enableMissed(){
 	var currentPlayer = document.URL;
 	currentPlayer = currentPlayer.split("player")[1];
 	currentPlayer = currentPlayer.split(".jsp")[0];
@@ -196,12 +203,17 @@ function checkForMissed(){
 		var cardName = src.split("img/")[1];
 		if(cardName == "missed.jpg"){
 			var cardFound = $(player).find(elt);
-			$(cardFound).css("border", "1px solid red");
+			var number = $(cardFound).parent().attr('id').split('card')[1];
+			number = "showAction("+number+")";
+			$(cardFound).removeAttr( 'class' );
+			$(cardFound).addClass('image_in_slot');
+			$(cardFound).removeAttr('onclick');
+			$(cardFound).attr('onclick', number);
 		}
 		else{
 			var cardFound = $(player).find(elt);
 			$(cardFound).removeAttr( 'class' );
-			$(cardFound).addClass('defausseCard');
+			$(cardFound).addClass('disabledCard');
 			$(cardFound).removeAttr('onclick');
 		}
 	});
@@ -221,7 +233,9 @@ function addPlayer(name, token){
 	})
 }
 
-function refreshHand(nb){
+var refreshHand = function(nb){
+	var r = $.Deferred();
+	
 	var json = {};
 	json.number = nb;
 	
@@ -241,9 +255,12 @@ function refreshHand(nb){
 		});
 		
 		if(json.defausse){
-			$("#defausse").text("");
+			$("#defausse").empty();
+			$("#defausse").text("Defausse :"+ json.defausseSize+ " cards");
 			$("#defausse").append('<img class="defausseCard" src="img/'+json.defausse+'.jpg"/>');
-			
+		}
+		else{
+			$("#defausse").text("Defausse : 0 cards");
 		}
 		
 		$("#life").text(json.life);
@@ -258,42 +275,119 @@ function refreshHand(nb){
 				$(playerName).text("life : "+elt.life + " nb cards : "+ elt.nbCards);	
 			}
 		});
+		
+		$("#pioche").empty();
+		$("#pioche").text("Pioche: "+json.pioche+" cards");
+		$("#pioche").append('<img class="defausseCard" src="img/back.png"/>');
 	});
+	
+	setTimeout(function () {
+	    // and call `resolve` on the deferred object, once you're done
+	    r.resolve();
+	  }, 2500);
+
+	  // return the deferred object
+	  return r;
 }
 
 function enablePlayer(){
-	console.log("enable");
-	var currentPlayer = document.URL;
-	currentPlayer = currentPlayer.split("player")[1];
-	currentPlayer = currentPlayer.split(".jsp")[0];
-	
-	var player = $("#player"+currentPlayer);
+
+	var player = document.URL;
+	player = player.split("player")[1];
+	player = player.split(".jsp")[0];
+	player = ("#player")+player;
 	var images =  $(player).find('img').map(function() { return this; }).get();
 	
 	$(images).each(function(i,elt){
 		var cardFound = $(player).find(elt);
-		$(cardFound).removeAttr( 'class' );
-		$(cardFound).addClass('image_in_slot');
-		$(cardFound).removeAttr('onclick');
+		var src = elt.src;
+		var cardName = src.split("img/")[1];
+		if(cardName == "missed.jpg"){
+			var number = $(cardFound).parent().attr('id').split('card')[1];
+			number = "showDefausse("+number+")";
+			
+			$(cardFound).removeAttr( 'class' );
+			$(cardFound).addClass('image_in_slot');
+			$(cardFound).removeAttr('onclick');
+			$(cardFound).attr('onclick', number);
+			
+		}
+		
+		else{
+			var number = $(cardFound).parent().attr('id').split('card')[1];
+			number = "showAction("+number+")";
+			
+			$(cardFound).removeAttr( 'class' );
+			$(cardFound).addClass('image_in_slot');
+			$(cardFound).removeAttr('onclick');
+			$(cardFound).attr('onclick', number);
+		}
+		
 	});
+	$("#action_endOfTurn").css( "visibility", "visible" );
 }
 
 function disablePlayer(){
-	console.log("disable");
-	var currentPlayer = document.URL;
-	currentPlayer = currentPlayer.split("player")[1];
-	currentPlayer = currentPlayer.split(".jsp")[0];
+	var player = document.URL;
+	player = player.split("player")[1];
+	player = player.split(".jsp")[0];
+	player = ("#player")+player;
 	
-	var player = $("#player"+currentPlayer);
-	console.log(player);
 	var images =  $(player).find('img').map(function() { return this; }).get();
-	console.log(images);
+	
 	$(images).each(function(i,elt){
 		var cardFound = $(player).find(elt);
-		console.log(cardFound);
 		$(cardFound).removeAttr( 'class' );
-		$(cardFound).addClass('defausseCard');
+		$(cardFound).addClass('disabledCard');
 		$(cardFound).removeAttr('onclick');
+	});
+
+	$("#action_endOfTurn").css( "visibility", "hidden" );
+}
+
+function endOfTurn(){
+	var nbOfImages = $("#cards img").length;
+	console.log(nbOfImages);
+	
+	
+	if(nbOfImages <= $("#life").text()){
+		changePlayer();
+	}
+	else{
+		$("#notifications").text("You can't have more than "+$("#life").text()+" cards.");
+		$("#notifications").append("<p>Please defausse cards before ending your turn.</p>");
+	}
+
+}
+
+function changePlayer(){
+	var json = {};
+	json.turn = "next";
+	$.ajax({
+		type: "POST",
+		dataType: "json",
+		url: "turn",
+	    data: json		
+		
 	});
 }
 
+function reEnablePlayer(){
+	var json = {};
+	json.turn = "";
+		$.ajax({
+			type: "POST",
+			dataType: "json",
+			url: "turn",
+		    data: json		
+		})
+	}
+
+function skipDodge(){
+	var player = document.URL;
+	player = player.split("player")[1];
+	player = player.split(".jsp")[0];
+	
+	loseLife(player);
+	reEnablePlayer();
+}

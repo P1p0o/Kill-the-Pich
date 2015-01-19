@@ -1,7 +1,6 @@
 package bang.model.game;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Id;
 
@@ -71,6 +70,7 @@ public class PlayerModel {
 		{
 			//Chance de boire une biere
 			ChannelService channelService = ChannelServiceFactory.getChannelService();
+			
 			channelService.sendMessage(new ChannelMessage("player1", "chancepoulemouth"+this.getName()));
 			channelService.sendMessage(new ChannelMessage("player2", "chancepoulemouth"+this.getName()));
 			channelService.sendMessage(new ChannelMessage("player3", "chancepoulemouth"+this.getName()));
@@ -84,7 +84,13 @@ public class PlayerModel {
 			if(Life < 0 || Life == 0)
 			{
 				Life = 0;
-				return "dead";
+
+				ChannelService channelService = ChannelServiceFactory.getChannelService();
+				channelService.sendMessage(new ChannelMessage("player1", "mort"+name));
+				channelService.sendMessage(new ChannelMessage("player2", "mort"+name));
+				channelService.sendMessage(new ChannelMessage("player3", "mort"+name));
+				channelService.sendMessage(new ChannelMessage("player4", "mort"+name));
+
 			}
 		}
 		return "alive";
