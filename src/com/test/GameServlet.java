@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.appengine.api.channel.ChannelMessage;
 import com.google.appengine.api.channel.ChannelService;
@@ -62,12 +63,15 @@ public class GameServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		GameModel gameModel = (GameModel) cacheManager.get("game");
 		
+		HttpSession session = request.getSession();
+		String mail = (String) session.getAttribute("email");
+		
 		if(gameModel == null){
 			gameModel = new GameModel();
 		}
 		
 		if(gameModel.getListPlayers().size() < 4){
-			gameModel.addPlayer(name, token);
+			gameModel.addPlayer(name, token, mail);
 		}
 		
 		

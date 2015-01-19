@@ -15,7 +15,12 @@ import bang.model.game.PlayerModel;
 import com.google.appengine.api.channel.ChannelMessage;
 import com.google.appengine.api.channel.ChannelService;
 import com.google.appengine.api.channel.ChannelServiceFactory;
- 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
+
  
 @SuppressWarnings("serial")
 public class CardServlet extends HttpServlet {
@@ -89,16 +94,29 @@ public class CardServlet extends HttpServlet {
 			}
 		}
 		
-		if( gameModel.EndOfAction().equals(""))
+		if( !gameModel.EndOfAction().equals(""))
 		{
 			String lWinner = gameModel.EndOfAction();
-			ChannelService channelService = ChannelServiceFactory.getChannelService();
-			channelService.sendMessage(new ChannelMessage("player1", lWinner));
-			channelService.sendMessage(new ChannelMessage("player2", lWinner));
-			channelService.sendMessage(new ChannelMessage("player3", lWinner));
-			channelService.sendMessage(new ChannelMessage("player4", lWinner));
+			DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+			for(PlayerModel P : gameModel.getListPlayers()){
+				String email = P.getMail();
+				if(P.getmRole() == lWinner || (P.getmRole() == "adjoint" && lWinner == "sherif")){
+					Query q = new Query("user").setFilter(new Query.FilterPredicate("email", Query.FilterOperator.EQUAL, email));
+					Entity user = datastore.prepare(q).asSingleEntity();
+					Object score = user.getProperty("score");
+					int scoreInt = ((Long) score).intValue();
+					//score = score+50;
+					user.setProperty("score", score);
+					datastore.put(user);
+				} 
+			}
 			
-			System.out.println("End of game message: "+lWinner);
+			
+			ChannelService channelService = ChannelServiceFactory.getChannelService();
+			channelService.sendMessage(new ChannelMessage("player1", "win"+lWinner));
+			channelService.sendMessage(new ChannelMessage("player2", "win"+lWinner));
+			channelService.sendMessage(new ChannelMessage("player3", "win"+lWinner));
+			channelService.sendMessage(new ChannelMessage("player4", "win"+lWinner));
 		}
 	} 
 	

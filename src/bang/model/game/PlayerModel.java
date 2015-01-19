@@ -17,11 +17,13 @@ public class PlayerModel {
 	private String name;
 	private String mRole;
 	private String token;
+	private String mail;
 	
-	public PlayerModel(String name, String pToken)
+	public PlayerModel(String name, String pToken, String pMail)
 	{
 		setName(name);
 		setToken(pToken);
+		setMail(pMail);
 	}
 	
 	public PlayerModel(){}
@@ -125,6 +127,14 @@ public class PlayerModel {
 
 	public void setmRole(String mRole) {
 		this.mRole = mRole;
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 	
 	

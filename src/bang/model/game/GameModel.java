@@ -162,19 +162,31 @@ public class GameModel {
 		//Victoire du Hors la Loi
 		if(lPlayers.get("sherif").equals("dead") && lPlayers.get("hll").equals("alive"))
 		{
+<<<<<<< Updated upstream
 			return "winLE MEURTRIEUR";
+=======
+			return "hll";
+>>>>>>> Stashed changes
 		}
 		
 		//Victoire du sherif (et adjoint)
 		if(lPlayers.get("sherif").equals("alive") && lPlayers.get("hll").equals("dead") && lPlayers.get("renegat").equals("dead") )
 		{
+<<<<<<< Updated upstream
 			return "winLE CHEF";
+=======
+			return "sherif";
+>>>>>>> Stashed changes
 		}
 		
 		//Victoire du renegat
 		if(lPlayers.get("sherif").equals("dead") && lPlayers.get("adjoint").equals("dead") && lPlayers.get("hll").equals("dead") && lPlayers.get("renegat").equals("alive"))
 		{
+<<<<<<< Updated upstream
 			return "winL'IMPOSTEUR";
+=======
+			return "renegat";
+>>>>>>> Stashed changes
 		}
 		
 		//CAS EX AEQUO: adjoint seul
@@ -182,7 +194,7 @@ public class GameModel {
 		{
 			if( lPlayers.get("renegat").equals("dead") && lPlayers.get("adjoint").equals("true") )
 			{
-				return "allLose";
+				return "lose";
 			}	
 		}
 		
@@ -210,9 +222,9 @@ public class GameModel {
 		return lFirstCard.getName();
 	}
 	
-	public void addPlayer (String name, String token)
+	public void addPlayer (String name, String token, String mail)
 	{
-		PlayerModel lNewPlayer = new PlayerModel(name, token);
+		PlayerModel lNewPlayer = new PlayerModel(name, token, mail);
 		mListPlayers.add(lNewPlayer);
 		availableSlots --;
 	}
