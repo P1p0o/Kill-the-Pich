@@ -162,19 +162,19 @@ public class GameModel {
 		//Victoire du Hors la Loi
 		if(lPlayers.get("sherif").equals("dead") && lPlayers.get("hll").equals("alive"))
 		{
-			return "winHll";
+			return "winLE MEURTRIEUR";
 		}
 		
 		//Victoire du sherif (et adjoint)
 		if(lPlayers.get("sherif").equals("alive") && lPlayers.get("hll").equals("dead") && lPlayers.get("renegat").equals("dead") )
 		{
-			return "winSherif";
+			return "winLE CHEF";
 		}
 		
 		//Victoire du renegat
 		if(lPlayers.get("sherif").equals("dead") && lPlayers.get("adjoint").equals("dead") && lPlayers.get("hll").equals("dead") && lPlayers.get("renegat").equals("alive"))
 		{
-			return "winRenegat";
+			return "winL'IMPOSTEUR";
 		}
 		
 		//CAS EX AEQUO: adjoint seul
