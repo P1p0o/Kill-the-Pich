@@ -25,14 +25,14 @@ public class CardServlet extends HttpServlet {
 		String player = req.getParameter("player");
 		String defausse = req.getParameter("defausse");
 		String pioche = req.getParameter("pioche");
+
+		CacheManager cacheManager;
+		cacheManager = CacheManager.getInstance();
+		GameModel gameModel = (GameModel) cacheManager.get("game");
 		
 		if(defausse != null || pioche != null){
 			if( defausse != null )
-			{
-				CacheManager cacheManager;
-				cacheManager = CacheManager.getInstance();
-				GameModel gameModel = (GameModel) cacheManager.get("game");
-				ArrayList<PlayerModel> listPlayers = gameModel.getListPlayers();
+			{ArrayList<PlayerModel> listPlayers = gameModel.getListPlayers();
 				for(PlayerModel playerModel : listPlayers){
 					if(playerModel.getName().equals("player"+player)){
 						ArrayList<CardModel> cardHand = playerModel.getHand();
@@ -49,9 +49,6 @@ public class CardServlet extends HttpServlet {
 			}
 			if( pioche != null)
 			{
-				CacheManager cacheManager;
-				cacheManager = CacheManager.getInstance();
-				GameModel gameModel = (GameModel) cacheManager.get("game");
 				ArrayList<PlayerModel> listPlayers = gameModel.getListPlayers();
 				String lNewCard = gameModel.drawCard(player);
 				ChannelService channelService = ChannelServiceFactory.getChannelService();
@@ -81,6 +78,8 @@ public class CardServlet extends HttpServlet {
 			}
 		}
 		
-	}
+		String test = gameModel.EndOfAction();
+		System.out.println("test : "+test);
+	} 
 	
 } 

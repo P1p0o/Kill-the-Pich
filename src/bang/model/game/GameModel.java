@@ -144,7 +144,7 @@ public class GameModel {
 		}
 	}
 	
-	public void EndOfAction()
+	public String EndOfAction()
 	{
 		Map<String, String> lPlayers = new HashMap<String, String>();
 		for( PlayerModel P : mListPlayers)
@@ -155,60 +155,26 @@ public class GameModel {
 			}
 			else
 			{
-				lPlayers.put(P.getmRole(), "alive");
+				lPlayers.put(P.getmRole(), "dead");
 			}
 		}
 		
 		//Victoire du Hors la Loi
 		if(lPlayers.get("sherif").equals("dead") && lPlayers.get("hll").equals("alive"))
 		{
-			if(lPlayers.get("renegat").equals("dead"))
-			{
-				if(lPlayers.get("adjoint").equals("alive"))
-				{
-					EndOfGame("hll", "adjoint");
-					return;
-				}
-				else
-				{
-					EndOfGame("hll", "");
-					return;
-				}
-			}
-			else
-			{
-				if(lPlayers.get("adjoint").equals("alive"))
-				{
-					EndOfGame("hll", "renegatadjoint");
-					return;
-				}
-				else
-				{
-					EndOfGame("hll", "renegat");
-					return;
-				}
-			}
+			return "hll";
 		}
 		
 		//Victoire du sherif (et adjoint)
 		if(lPlayers.get("sherif").equals("alive") && lPlayers.get("hll").equals("dead") && lPlayers.get("renegat").equals("dead") )
 		{
-			if(lPlayers.get("adjoint").equals("alive"))
-			{
-				EndOfGame("sherif", "");
-				return;
-			}
-			else
-			{
-				EndOfGame("sherif", "");
-				return;
-			}
+			return "sherif";
 		}
 		
 		//Victoire du renegat
 		if(lPlayers.get("sherif").equals("dead") && lPlayers.get("adjoint").equals("dead") && lPlayers.get("hll").equals("dead") && lPlayers.get("renegat").equals("alive"))
 		{
-			EndOfGame("renegat", "");
+			return "renegat";
 		}
 		
 		//CAS EX AEQUO: adjoint seul
@@ -216,25 +182,14 @@ public class GameModel {
 		{
 			if( lPlayers.get("renegat").equals("dead") && lPlayers.get("adjoint").equals("true") )
 			{
-				EndOfGame("", "adjoint");
-			}
-			
+				return "allLose";
+			}	
 		}
+		
+		return "";
 		
 	}
 	
-	public void EndOfGame( String pWinners, String pLosers)
-	{
-		ChannelService channelService = ChannelServiceFactory.getChannelService();
-		for(PlayerModel P : mListPlayers)
-		{
-			channelService.sendMessage(new ChannelMessage( P.getName(), "win"));
-			if(pLosers.contains(P.getmRole()))
-			{
-				channelService.sendMessage(new ChannelMessage( P.getName(), "lose"));
-			}
-		}
-	}
 	
 	public String drawCard( String pPlayer) //Piocher une carte
 	{
