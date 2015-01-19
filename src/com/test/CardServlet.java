@@ -56,10 +56,21 @@ public class CardServlet extends HttpServlet {
 			}
 			
 			ChannelService channelService = ChannelServiceFactory.getChannelService();
-			channelService.sendMessage(new ChannelMessage("player1", "refreshHand"));
-			channelService.sendMessage(new ChannelMessage("player2", "refreshHand"));
-			channelService.sendMessage(new ChannelMessage("player3", "refreshHand"));
-			channelService.sendMessage(new ChannelMessage("player4", "refreshHand"));
+			if( gameModel.EndOfAction().equals(""))
+			{
+				channelService.sendMessage(new ChannelMessage("player1", "refreshHand"));
+				channelService.sendMessage(new ChannelMessage("player2", "refreshHand"));
+				channelService.sendMessage(new ChannelMessage("player3", "refreshHand"));
+				channelService.sendMessage(new ChannelMessage("player4", "refreshHand"));
+			}
+			else
+			{
+				String lWinner = gameModel.EndOfAction();
+				channelService.sendMessage(new ChannelMessage("player1", lWinner));
+				channelService.sendMessage(new ChannelMessage("player2", lWinner));
+				channelService.sendMessage(new ChannelMessage("player3", lWinner));
+				channelService.sendMessage(new ChannelMessage("player4", lWinner));
+			}
 			
 		}
 		else{
@@ -78,8 +89,17 @@ public class CardServlet extends HttpServlet {
 			}
 		}
 		
-		String test = gameModel.EndOfAction();
-		System.out.println("test : "+test);
+		if( gameModel.EndOfAction().equals(""))
+		{
+			String lWinner = gameModel.EndOfAction();
+			ChannelService channelService = ChannelServiceFactory.getChannelService();
+			channelService.sendMessage(new ChannelMessage("player1", lWinner));
+			channelService.sendMessage(new ChannelMessage("player2", lWinner));
+			channelService.sendMessage(new ChannelMessage("player3", lWinner));
+			channelService.sendMessage(new ChannelMessage("player4", lWinner));
+			
+			System.out.println("End of game message: "+lWinner);
+		}
 	} 
 	
 } 
