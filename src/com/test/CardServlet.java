@@ -103,9 +103,8 @@ public class CardServlet extends HttpServlet {
 				if(P.getmRole() == lWinner || (P.getmRole() == "adjoint" && lWinner == "sherif")){
 					Query q = new Query("user").setFilter(new Query.FilterPredicate("email", Query.FilterOperator.EQUAL, email));
 					Entity user = datastore.prepare(q).asSingleEntity();
-					Object score = user.getProperty("score");
-					int scoreInt = ((Long) score).intValue();
-					//score = score+50;
+					long score = (long) user.getProperty("score");
+					score = score+50;
 					user.setProperty("score", score);
 					datastore.put(user);
 				} 
