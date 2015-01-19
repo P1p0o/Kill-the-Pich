@@ -162,19 +162,19 @@ public class GameModel {
 		//Victoire du Hors la Loi
 		if(lPlayers.get("sherif").equals("dead") && lPlayers.get("hll").equals("alive"))
 		{
-			return "hll";
+			return "winHll";
 		}
 		
 		//Victoire du sherif (et adjoint)
 		if(lPlayers.get("sherif").equals("alive") && lPlayers.get("hll").equals("dead") && lPlayers.get("renegat").equals("dead") )
 		{
-			return "sherif";
+			return "winSherif";
 		}
 		
 		//Victoire du renegat
 		if(lPlayers.get("sherif").equals("dead") && lPlayers.get("adjoint").equals("dead") && lPlayers.get("hll").equals("dead") && lPlayers.get("renegat").equals("alive"))
 		{
-			return "renegat";
+			return "winRenegat";
 		}
 		
 		//CAS EX AEQUO: adjoint seul
@@ -190,7 +190,7 @@ public class GameModel {
 		
 	}
 	
-	
+
 	public String drawCard( String pPlayer) //Piocher une carte
 	{
 		PlayerModel lPlayer;
