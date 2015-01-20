@@ -35,11 +35,3 @@ function backMainMenu(){
 	window.location.href="index.html"; 
 	
 }
-
-function goToHall()
-{
-	
-	window.location.replace("Hall.html"); 
-
-
-}

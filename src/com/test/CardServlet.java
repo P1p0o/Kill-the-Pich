@@ -115,6 +115,8 @@ public class CardServlet extends HttpServlet {
 			channelService.sendMessage(new ChannelMessage("player2", "win"+lWinner));
 			channelService.sendMessage(new ChannelMessage("player3", "win"+lWinner));
 			channelService.sendMessage(new ChannelMessage("player4", "win"+lWinner));
+			
+			cacheManager.clear("game");
 		}
 	} 
 	
