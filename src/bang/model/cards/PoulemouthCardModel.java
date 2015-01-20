@@ -21,13 +21,17 @@ public class PoulemouthCardModel extends YellowCardModel {
 	public boolean eatPoulemouth (String pPlayer)
 	{
 		ChannelService channelService = ChannelServiceFactory.getChannelService();
-		
+		channelService.sendMessage(new ChannelMessage("player1", "poulemouth"+pPlayer));
+		channelService.sendMessage(new ChannelMessage("player2", "poulemouth"+pPlayer));
+		channelService.sendMessage(new ChannelMessage("player3", "poulemouth"+pPlayer));
+		channelService.sendMessage(new ChannelMessage("player4", "poulemouth"+pPlayer));
 		
 		//Refresh life
 		CacheManager cacheManager;
 		cacheManager = CacheManager.getInstance();
 		GameModel gameModel = (GameModel) cacheManager.get("game");
 		ArrayList<PlayerModel> listPlayers = gameModel.getListPlayers();
+		
 		
 		for(PlayerModel P : listPlayers){
 			if(P.getName().equals("player"+pPlayer))

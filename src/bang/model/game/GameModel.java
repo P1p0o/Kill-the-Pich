@@ -192,7 +192,7 @@ public class GameModel {
 	}
 	
 
-	public String drawCard( String pPlayer) //Piocher une carte
+	public String drawCard( String pPlayer) //Piocher une carte: numero du joueur
 	{
 		PlayerModel lPlayer;
 		CardModel lFirstCard;

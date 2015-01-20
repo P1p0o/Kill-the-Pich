@@ -7,6 +7,7 @@ import javax.servlet.http.*;
 
 import bang.manager.CacheManager;
 import bang.model.cards.CardModel;
+import bang.model.cards.ChasseCardModel;
 import bang.model.cards.PafCardModel;
 import bang.model.cards.MissedCardModel;
 import bang.model.game.GameModel;
@@ -34,6 +35,8 @@ public class CardServlet extends HttpServlet {
 		CacheManager cacheManager;
 		cacheManager = CacheManager.getInstance();
 		GameModel gameModel = (GameModel) cacheManager.get("game");
+		
+		
 		
 		if(defausse != null || pioche != null){
 			if( defausse != null )
@@ -91,6 +94,10 @@ public class CardServlet extends HttpServlet {
 			if(card.equals("loseLife")){
 				PafCardModel pafCard = new PafCardModel();
 				pafCard.decrementLife(player);
+			}
+			if(card.equals("chasse")){
+				ChasseCardModel chasseCard = new ChasseCardModel();
+				chasseCard.goChasse(player);
 			}
 		}
 		
