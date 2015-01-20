@@ -70,10 +70,17 @@ public class GameServlet extends HttpServlet {
 			gameModel = new GameModel();
 		}
 		
+		boolean check = false;
 		if(gameModel.getListPlayers().size() < 4){
-			gameModel.addPlayer(name, token, mail);
+			for(PlayerModel P : gameModel.getListPlayers()){
+				if(P.getName().equals(name)){
+					check = true;
+				}
+			}
+			if(check == false){
+				gameModel.addPlayer(name, token, mail);
+			}
 		}
-		
 		
 		cacheManager.put("game", gameModel);
 		
@@ -81,20 +88,29 @@ public class GameServlet extends HttpServlet {
 		ArrayList<PlayerModel> listPlayers = gameModel.getListPlayers();
 		
 		if(listPlayers.size() == 4){
-			gameModel.startGame();
-			
-			//Le jeu commence
-			ChannelService channelService = ChannelServiceFactory.getChannelService();
-			channelService.sendMessage(new ChannelMessage("player1", "startGameTurn"+gameModel.getmTurn()));
-			channelService.sendMessage(new ChannelMessage("player2", "startGameTurn"+gameModel.getmTurn()));
-			channelService.sendMessage(new ChannelMessage("player3", "startGameTurn"+gameModel.getmTurn()));
-			channelService.sendMessage(new ChannelMessage("player4", "startGameTurn"+gameModel.getmTurn()));
-			
-			//C'est le tour du sherif!
-			/*channelService.sendMessage(new ChannelMessage("player1", "turn"));
-			channelService.sendMessage(new ChannelMessage("player2", "turn"+gameModel.getmTurn()));
-			channelService.sendMessage(new ChannelMessage("player3", "turn"+gameModel.getmTurn()));
-			channelService.sendMessage(new ChannelMessage("player4", "turn"+gameModel.getmTurn()));*/
+			if(!gameModel.isGameStarted()){
+				
+				gameModel.startGame();
+				
+				//Le jeu commence
+				ChannelService channelService = ChannelServiceFactory.getChannelService();
+				channelService.sendMessage(new ChannelMessage("player1", "startGameTurn"+gameModel.getmTurn()));
+				channelService.sendMessage(new ChannelMessage("player2", "startGameTurn"+gameModel.getmTurn()));
+				channelService.sendMessage(new ChannelMessage("player3", "startGameTurn"+gameModel.getmTurn()));
+				channelService.sendMessage(new ChannelMessage("player4", "startGameTurn"+gameModel.getmTurn()));
+				
+				//C'est le tour du sherif!
+				/*channelService.sendMessage(new ChannelMessage("player1", "turn"));
+				channelService.sendMessage(new ChannelMessage("player2", "turn"+gameModel.getmTurn()));
+				channelService.sendMessage(new ChannelMessage("player3", "turn"+gameModel.getmTurn()));
+				channelService.sendMessage(new ChannelMessage("player4", "turn"+gameModel.getmTurn()));*/
+
+			}
+			else{
+				String player = name;
+				ChannelService channelService = ChannelServiceFactory.getChannelService();
+				channelService.sendMessage(new ChannelMessage(name, "refreshHand"));
+			}
 		}
 		
 	}

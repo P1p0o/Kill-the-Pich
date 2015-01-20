@@ -25,6 +25,7 @@ public class GameModel {
 	private Integer nbPlayers = 4;
 	private int mTurn;
 	private ArrayList<CardModel> defausse = new ArrayList<CardModel>();
+	private boolean gameStarted;
 	
 	
 	public int getmTurn() {
@@ -57,7 +58,7 @@ public class GameModel {
 			AssignRoles(4);
 			GenerateCardsDeck();
 			HandOutCards();
-			
+			setGameStarted(true);
 			return true;
 		}
 		else
@@ -256,5 +257,14 @@ public class GameModel {
 	public void setCardsDeck(ArrayList<CardModel> cardDeck){
 		CardsDeck = cardDeck;
 	}
+
+	public boolean isGameStarted() {
+		return gameStarted;
+	}
+
+	public void setGameStarted(boolean gameStarted) {
+		this.gameStarted = gameStarted;
+	}
+	
 
 }
