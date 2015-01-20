@@ -1,2 +1,3 @@
 # Module bang
 # RPC service class, partial path of RPC policy file
+bang.client.GreetingService, 1E17C3BE36CB51A42FFAF60B13912500.gwt.rpc

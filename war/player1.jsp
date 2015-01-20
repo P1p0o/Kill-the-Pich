@@ -7,7 +7,7 @@
  
 <%@ page import="com.google.appengine.api.channel.ChannelService" %>
 <%@ page import="com.google.appengine.api.channel.ChannelServiceFactory" %>
-<%@page import="java.util.ArrayList"%>
+<%@ page import="java.util.ArrayList" %>
  
  
 <%
