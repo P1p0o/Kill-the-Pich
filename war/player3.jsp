@@ -166,6 +166,11 @@ String token = channelService.createChannel("player3");
 					$("#notifications").append("<p>player "+player+" can dodge!!</p>");
 				}
 			}
+			  
+			if(message.data.indexOf("win") > -1){
+				alert("THE WINNER IS THE "+ message.data.split("win")[1]);
+				window.location.href = "index.html";
+			}
 			    
 	    };
     	</script>
