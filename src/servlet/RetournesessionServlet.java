@@ -44,7 +44,7 @@ public class RetournesessionServlet extends HttpServlet {
 		if(login!=null)
 		{
 			//int score = ((Long) session.getAttribute("score")).intValue();
-			long score = (long)session.getAttribute("score");
+			String score = ((Long)session.getAttribute("score")).toString();
 			try {
 				json.put("response", "true");
 				json.put("login", login);

@@ -75,11 +75,12 @@ public class InscriptionServlet extends HttpServlet {
 
 			//Create Entity for the datastore
 			Entity user = new Entity("user");
+			long score = 0;
 			//String decoded = new String(digest, "UTF-8");
 			user.setProperty("login", login);
 			user.setProperty("pass", hash);//decoded);
 			user.setProperty("email", email);
-			user.setProperty("score", "0");
+			user.setProperty("score", score);
 
 			datastore.put(user);
 			try {

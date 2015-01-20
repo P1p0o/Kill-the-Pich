@@ -4,11 +4,12 @@ $(document).ready(function(){ //au chargement on affiche tantot la login area, t
 		dataType:"json",
 		url:"retournesession",
 	}).then(function(json){
+		console.log(json);
 		if(json.response == "true")
 		{
 			$("#login_area").hide();
 			comment="Bienvenue " + json.login ;
-			document.getElementById('errors').innerHTML = comment;
+			document.getElementById('welcome').innerHTML = comment;
 			score = " votre score est de " + json.score;
 			document.getElementById('score').innerHTML = score;
 			$("#joinGameButton").attr('onclick', "joinGame()");
