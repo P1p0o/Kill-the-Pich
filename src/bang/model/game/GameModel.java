@@ -14,6 +14,7 @@ import com.google.appengine.api.channel.ChannelService;
 import com.google.appengine.api.channel.ChannelServiceFactory;
 
 import bang.model.cards.CardModel;
+import bang.model.cards.ChasseCardModel;
 import bang.model.cards.PafCardModel;
 import bang.model.cards.MissedCardModel;
 
@@ -79,6 +80,10 @@ public class GameModel {
 		for(i=0;i<7;i++){
 			MissedCardModel NewRate = new MissedCardModel();
 			this.CardsDeck.add( NewRate );
+		}
+		for(i=0;i<3;i++){
+			ChasseCardModel NewChasse = new ChasseCardModel();
+			this.CardsDeck.add( NewChasse );
 		}
 		Collections.shuffle(CardsDeck);
 	}
