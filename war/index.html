@@ -4,28 +4,16 @@
 <meta charset="UTF-8">
 <title>PAF - Accueil</title>
 <link href="css/index.css" rel="stylesheet">
-
- <script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
-<script type="text/javascript" src="js/jquery-ui.js"></script>
-<script type="text/javascript" src="js/jquery-2.1.1.js"></script>		
-
-
-<script type="text/javascript" src="js/index.js"></script>
-
-<script type="text/javascript" src="js/jquery.js"></script>
+<script src="js/jquery.js"></script>
 
 <script type="text/javascript" language="javascript" src="js/login.js"></script>
-<script src="cordova-x.x.x.js" charset="utf-8" type="text/javascript"></script>
-
-
 </head>
 <body>
 
 	<div id="header">
 
 		<div id="title">
-			<h1 id="main_title">Bonjour !</h1>
+			<h1 id="main_title">PAF !</h1>
 		</div>
 
 		<div id="login_area">
@@ -33,6 +21,7 @@
 				<tr>
 					<td>E-mail</td>
 					<td><input id="email" name="email" type="email" /></td>
+
 				</tr>
 				<tr>
 					<td>Password</td>
@@ -45,22 +34,38 @@
 				<tr>
 					<td><a id="sign_in" href="inscription.html">Creer un
 							profil</a></td>
+					<td></td>
+					<td>
+						<p id="errors"></p>
+					</td>
 				</tr>
 			</table>
 		</div>
-		<p id="errors"></p>
 		<div id="logout_area">
-			<p id="score"></p>
-			<button name="logout" value="Deconnexion" onclick="logout()">Deconnexion</button>
+			<table>
+				<tr>
+					<td>
+						<p id="welcome"></p>
+					</td>
+					<td>
+						<p id="score"></p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<button name="logout" value="Deconnexion" onclick="logout()">Deconnexion</button>
+					</td>
+				</tr>
+			</table>
 		</div>
-
 	</div>
 
 
 	<div align="center" id="content">
 		<div id="start_game">
-			<button id="joinGameButton" type="button" onclick="joinGame()">
-				<img src="img/start.jpg" height="150" width="200"/><br>LA BAGARRE !
+			<button onclick="joinGame()" id="button" type="button">
+				<img src="img/start.jpg" height="150" width="200" /><br>LA
+				BAGARRE !
 			</button>
 
 		</div>
@@ -71,7 +76,7 @@
 		</div>
 
 		<div id="challenge_button">
-			<button onclick="goToHall()">
+			<button id="button" type="button">
 				<img src="img/challenge.jpg" /><br>LA GROTTE DES CHAMPIONS
 			</button>
 

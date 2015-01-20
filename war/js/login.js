@@ -26,7 +26,7 @@ $(document).ready(function(){ //au chargement on affiche tantot la login area, t
 });
 
 function alertedNotConnected(){
-	alert("Veuillez vous connectez pour pouvoir jouer");
+	alert("Veuillez vous connecter pour pouvoir jouer");
 }
 
 function logout()

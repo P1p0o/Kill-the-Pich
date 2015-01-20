@@ -1,12 +1,65 @@
 @CHARSET "UTF-8";
 
+html,body{
+	margin:0;
+	padding:0;
+	height:100%;	
+}
+
+body{
+	
+	height:100%;
+	width:100%;
+	background-color:#3a0303;
+}
+
+#header{
+	height:18%;
+	width:100%;
+	background-color:yellow;
+	
+}
+
+#content{
+	margin-top:2%;
+	height:74%;
+	width:100%;
+	
+}
+#footer{
+	/*margin-top:5%;*/
+	height:3%;
+	background-color:yellow;
+}
+
+
+#title{
+	width:65%;
+	display:inline-block;
+	vertical-align:middle;
+	color:#3a0303;
+}
 #login_area{
 display:inline-block;
-width:30%;
+/*padding-right:10px;*/
+/*width:30%;*/
 vertical-align:middle;
-position:absolute;
+
+}
+
+#logout_area{
+display:inline-block;
+/*padding-right:10px;*/
+/*width:30%;*/
+vertical-align:middle;
+position:relative;
 right:0;
 }
+#errors{
+	display:inline-block;
+	vertical-align:middle;
+}
+
 
 #main_title{
 	
@@ -14,36 +67,6 @@ right:0;
 	vertical-align:middle;
 }
 
-#header{
-	width:100%;
-	background-color:green;
-	
-}
-#title{
-	width:65%;
-	display:inline-block;
-	vertical-align:middle;
-}
-
-#content{
-	margin-top:2%;
-	heigth:100%;
-	width:100%;
-	
-}
-#footer{
-	margin-top:5%;
-	heigth:14%;
-	background-color:red;
-}
-
-
-body{
-	
-	height:100%;
-	width:100%;
-	background-color:yellow;
-}
 
 #start_game{
 	display:inline-block;
@@ -59,5 +82,6 @@ body{
 
 #challenge_button{
 	margin-top:2%;
-
 }
+
+

@@ -11,7 +11,7 @@
 <!--                                                               -->
 <!-- Consider inlining CSS to reduce the number of requested files -->
 <!--                                                               -->
-<link type="text/css" rel="stylesheet" href="Bang.css">
+<link type="text/css" rel="stylesheet" href="css/inscription.css">
 
 <!--                                           -->
 <!-- Any title is fine                         -->
@@ -25,8 +25,6 @@
 <!--                                           -->
 <script type="text/javascript" language="javascript"
 	src="js/inscription.js"></script>
-	<script src="cordova-x.x.x.js" charset="utf-8" type="text/javascript"></script>
-	
 </head>
 
 <!--                                           -->
@@ -47,8 +45,9 @@
 			Veuillez activer JavaScript pour jouer.</div>
 	</noscript>
 
-	<h1>Inscription</h1>
-
+	<div id="header">
+		<h1>Inscription</h1>
+	</div>
 
 	<div id="inscription">
 
@@ -56,7 +55,8 @@
 
 			<tr>
 
-				<td><label for="login"><strong>Login:</strong></label></td>
+				<td><label for="login"><strong>Nom de
+							guerrier:</strong></label></td>
 				<td><input type="text" name="login" id="login" /></td>
 
 			</tr>
@@ -80,14 +80,19 @@
 				<td><label for="pass2"><strong>Confirmation
 							mot de passe:</strong></label></td>
 				<td><input type="password" name="pass2" id="pass2" /></td>
+			</tr>
+			<tr>
+				<td><button name="register" value="S'inscrire"
+						onclick="inscription()">S'inscrire</button></td>
+				<td>
+					<p id="errors"></p>
+				</td>
+			</tr>
 		</table>
-
-		<button name="register" value="S'inscrire" onclick="inscription()">S'inscrire</button>
-		<p id="errors"></p>
-
 	</div>
+	<div id="footer">PAF - 2015</div>
 </body>
-<script type="text/javascript" src="js/jquery.js"></script>
+<script src="js/jquery.js"></script>
 
 <script type="text/javascript" language="javascript"
 	src="js/inscription.js"></script>
