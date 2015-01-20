@@ -19,7 +19,7 @@ public class PafCardModel extends YellowCardModel{
 		this.setName("paf");
 	}
 	
-	public void pafPlayer(String pPlayer)
+	public void pafPlayer(String pPlayer, String pPafeur)
 	{
 		//Notify players
 		ChannelService channelService = ChannelServiceFactory.getChannelService();
@@ -34,7 +34,11 @@ public class PafCardModel extends YellowCardModel{
 		GameModel gameModel = (GameModel) cacheManager.get("game");
 		ArrayList<PlayerModel> listPlayers = gameModel.getListPlayers();
 		for(PlayerModel playerModel : listPlayers){
+			if(playerModel.getName().equals("player"+pPafeur)){
+				playerModel.setCanPaf(false);
+			}
 			if(playerModel.getName().equals("player"+pPlayer)){
+		
 				ArrayList<CardModel> cardHand = playerModel.getHand();
 				int cpt = 0;
 				for(CardModel cardModel : cardHand){

@@ -18,10 +18,13 @@ public class HippopotamouthCardModel extends YellowCardModel {
 		this.setName("hippopotamouth");
 	}
 	
-	public boolean eatPoulemouth (String pPlayer)
+	public void eatHippopotamouth (String pPlayer)
 	{
 		ChannelService channelService = ChannelServiceFactory.getChannelService();
-		
+		channelService.sendMessage(new ChannelMessage("player1", "hippopotamouth"+pPlayer));
+		channelService.sendMessage(new ChannelMessage("player2", "hippopotamouth"+pPlayer));
+		channelService.sendMessage(new ChannelMessage("player3", "hippopotamouth"+pPlayer));
+		channelService.sendMessage(new ChannelMessage("player4", "hippopotamouth"+pPlayer));
 		
 		//Refresh life
 		CacheManager cacheManager;
@@ -32,31 +35,23 @@ public class HippopotamouthCardModel extends YellowCardModel {
 		for(PlayerModel P : listPlayers){
 			if( P.getmRole().equals("sherif") )
 			{
-				if( P.getLife() == 5 )
-				{
-					channelService.sendMessage(new ChannelMessage("player"+pPlayer, "lifemax"+pPlayer));
-					return false;
-				}
-				else
-				{
+				if( P.getLife() < 5 )
+				{	
 					P.setLife( P.getLife() + 1 );
-					return true;
 				}
 			}
 			else
 			{
-				if( P.getLife() == 4 )
-				{
-					channelService.sendMessage(new ChannelMessage("player"+pPlayer, "lifemax"+pPlayer));
-					return false;
-				}
-				else
+				if( P.getLife() < 4 )
 				{
 					P.setLife( P.getLife() + 1 );
-					return true;
 				}
 			}
 		}
-		return false;
+
+		channelService.sendMessage(new ChannelMessage("player1", "refreshHand"));
+		channelService.sendMessage(new ChannelMessage("player2", "refreshHand"));
+		channelService.sendMessage(new ChannelMessage("player3", "refreshHand"));
+		channelService.sendMessage(new ChannelMessage("player4", "refreshHand"));
 	}
 }

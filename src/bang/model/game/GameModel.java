@@ -15,6 +15,8 @@ import com.google.appengine.api.channel.ChannelServiceFactory;
 
 import bang.model.cards.CardModel;
 import bang.model.cards.ChasseCardModel;
+import bang.model.cards.HippopotamouthCardModel;
+import bang.model.cards.PoulemouthCardModel;
 import bang.model.cards.PafCardModel;
 import bang.model.cards.MissedCardModel;
 
@@ -84,6 +86,14 @@ public class GameModel {
 		for(i=0;i<3;i++){
 			ChasseCardModel NewChasse = new ChasseCardModel();
 			this.CardsDeck.add( NewChasse );
+		}
+		for(i=0;i<6;i++){
+			PoulemouthCardModel NewPoulemouth = new PoulemouthCardModel();
+			this.CardsDeck.add( NewPoulemouth );
+		}
+		for(i=0;i<2;i++){
+			HippopotamouthCardModel NewHippo = new HippopotamouthCardModel();
+			this.CardsDeck.add( NewHippo );
 		}
 		Collections.shuffle(CardsDeck);
 	}
@@ -216,9 +226,9 @@ public class GameModel {
 		return lFirstCard.getName();
 	}
 	
-	public void addPlayer (String name, String token, String mail)
+	public void addPlayer (String name, String token, String mail, String login)
 	{
-		PlayerModel lNewPlayer = new PlayerModel(name, token, mail);
+		PlayerModel lNewPlayer = new PlayerModel(name, token, mail, login);
 		mListPlayers.add(lNewPlayer);
 		availableSlots --;
 	}
