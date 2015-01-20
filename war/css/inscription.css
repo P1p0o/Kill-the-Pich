@@ -1,0 +1,34 @@
+@CHARSET "UTF-8";
+
+
+html,body{
+	/*margin:0;
+	padding:0;*/
+	height:98%;	
+}
+
+body{
+	height:98%;
+	width:100%;
+	background-color:#3a0303;
+	color:yellow;
+}
+
+#header{
+	height:15%;
+}
+
+#inscription{
+	height:80%;
+}
+
+#footer{
+	height: 3%;
+	/*max-height:20px;*/
+	/*min-height:15px;*/
+	background-color:yellow;
+	color:#3a0303;
+}
+
+
+
