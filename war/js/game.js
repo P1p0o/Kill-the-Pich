@@ -95,36 +95,50 @@ function play(){
 		$("#action_defausse").css( "visibility", "hidden" );
 		$("#action_play").css( "visibility", "hidden" );
 		
-		if(currentPlayer != 1){
+		if((currentPlayer != 1) && ($("#player1").text() != "This player is dead")){
 			$("#player1").css("border","1px solid red");
 			$("#player1").css("cursor", "pointer");
 			$("#player1").click(function(){
 				paff(1);
 			});
 		}
+		else{
+			$("#player1").removeAttr('onclick');
+		}
 		
-		if(currentPlayer != 2){
+		if((currentPlayer != 2) && ($("#player2").text() != "This player is dead")){
 			$("#player2").css("border","1px solid red");
 			$("#player2").css("cursor", "pointer");
 			$("#player2").click(function(){
 				paff(2);
 			});
 		}
+		else{
+			$("#player2").removeAttr('onclick');
+		}
 		
-		if(currentPlayer != 3){
+		if((currentPlayer != 3) && ($("#player3").text() != "This player is dead")){
+			console.log("on reste dans le if");
 			$("#player3").css("border","1px solid red");
 			$("#player3").css("cursor", "pointer");
 			$("#player3").click(function(){
 				paff(3);
 			});
 		}
+		else{
+			console.log("on va dans le else");
+			$("#player3").removeAttr('onclick');
+		}
 		
-		if(currentPlayer != 4){
+		if((currentPlayer != 4) && ($("#player4").text() != "This player is dead")){
 			$("#player4").css("border","1px solid red");
 			$("#player4").css("cursor", "pointer");
 			$("#player4").click(function(){
 				paff(4);
 			});
+		}
+		else{
+			$("#player4").removeAttr('onclick');
 		}
 		
 	}
@@ -153,9 +167,9 @@ function paff(player){
 		dataType: "json",
 		url: "card",
 	    data: json			
-	}).always(function(){
-		defausse();
 	});
+	defausse();
+	
 	$(document).ajaxStop(function () {
 		disablePlayer();
 	});
@@ -245,14 +259,23 @@ var refreshHand = function(nb){
 		url: "hand",
 	    data: json			
 	}).then(function(json){
-		$("#cards").empty();
-		$(json.cards).each(function(i,elt){
-			i++;
-			$("#cards").append('<div class="slot_horizontal" id="card'+i+'">\
-			<img class="image_in_slot" onclick="showAction('+i+')" src="img/'+elt.name+'.jpg"/>\
-			</div>');
-			
-		});
+		if(json.life > 0){
+			$("#cards").empty();
+			$(json.cards).each(function(i,elt){
+				i++;
+				$("#cards").append('<div class="slot_horizontal" id="card'+i+'">\
+				<img class="image_in_slot" onclick="showAction('+i+')" src="img/'+elt.name+'.jpg"/>\
+				</div>');
+				
+			});
+
+			$("#life").text(json.life);
+			$("#role").text(json.role);
+		}
+		else{
+			$("#cards").empty();
+			$("#role").text("u are dead !!");
+		}
 		
 		if(json.defausse){
 			$("#defausse").empty();
@@ -263,9 +286,6 @@ var refreshHand = function(nb){
 			$("#defausse").text("Defausse : 0 cards");
 		}
 		
-		$("#life").text(json.life);
-		$("#role").text(json.role);
-		
 		$(json.otherPlayers).each(function(i,elt){
 			var playerName = "#"+elt.name;
 			if(elt.role == "sherif"){
@@ -273,6 +293,9 @@ var refreshHand = function(nb){
 			}
 			else{
 				$(playerName).text("life : "+elt.life + " nb cards : "+ elt.nbCards);	
+			}
+			if(elt.life == 0){
+				$(playerName).text("This player is dead");
 			}
 		});
 		
@@ -348,6 +371,10 @@ function disablePlayer(){
 function endOfTurn(){
 	var nbOfImages = $("#cards img").length;
 	console.log(nbOfImages);
+	
+	$("#action_defausse").css( "visibility", "hidden" );
+	$("#action_play").css( "visibility", "hidden" );
+	$("#action_cancel").css( "visibility", "hidden" );
 	
 	
 	if(nbOfImages <= $("#life").text()){

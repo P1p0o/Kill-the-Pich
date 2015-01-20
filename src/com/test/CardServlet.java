@@ -110,7 +110,6 @@ public class CardServlet extends HttpServlet {
 				} 
 			}
 			
-			
 			ChannelService channelService = ChannelServiceFactory.getChannelService();
 			channelService.sendMessage(new ChannelMessage("player1", "win"+lWinner));
 			channelService.sendMessage(new ChannelMessage("player2", "win"+lWinner));

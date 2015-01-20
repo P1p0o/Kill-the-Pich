@@ -1,5 +1,5 @@
 #player1{
-	background-color:blue;
+	background-color:#B5B3B3;
 	width: 60%;
 	height: 20%;
 	margin-left:20%;
@@ -7,7 +7,7 @@
 }
 
 #player4{
-	background-color:red;
+	background-color:#B5B3B3;
 	width :10%;
 	height: 60%;
 	display: inline-block;
@@ -16,7 +16,7 @@
 }
 
 #player2{
-	background-color:yellow;
+	background-color:#B5B3B3;
 	width :10%;
 	height: 60%;
 	display: inline-block;
@@ -26,7 +26,7 @@
 }
 
 #player3{
-	background-color:green;
+	background-color:#B5B3B3;
 	width: 60%;
 	height: 20%;
 	margin-left:20%;
