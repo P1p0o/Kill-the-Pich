@@ -65,6 +65,7 @@ public class GameServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		String mail = (String) session.getAttribute("email");
+		String login = (String) session.getAttribute("login");
 		
 		if(gameModel == null){
 			gameModel = new GameModel();
@@ -78,7 +79,7 @@ public class GameServlet extends HttpServlet {
 				}
 			}
 			if(check == false){
-				gameModel.addPlayer(name, token, mail);
+				gameModel.addPlayer(name, token, mail, login);
 			}
 		}
 		

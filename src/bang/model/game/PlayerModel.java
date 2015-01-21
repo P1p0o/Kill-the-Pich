@@ -18,12 +18,16 @@ public class PlayerModel {
 	private String mRole;
 	private String token;
 	private String mail;
+	private String login;
+	private boolean canPaf;
 	
-	public PlayerModel(String name, String pToken, String pMail)
+	public PlayerModel(String name, String pToken, String pMail, String pLogin)
 	{
 		setName(name);
 		setToken(pToken);
 		setMail(pMail);
+		setLogin(pLogin);
+		canPaf = true;
 	}
 	
 	public PlayerModel(){}
@@ -135,6 +139,22 @@ public class PlayerModel {
 
 	public void setMail(String mail) {
 		this.mail = mail;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public boolean isCanPaf() {
+		return canPaf;
+	}
+
+	public void setCanPaf(boolean canPaf) {
+		this.canPaf = canPaf;
 	}
 	
 	

@@ -79,6 +79,19 @@ public class HandServlet extends HttpServlet {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
+						
+						try {
+							jsonToReturn.put("login", playerModel.getLogin());
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						try {
+							jsonToReturn.put("canPaf", playerModel.isCanPaf());
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 				
 					}
 					
@@ -92,6 +105,12 @@ public class HandServlet extends HttpServlet {
 						}
 				        try {
 							newJson.put("life", playerModel.getLife());
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+				        try {
+							newJson.put("login", playerModel.getLogin());
 						} catch (JSONException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -111,6 +130,8 @@ public class HandServlet extends HttpServlet {
 								e.printStackTrace();
 							}
 						}
+						
+						
 						
 						newArray.put(newJson);	
 					}

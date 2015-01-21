@@ -95,7 +95,7 @@ function play(){
 		$("#action_defausse").css( "visibility", "hidden" );
 		$("#action_play").css( "visibility", "hidden" );
 		
-		if((currentPlayer != 1) && ($("#player1").text() != "This player is dead")){
+		if((currentPlayer != 1) && ($("#player1").text() != "Ce joueur est mort")){
 			$("#player1").css("border","1px solid red");
 			$("#player1").css("cursor", "pointer");
 			$("#player1").click(function(){
@@ -106,7 +106,7 @@ function play(){
 			$("#player1").removeAttr('onclick');
 		}
 		
-		if((currentPlayer != 2) && ($("#player2").text() != "This player is dead")){
+		if((currentPlayer != 2) && ($("#player2").text() != "Ce joueur est mort")){
 			$("#player2").css("border","1px solid red");
 			$("#player2").css("cursor", "pointer");
 			$("#player2").click(function(){
@@ -117,8 +117,7 @@ function play(){
 			$("#player2").removeAttr('onclick');
 		}
 		
-		if((currentPlayer != 3) && ($("#player3").text() != "This player is dead")){
-			console.log("on reste dans le if");
+		if((currentPlayer != 3) && ($("#player3").text() != "Ce joueur est mort")){
 			$("#player3").css("border","1px solid red");
 			$("#player3").css("cursor", "pointer");
 			$("#player3").click(function(){
@@ -126,11 +125,10 @@ function play(){
 			});
 		}
 		else{
-			console.log("on va dans le else");
 			$("#player3").removeAttr('onclick');
 		}
 		
-		if((currentPlayer != 4) && ($("#player4").text() != "This player is dead")){
+		if((currentPlayer != 4) && ($("#player4").text() != "Ce joueur est mort")){
 			$("#player4").css("border","1px solid red");
 			$("#player4").css("cursor", "pointer");
 			$("#player4").click(function(){
@@ -145,7 +143,59 @@ function play(){
 	if(image == "missed.jpg"){
 		missed(currentPlayer);
 	}
+	if(image == "chasse.jpg"){
+		chasse(currentPlayer);
+	}
+	if(image == "poulemouth.jpg"){
+		poulemouth(currentPlayer);
+	}
+	if(image == "hippopotamouth.jpg"){
+		hippopotamouth(currentPlayer);
+	}
 }
+
+function chasse(player){
+	var json ={};
+	json.player = player; 
+	json.card = "chasse";
+	$.ajax({
+		type: "POST",
+		dataType: "json",
+		url: "card",
+	    data: json			
+	});
+	
+	defausse();
+}
+
+function hippopotamouth(player){
+	var json ={};
+	json.player = player; 
+	json.card = "hippopotamouth";
+	$.ajax({
+		type: "POST",
+		dataType: "json",
+		url: "card",
+	    data: json			
+	});
+	
+	defausse();
+}
+
+function poulemouth(player){
+	var json ={};
+	json.player = player; 
+	json.card = "poulemouth";
+	$.ajax({
+		type: "POST",
+		dataType: "json",
+		url: "card",
+	    data: json			
+	});
+	
+	defausse();
+}
+
 function paff(player){
 	$("#player1").css("border","1px solid black");
 	$("#player1").css("cursor", "default");
@@ -162,6 +212,12 @@ function paff(player){
 	var json ={};
 	json.player = player; 
 	json.card = "paf";
+
+	var currentPlayer = document.URL;
+	currentPlayer = currentPlayer.split("player")[1];
+	currentPlayer = currentPlayer.split(".jsp")[0];
+	json.pafeur = currentPlayer;
+	
 	$.ajax({
 		type: "POST",
 		dataType: "json",
@@ -269,7 +325,6 @@ var refreshHand = function(nb){
 				
 			});
 
-<<<<<<< HEAD
 			$("#life").text(json.login + " Points de vie : "+json.life);
 			if(json.role == "hll"){
 				$("#role").text("Le Meurtrieur");
@@ -283,14 +338,11 @@ var refreshHand = function(nb){
 			if(json.role == "adjoint"){
 				$("#role").text("Le Blond");
 			}
-=======
-			$("#life").text(json.life);
-			$("#role").text(json.role);
->>>>>>> parent of 73197a6... MIMOLETTE
 		}
 		else{
 			$("#cards").empty();
-			$("#role").text("u are dead !!");
+			$("#role").text("Tu es mort!!");
+			$("#life").text("");
 		}
 		
 		if(json.defausse){
@@ -299,33 +351,57 @@ var refreshHand = function(nb){
 			$("#defausse").append('<img class="defausseCard" src="img/'+json.defausse+'.jpg"/>');
 		}
 		else{
-			$("#defausse").text("Defausse : 0 cards");
+			$("#defausse").text("Défausse : 0 cartes");
+		}
+		if(json.canPaf == false){
+			console.log("c FAUX");
+			var player = document.URL;
+			player = player.split("player")[1];
+			player = player.split(".jsp")[0];
+			player = ("#player")+player;
+			var images =  $(player).find('img').map(function() { return this; }).get();
+			
+			$(images).each(function(i,elt){
+				var cardFound = $(player).find(elt);
+				var src = elt.src;
+				var cardName = src.split("img/")[1];
+				if(cardName == "paf.jpg"){
+					var number = $(cardFound).parent().attr('id').split('card')[1];
+					number = "showDefausse("+number+")";
+					console.log(number);
+					$(cardFound).removeAttr( 'class' );
+					$(cardFound).addClass('image_in_slot');
+					$(cardFound).removeAttr('onclick');
+					$(cardFound).attr('onclick', number);
+				console.log(cardFound);	
+				}
+			});
 		}
 		
 		$(json.otherPlayers).each(function(i,elt){
 			var playerName = "#"+elt.name;
 			if(elt.role == "sherif"){
-<<<<<<< HEAD
 				$(playerName).text("");
 				$(playerName).text(elt.login);
 				$(playerName).append("<p>Points de vie : "+elt.life);
 				$(playerName).append("<p>Nombre de cartes : "+elt.nbCards+"</p>");
 				$(playerName).append("<p>Le Chef</p>");
-=======
-				$(playerName).text("life : "+elt.life + " nb cards : "+ elt.nbCards + "WHATHUP I AM THE SHERIF");
->>>>>>> parent of 73197a6... MIMOLETTE
 			}
 			else{
-				$(playerName).text("life : "+elt.life + " nb cards : "+ elt.nbCards);	
+				$(playerName).text("");
+				$(playerName).text(elt.login);
+				$(playerName).append("<p>Points de vie : "+elt.life);
+				$(playerName).append("<p>Nombre de cartes : "+elt.nbCards+"</p>");
+				
 			}
 			if(elt.life == 0){
-				$(playerName).text("This player is dead");
+				$(playerName).text("Ce joueur est mort");
 			}
 		});
 		
 		$("#pioche").empty();
-		$("#pioche").text("Pioche: "+json.pioche+" cards");
-		$("#pioche").append('<img class="defausseCard" src="img/back.png"/>');
+		$("#pioche").text("Pioche: "+json.pioche+" cartes");
+		$("#pioche").append('<img class="defausseCard" src="img/back.jpg"/>');
 	});
 	
 	setTimeout(function () {
@@ -394,19 +470,18 @@ function disablePlayer(){
 
 function endOfTurn(){
 	var nbOfImages = $("#cards img").length;
-	console.log(nbOfImages);
 	
 	$("#action_defausse").css( "visibility", "hidden" );
 	$("#action_play").css( "visibility", "hidden" );
 	$("#action_cancel").css( "visibility", "hidden" );
+	var life = $("#life").text().split(" : ")[1];
 	
-	
-	if(nbOfImages <= $("#life").text()){
+	if(nbOfImages <= life){
 		changePlayer();
 	}
 	else{
-		$("#notifications").text("You can't have more than "+$("#life").text()+" cards.");
-		$("#notifications").append("<p>Please defausse cards before ending your turn.</p>");
+		$("#notifications").text("Tu ne peux pas avoir plus de "+life+" cartes.");
+		$("#notifications").append("<p>Défausse toi de cartes avant de passer ton tour.</p>");
 	}
 
 }
@@ -426,13 +501,13 @@ function changePlayer(){
 function reEnablePlayer(){
 	var json = {};
 	json.turn = "";
-		$.ajax({
-			type: "POST",
-			dataType: "json",
-			url: "turn",
-		    data: json		
-		})
-	}
+	$.ajax({
+		type: "POST",
+		dataType: "json",
+		url: "turn",
+	    data: json		
+	})
+}
 
 function skipDodge(){
 	var player = document.URL;

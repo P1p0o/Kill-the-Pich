@@ -44,9 +44,15 @@ public class TurnServlet extends HttpServlet {
 		String param = request.getParameter("turn");
 
 		if(lCurrentGame != null){
+
 			int lTurn = lCurrentGame.getmTurn();
-			
+				
 			if(param.equals("next")){
+				
+				for(PlayerModel P :lCurrentGame.getListPlayers()){
+					P.setCanPaf(true);
+				}
+				
 				do
 				{
 					if ( lTurn == 4)
@@ -77,6 +83,7 @@ public class TurnServlet extends HttpServlet {
 					player.getHand().add(card);
 					cardDeck.remove(cardDeck.size()-1);
 				}
+				
 			}
 			lCurrentGame.setmTurn(lTurn);
 			cacheManager.put("game", lCurrentGame);

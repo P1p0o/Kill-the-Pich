@@ -35,7 +35,7 @@ String token = channelService.createChannel("player3");
 				<div id="pioche">Pioche</div>
 				<div id="defausse" class="dropper">Defausse</div>
 			</div>
-			<div id="notifications">Notifications</div>
+			<div id="notifications">En attente d'autres joueurs...</div>
 		</div>
 		<div id="action">
 			<div id="action_play" class="action_div" onclick="play()">Play card</div>
@@ -65,6 +65,7 @@ String token = channelService.createChannel("player3");
 		<script src="js/jquery-ui.js"></script>
 		<script src="js/jquery-2.1.1.js"></script>
 		<script src="js/game.js"></script>
+		<script src="js/channelListener.js"></script>
     	<script>
 	    var token ="<%=token %>";// This will creaete unique identifier(some id created by google api + ur key)
 		channel = new goog.appengine.Channel('<%=token%>');    
@@ -76,103 +77,8 @@ String token = channelService.createChannel("player3");
 		
 		
 		socket.onmessage = function(message) {
-
-			if(message.data.indexOf("paf") > -1){
-				if(message.data.indexOf("paf3") > -1){
-					$("#notifications").text("You got pafed !!");
-				}
-				else{
-					var player = message.data.split("paf")[1];
-					$("#notifications").text("player "+player+" got pafed!!");
-				}
-			}
-			
-			if(message.data.indexOf("missed") > -1){
-				if(message.data.indexOf("missed3") > -1){
-					$("#notifications").append("<p>You don't lose 1 life !!</p>");
-				}
-				else{
-					var player = message.data.split("missed")[1];
-					$("#notifications").append("<p>player "+player+" dodged the paf!!</p>");
-				}
-			}
-			
-			if(message.data.indexOf("startGame") > -1){
-				$("#notifications").text("4 players. The game begins");
-				refreshHand(3);
-				if(message.data.indexOf("Turn3") > -1){
-					$("#notifications").append("<p>You are the sherif !! Your turn to play</p>");
-					$(document).ajaxStop(function () {
-					     enablePlayer();
-					  });
-				}
-				else{
-					var player = message.data.split("Turn")[1];
-					$("#notifications").append("<p>player "+player+" is the sherif. It's his turn to play</p>");
-					$(document).ajaxStop(function () {
-					     disablePlayer();
-					  });
-				}
-				
-			}	
-			
-			if(message.data.indexOf("turn") > -1){
-				refreshHand(3);
-				if(message.data.indexOf("turn3") > -1){
-					$("#notifications").text("Your turn to play");
-
-					$(document).ajaxStop(function () {
-					     enablePlayer();
-					});
-				}
-				else{
-					var player = message.data.split("turn")[1];
-					$("#notifications").text("player "+player+" turn to play");
-					
-					$(document).ajaxStop(function () {
-					      disablePlayer();
-			     	});
-				}
-				
-				
-			}
-			
-			if(message.data.indexOf("refreshHand") > -1){
-				//alert("4 joueurs, la partie va commencer");
-				refreshHand(3);
-			}
-			
-			if(message.data.indexOf("loseLife") > -1){
-				if(message.data.indexOf("loseLife3") > -1){
-					$("#notifications").append("<p>You lose 1 life !!</p>");
-				}
-				else{
-					var player = message.data.split("loseLife")[1];
-					$("#notifications").append("<p>player "+player+" lost 1 life!!</p>");
-				}
-				refreshHand(3);
-			}	
-			if(message.data.indexOf("waitAnswer") > -1){
-				if(message.data.indexOf("waitAnswer3") > -1){
-					$("#notifications").text("Your turn to dodge!!");
-			        $("#notifications").append("<p>If you dont wan't or can't to dodge just click here</p>");
-			             $("#notifications").append("<button onclick='skipDodge()'>Skip</button>");
-					$(document).ajaxStop(function () {
-					     enableMissed();
-    				});
-				}
-				else{
-					var player = message.data.split("waitAnswer")[1];
-					$("#notifications").append("<p>player "+player+" can dodge!!</p>");
-				}
-			}
-			  
-			if(message.data.indexOf("win") > -1){
-				alert("THE WINNER IS THE "+ message.data.split("win")[1]);
-				window.location.href = "index.html";
-			}
-			    
-	    };
+			listenToChannel(message, 3);
+		}
     	</script>
     </body>
 </html> 
