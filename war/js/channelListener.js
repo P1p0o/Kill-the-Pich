@@ -5,11 +5,7 @@ function listenToChannel(message, play){
 		}
 		else{
 			var player = message.data.split("paf")[1];
-			var name = $("#player"+player).text();
-			console.log(name);
-			console.log(name.split("Points"));
-			name = name.split("Points")[0];
-			$("#notifications").text(Name+" s'est fait pafer!!");
+			$("#notifications").text("Joueur "+player+" s'est fait pafer!!");
 		}
 	}
 	
@@ -19,11 +15,7 @@ function listenToChannel(message, play){
 		}
 		else{
 			var player = message.data.split("missed")[1];
-			var name = $("#player"+player).text();
-			console.log(name);
-			console.log(name.split("Points"));
-			name = name.split("Points")[0];
-			$("#notifications").append("<p>"+name+" esquive le paf!!</p>");
+			$("#notifications").append("<p>Joueur "+player+" esquive le paf!!</p>");
 		}
 	}
 
@@ -31,7 +23,7 @@ function listenToChannel(message, play){
 		$("#notifications").text("4 joueurs. La partie commence");
 		refreshHand(play);
 		if(message.data.indexOf("Turn"+play) > -1){
-			$("#notifications").append("<p>Vous êtes le chef. Vous commencez à jouer.</p>");
+			$("#notifications").append("<p>Vous êtes les sherif. Vous commencez à jouer.</p>");
 
 			$(document).ajaxStop(function () {
 			     enablePlayer();
@@ -39,16 +31,13 @@ function listenToChannel(message, play){
 		}
 		else{
 			var player = message.data.split("Turn")[1];
-			var name = $("#player"+player).text();
-			console.log(name);
-			console.log(name.split("Points"));
-			name = name.split("Points")[0];
-			$("#notifications").append("<p>"+name+" est le chef. Il commence à jouer.</p>");
+			$("#notifications").append("<p>Joueur "+player+" est le chef. Il commence à jouer.</p>");
 			
 			$(document).ajaxStop(function () {
 			      disablePlayer();
 			  });
 		}
+		
 	}	
 	
 	if(message.data.indexOf("turn") > -1){
@@ -63,11 +52,7 @@ function listenToChannel(message, play){
 		}
 		else{
 			var player = message.data.split("turn")[1];
-			var name = $("#player"+player).text();
-			console.log(name);
-			console.log(name.split("Points"));
-			name = name.split("Points")[0];
-			$("#notifications").text(name+" est en train de jouer...");
+			$("#notifications").text("Joueur "+player+" est en train de jouer...");
 			
 			$(document).ajaxStop(function () {
 			      disablePlayer();
@@ -84,18 +69,14 @@ function listenToChannel(message, play){
 		}
 		else{
 			var player = message.data.split("loseLife")[1];
-			var name = $("#player"+player).text();
-			console.log(name);
-			console.log(name.split("Points"));
-			name = name.split("Points")[0];
-			$("#notifications").append("<p>"+name+" perd 1 point de vie!!</p>");
+			$("#notifications").append("<p>Joueuer "+player+" perd 1 point de vie!!</p>");
 		}
 		refreshHand(play);
 		reEnablePlayer();
 	}	
 	if(message.data.indexOf("waitAnswer") > -1){
 		if(message.data.indexOf("waitAnswer"+play) > -1){
-			$("#notifications").text("A toi d'esquiver!!");
+			$("#notifications").text("Your turn to dodge!!");
 	        $("#notifications").append("<p>Si tu ne veux pas ou peux pas esquiver click ici</p>");
 	        $("#notifications").append("<button onclick='skipDodge()'>Skip</button>");
 			$(document).ajaxStop(function () {
@@ -105,11 +86,7 @@ function listenToChannel(message, play){
 		}
 		else{
 			var player = message.data.split("waitAnswer")[1];
-			var name = $("#player"+player).text();
-			console.log(name);
-			console.log(name.split("Points"));
-			name = name.split("Points")[0];
-			$("#notifications").append("<p>"+name+" peut esquiver!!</p>");
+			$("#notifications").append("<p>Joueur "+player+" peu esquiver!!</p>");
 		}
 	}
 	if(message.data.indexOf("win") > -1){
@@ -123,11 +100,7 @@ function listenToChannel(message, play){
 		}
 		else{
 			var player = message.data.split("poulemouth")[1];
-			var name = $("#player"+player).text();
-			console.log(name);
-			console.log(name.split("Points"));
-			name = name.split("Points")[0];
-			$("#notifications").text(name+" dévore un poulemouth");
+			$("#notifications").text("Joueur "+player+" dévore un poulemouth");
 			$("#notifications").append("<p>Il gagne un point de vie</p>");
 		}
 	}
@@ -138,25 +111,17 @@ function listenToChannel(message, play){
 		}
 		else{
 			var player = message.data.split("chasse")[1];
-			var name = $("#player"+player).text();
-			console.log(name);
-			console.log(name.split("Points"));
-			name = name.split("Points")[0];
-			$("#notifications").text(name+" part à la chasse");
+			$("#notifications").text("Joueur "+player+" part à la chasse");
 		}
 	}
 	
 	if(message.data.indexOf("hippopotamouth") > -1){
 		if(message.data.indexOf("hippopotamouth"+play) > -1){
-			$("#notifications").text("Vous attrapez un hippopotamouth!!");
+			$("#notifications").text("Vous attraper un hippopotamouth!!");
 		}
 		else{
-			var player = message.data.split("hippopotamouth")[1];
-			var name = $("#player"+player).text();
-			console.log(name);
-			console.log(name.split("Points"));
-			name = name.split("Points")[0];
-			$("#notifications").text(name+" attrape un hippopotamouth");
+			var player = message.data.split("chasse")[1];
+			$("#notifications").text("Joueur "+player+" attrape un hippopotamouth");
 		}
 		$("#notifications").append("<p>Tous les joueurs gagnent un point de vie</p>");
 	}
