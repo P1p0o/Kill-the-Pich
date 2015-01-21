@@ -378,6 +378,7 @@ var refreshHand = function(nb){
 			});
 		}
 		
+		
 		$(json.otherPlayers).each(function(i,elt){
 			var playerName = "#"+elt.name;
 			if(elt.role == "sherif"){
