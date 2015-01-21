@@ -8,10 +8,8 @@ import javax.servlet.http.*;
 import bang.manager.CacheManager;
 import bang.model.cards.CardModel;
 import bang.model.cards.ChasseCardModel;
-import bang.model.cards.HippopotamouthCardModel;
 import bang.model.cards.PafCardModel;
 import bang.model.cards.MissedCardModel;
-import bang.model.cards.PoulemouthCardModel;
 import bang.model.game.GameModel;
 import bang.model.game.PlayerModel;
 
@@ -33,7 +31,7 @@ public class CardServlet extends HttpServlet {
 		String player = req.getParameter("player");
 		String defausse = req.getParameter("defausse");
 		String pioche = req.getParameter("pioche");
-		String pafeur = req.getParameter("pafeur");
+
 		CacheManager cacheManager;
 		cacheManager = CacheManager.getInstance();
 		GameModel gameModel = (GameModel) cacheManager.get("game");
@@ -86,7 +84,7 @@ public class CardServlet extends HttpServlet {
 		else{
 			if(card.equals("paf")){
 				PafCardModel pafCard = new PafCardModel();
-				pafCard.pafPlayer(player, pafeur);
+				pafCard.pafPlayer(player);
 			}
 			if(card.equals("missed")){
 				MissedCardModel missedCard = new MissedCardModel();
@@ -100,14 +98,6 @@ public class CardServlet extends HttpServlet {
 			if(card.equals("chasse")){
 				ChasseCardModel chasseCard = new ChasseCardModel();
 				chasseCard.goChasse(player);
-			}
-			if(card.equals("poulemouth")){
-				PoulemouthCardModel poulemouth = new PoulemouthCardModel();
-				poulemouth.eatPoulemouth(player);
-			}
-			if(card.equals("hippopotamouth")){
-				HippopotamouthCardModel hippo = new HippopotamouthCardModel();
-				hippo.eatHippopotamouth(player);
 			}
 		}
 		

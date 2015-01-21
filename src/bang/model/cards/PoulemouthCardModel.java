@@ -18,7 +18,7 @@ public class PoulemouthCardModel extends YellowCardModel {
 		this.setName("poulemouth");
 	}
 	
-	public void eatPoulemouth (String pPlayer)
+	public boolean eatPoulemouth (String pPlayer)
 	{
 		ChannelService channelService = ChannelServiceFactory.getChannelService();
 		channelService.sendMessage(new ChannelMessage("player1", "poulemouth"+pPlayer));
@@ -38,23 +38,32 @@ public class PoulemouthCardModel extends YellowCardModel {
 			{
 				if( P.getmRole().equals("sherif") )
 				{
-					if( P.getLife() < 5 )
+					if( P.getLife() == 5 )
+					{
+						channelService.sendMessage(new ChannelMessage("player"+pPlayer, "lifemax"+pPlayer));
+						return false;
+					}
+					else
 					{
 						P.setLife( P.getLife() + 1 );
+						return true;
 					}
 				}
 				else
 				{
-					if( P.getLife() < 4 )
+					if( P.getLife() == 4 )
+					{
+						channelService.sendMessage(new ChannelMessage("player"+pPlayer, "lifemax"+pPlayer));
+						return false;
+					}
+					else
 					{
 						P.setLife( P.getLife() + 1 );
+						return true;
 					}
 				}
 			}
 		}
-		channelService.sendMessage(new ChannelMessage("player1", "refreshHand"));
-		channelService.sendMessage(new ChannelMessage("player2", "refreshHand"));
-		channelService.sendMessage(new ChannelMessage("player3", "refreshHand"));
-		channelService.sendMessage(new ChannelMessage("player4", "refreshHand"));
+		return false;
 	}
 }

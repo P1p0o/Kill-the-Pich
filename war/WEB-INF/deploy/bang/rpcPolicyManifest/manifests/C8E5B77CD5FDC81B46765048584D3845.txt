@@ -1,0 +1,2 @@
+serviceClass: bang.client.GreetingService
+path: 1E17C3BE36CB51A42FFAF60B13912500.gwt.rpc
