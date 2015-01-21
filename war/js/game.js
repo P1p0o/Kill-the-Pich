@@ -326,9 +326,17 @@ var refreshHand = function(nb){
 			});
 
 			$("#life").text(json.login + " Points de vie : "+json.life);
-			$("#role").text(json.role);
 			if(json.role == "hll"){
-				$("#role").text("hors la loi");
+				$("#role").text("Le Meurtrieur");
+			}
+			if(json.role == "sherif"){
+				$("#role").text("Le Chef");
+			}
+			if(json.role == "renegat"){
+				$("#role").text("L'imposteur");
+			}
+			if(json.role == "adjoint"){
+				$("#role").text("Le Blond");
 			}
 		}
 		else{
@@ -377,7 +385,7 @@ var refreshHand = function(nb){
 				$(playerName).text(elt.login);
 				$(playerName).append("<p>Points de vie : "+elt.life);
 				$(playerName).append("<p>Nombre de cartes : "+elt.nbCards+"</p>");
-				$(playerName).append("<p>Le Sherif</p>");
+				$(playerName).append("<p>Le Chef</p>");
 			}
 			else{
 				$(playerName).text("");
