@@ -31,7 +31,7 @@ function listenToChannel(message, play){
 		}
 		else{
 			var player = message.data.split("Turn")[1];
-			$("#notifications").append("<p>Joueur "+player+" est le chef. Il commence à jouer.</p>");
+			$("#notifications").append("<p>Joueur "+player+" est le sherif. Il commence à jouer.</p>");
 			
 			$(document).ajaxStop(function () {
 			      disablePlayer();
