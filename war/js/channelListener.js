@@ -9,7 +9,7 @@ function listenToChannel(message, play){
 			console.log(name);
 			console.log(name.split("Points"));
 			name = name.split("Points")[0];
-			$("#notifications").text(Name+" s'est fait pafer!!");
+			$("#notifications").text(name+" s'est fait pafer!!");
 		}
 	}
 	
