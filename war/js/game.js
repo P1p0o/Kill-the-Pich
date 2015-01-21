@@ -62,7 +62,7 @@ function defausse(){
 	var src = $(image).attr('src');
 	
 	src = src.split("img/")[1];
-	src = src.split(".jpg")[0];
+	src = src.split(".png")[0];
 	json.player = currentPlayer; 
 	json.card = src;
 	json.defausse = "true";
@@ -90,7 +90,7 @@ function play(){
 	image = image.split("img/")[1];
 	image = image.split("\"")[0];
 	
-	if(image == "paf.jpg"){
+	if(image == "paf.png"){
 
 		$("#action_defausse").css( "visibility", "hidden" );
 		$("#action_play").css( "visibility", "hidden" );
@@ -140,16 +140,16 @@ function play(){
 		}
 		
 	}
-	if(image == "missed.jpg"){
+	if(image == "missed.png"){
 		missed(currentPlayer);
 	}
-	if(image == "chasse.jpg"){
+	if(image == "chasse.png"){
 		chasse(currentPlayer);
 	}
-	if(image == "poulemouth.jpg"){
+	if(image == "poulemouth.png"){
 		poulemouth(currentPlayer);
 	}
-	if(image == "hippopotamouth.jpg"){
+	if(image == "hippopotamouth.png"){
 		hippopotamouth(currentPlayer);
 	}
 }
@@ -271,7 +271,7 @@ function enableMissed(){
 	$(images).each(function(i,elt){
 		var src = elt.src;
 		var cardName = src.split("img/")[1];
-		if(cardName == "missed.jpg"){
+		if(cardName == "missed.png"){
 			var cardFound = $(player).find(elt);
 			var number = $(cardFound).parent().attr('id').split('card')[1];
 			number = "showAction("+number+")";
@@ -320,7 +320,7 @@ var refreshHand = function(nb){
 			$(json.cards).each(function(i,elt){
 				i++;
 				$("#cards").append('<div class="slot_horizontal" id="card'+i+'">\
-				<img class="image_in_slot" onclick="showAction('+i+')" src="img/'+elt.name+'.jpg"/>\
+				<img class="image_in_slot" onclick="showAction('+i+')" src="img/'+elt.name+'.png"/>\
 				</div>');
 				
 			});
@@ -348,7 +348,7 @@ var refreshHand = function(nb){
 		if(json.defausse){
 			$("#defausse").empty();
 			$("#defausse").text("Defausse :"+ json.defausseSize+ " cards");
-			$("#defausse").append('<img class="defausseCard" src="img/'+json.defausse+'.jpg"/>');
+			$("#defausse").append('<img class="defausseCard" src="img/'+json.defausse+'.png"/>');
 		}
 		else{
 			$("#defausse").text("Défausse : 0 cartes");
@@ -365,7 +365,7 @@ var refreshHand = function(nb){
 				var cardFound = $(player).find(elt);
 				var src = elt.src;
 				var cardName = src.split("img/")[1];
-				if(cardName == "paf.jpg"){
+				if(cardName == "paf.png"){
 					var number = $(cardFound).parent().attr('id').split('card')[1];
 					number = "showDefausse("+number+")";
 					console.log(number);
@@ -402,7 +402,7 @@ var refreshHand = function(nb){
 		
 		$("#pioche").empty();
 		$("#pioche").text("Pioche: "+json.pioche+" cartes");
-		$("#pioche").append('<img class="defausseCard" src="img/back.jpg"/>');
+		$("#pioche").append('<img class="defausseCard" src="img/back.png"/>');
 	});
 	
 	setTimeout(function () {
@@ -426,7 +426,7 @@ function enablePlayer(){
 		var cardFound = $(player).find(elt);
 		var src = elt.src;
 		var cardName = src.split("img/")[1];
-		if(cardName == "missed.jpg"){
+		if(cardName == "missed.png"){
 			var number = $(cardFound).parent().attr('id').split('card')[1];
 			number = "showDefausse("+number+")";
 			
