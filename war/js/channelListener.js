@@ -120,12 +120,18 @@ function listenToChannel(message, play){
 			$("#notifications").text("Vous attraper un hippopotamouth!!");
 		}
 		else{
-			var player = message.data.split("chasse")[1];
+			var player = message.data.split("hippopotamouth")[1];
 			$("#notifications").text("Joueur "+player+" attrape un hippopotamouth");
 		}
 		$("#notifications").append("<p>Tous les joueurs gagnent un point de vie</p>");
 	}
 	
-	
+	if(message.data.indexOf("leave") > -1){
+		if( !(message.data.indexOf("leave"+play) > -1) ){  //Que pour les joueurs restant dans la partie
+			$("#notifications").text("Joueur "+player+" a quitté la partie");
+			$("#notifications").append("<p>La sanction est immédiate: il est éliminé</p>");
+			refreshHand(play);
+		}
+	}
 	
 }

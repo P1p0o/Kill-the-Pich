@@ -487,7 +487,7 @@ function changePlayer(){
 		url: "turn",
 	    data: json		
 		
-	});
+	})
 }
 
 function reEnablePlayer(){
@@ -498,7 +498,7 @@ function reEnablePlayer(){
 		dataType: "json",
 		url: "turn",
 	    data: json		
-	})
+	});
 }
 
 function skipDodge(){
@@ -509,3 +509,40 @@ function skipDodge(){
 	loseLife(player);
 	reEnablePlayer();
 }
+
+var _wasPageCleanedUp = false;
+
+function playerDisconnect()
+{
+    if (!_wasPageCleanedUp)
+    {
+    	var player = document.URL;
+    	player = player.split("player")[1];
+    	player = player.split(".jsp")[0];
+    	
+    	var json = {};
+    	json.leave = player;
+    	$.ajax({
+    		type: "POST",
+    		dataType: "json",
+    		url: "game",
+    	    data: json,
+    	    async : false,
+    	    success: function ()
+            {
+                _wasPageCleanedUp = true;
+            }
+    	});
+    }
+}
+
+//If a player tryes to leave the page during the game
+window.onbeforeunload = function() {
+	playerDisconnect();
+	return "Etes vous sur de vouloir quitter la partie? (votre personnage mourra)";
+};
+
+//Player decides to leave
+$(window).unload(function () {
+	playerDisconnect();
+});

@@ -58,62 +58,87 @@ public class GameServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String token = request.getParameter("token");
-		String name = request.getParameter("name");
-		GameModel gameModel = (GameModel) cacheManager.get("game");
-		
-		HttpSession session = request.getSession();
-		String mail = (String) session.getAttribute("email");
-		String login = (String) session.getAttribute("login");
-		
-		if(gameModel == null){
-			gameModel = new GameModel();
+		if( request.getParameter("leave") != null )
+		{
+			System.out.println("bouse"); 
+			
+			int lPlayerToKill = (int) Integer.parseInt(request.getParameter("leave"));
+			GameModel gameModel = (GameModel) cacheManager.get("game");
+			gameModel.killPlayer( lPlayerToKill );
+			
+			//Le jeu commence
+			ChannelService channelService = ChannelServiceFactory.getChannelService();
+			channelService.sendMessage(new ChannelMessage("player1", "leave"+lPlayerToKill));
+			channelService.sendMessage(new ChannelMessage("player2", "leave"+lPlayerToKill));
+			channelService.sendMessage(new ChannelMessage("player3", "leave"+lPlayerToKill));
+			channelService.sendMessage(new ChannelMessage("player4", "leave"+lPlayerToKill));
+			
+			if( !(gameModel.EndOfAction().equals("")) )
+			{
+				String lWinner = gameModel.EndOfAction();
+				channelService.sendMessage(new ChannelMessage("player1", lWinner));
+				channelService.sendMessage(new ChannelMessage("player2", lWinner));
+				channelService.sendMessage(new ChannelMessage("player3", lWinner));
+				channelService.sendMessage(new ChannelMessage("player4", lWinner));
+			}
 		}
-		
-		boolean check = false;
-		if(gameModel.getListPlayers().size() < 4){
-			for(PlayerModel P : gameModel.getListPlayers()){
-				if(P.getName().equals(name)){
-					check = true;
+		else
+		{
+			String token = request.getParameter("token");
+			String name = request.getParameter("name");
+			GameModel gameModel = (GameModel) cacheManager.get("game");
+			
+			HttpSession session = request.getSession();
+			String mail = (String) session.getAttribute("email");
+			String login = (String) session.getAttribute("login");
+			
+			if(gameModel == null){
+				gameModel = new GameModel();
+			}
+			
+			boolean check = false;
+			if(gameModel.getListPlayers().size() < 4){
+				for(PlayerModel P : gameModel.getListPlayers()){
+					if(P.getName().equals(name)){
+						check = true;
+					}
+				}
+				if(check == false){
+					gameModel.addPlayer(name, token, mail, login);
 				}
 			}
-			if(check == false){
-				gameModel.addPlayer(name, token, mail, login);
+			
+			cacheManager.put("game", gameModel);
+			
+			gameModel = (GameModel) cacheManager.get("game");
+			ArrayList<PlayerModel> listPlayers = gameModel.getListPlayers();
+			
+			if(listPlayers.size() == 4){
+				if(!gameModel.isGameStarted()){
+					
+					gameModel.startGame();
+					
+					//Le jeu commence
+					ChannelService channelService = ChannelServiceFactory.getChannelService();
+					channelService.sendMessage(new ChannelMessage("player1", "startGameTurn"+gameModel.getmTurn()));
+					channelService.sendMessage(new ChannelMessage("player2", "startGameTurn"+gameModel.getmTurn()));
+					channelService.sendMessage(new ChannelMessage("player3", "startGameTurn"+gameModel.getmTurn()));
+					channelService.sendMessage(new ChannelMessage("player4", "startGameTurn"+gameModel.getmTurn()));
+					
+					//C'est le tour du sherif!
+					/*channelService.sendMessage(new ChannelMessage("player1", "turn"));
+					channelService.sendMessage(new ChannelMessage("player2", "turn"+gameModel.getmTurn()));
+					channelService.sendMessage(new ChannelMessage("player3", "turn"+gameModel.getmTurn()));
+					channelService.sendMessage(new ChannelMessage("player4", "turn"+gameModel.getmTurn()));*/
+	
+				}
+				else{
+					String player = name;
+					ChannelService channelService = ChannelServiceFactory.getChannelService();
+					channelService.sendMessage(new ChannelMessage(name, "refreshHand"));
+				}
 			}
 		}
-		
-		cacheManager.put("game", gameModel);
-		
-		gameModel = (GameModel) cacheManager.get("game");
-		ArrayList<PlayerModel> listPlayers = gameModel.getListPlayers();
-		
-		if(listPlayers.size() == 4){
-			if(!gameModel.isGameStarted()){
-				
-				gameModel.startGame();
-				
-				//Le jeu commence
-				ChannelService channelService = ChannelServiceFactory.getChannelService();
-				channelService.sendMessage(new ChannelMessage("player1", "startGameTurn"+gameModel.getmTurn()));
-				channelService.sendMessage(new ChannelMessage("player2", "startGameTurn"+gameModel.getmTurn()));
-				channelService.sendMessage(new ChannelMessage("player3", "startGameTurn"+gameModel.getmTurn()));
-				channelService.sendMessage(new ChannelMessage("player4", "startGameTurn"+gameModel.getmTurn()));
-				
-				//C'est le tour du sherif!
-				/*channelService.sendMessage(new ChannelMessage("player1", "turn"));
-				channelService.sendMessage(new ChannelMessage("player2", "turn"+gameModel.getmTurn()));
-				channelService.sendMessage(new ChannelMessage("player3", "turn"+gameModel.getmTurn()));
-				channelService.sendMessage(new ChannelMessage("player4", "turn"+gameModel.getmTurn()));*/
-
-			}
-			else{
-				String player = name;
-				ChannelService channelService = ChannelServiceFactory.getChannelService();
-				channelService.sendMessage(new ChannelMessage(name, "refreshHand"));
-			}
-		}
-		
 	}
 
 }

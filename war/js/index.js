@@ -20,7 +20,7 @@ function joinGame(){
 			window.location.href = "player4.jsp";
 		}
 		if(json.numberOfPlayer == 4){
-			alert("trop de gens dsl trou de balle");
+			alert("Partie pleine, désolé!");
 		}
 	});
 }

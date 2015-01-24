@@ -226,6 +226,11 @@ public class GameModel {
 		return lFirstCard.getName();
 	}
 	
+	public void killPlayer(int pPlayerToKill)
+	{
+		mListPlayers.get( pPlayerToKill - 1 ).setLife(0);
+	}
+	
 	public void addPlayer (String name, String token, String mail, String login)
 	{
 		PlayerModel lNewPlayer = new PlayerModel(name, token, mail, login);
