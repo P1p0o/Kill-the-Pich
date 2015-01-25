@@ -22,11 +22,6 @@
   </servlet>
   
   <servlet>
-    <servlet-name>testFaftoz</servlet-name>
-    <servlet-class>bang.server.TestFaftozServlet</servlet-class>
-  </servlet>
-  
-  <servlet>
     <servlet-name>Inscription</servlet-name>
     <servlet-class>servlet.InscriptionServlet</servlet-class>
   </servlet>
@@ -59,13 +54,6 @@
   <servlet-mapping>
     <servlet-name>greetServlet</servlet-name>
     <url-pattern>/bang/greet</url-pattern>
-  </servlet-mapping>
-  
-  
-  
-  <servlet-mapping>
-    <servlet-name>testFaftoz</servlet-name>
-    <url-pattern>/faftoz</url-pattern>
   </servlet-mapping>
   
    <servlet-mapping>

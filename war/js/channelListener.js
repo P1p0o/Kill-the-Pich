@@ -91,6 +91,7 @@ function listenToChannel(message, play){
 	}
 	if(message.data.indexOf("win") > -1){
 		alert("Le vainqueur est : "+ message.data.split("win")[1]);
+		_wasPageCleanedUp = true;
 		window.location.href = "index.html";
 	}
 	if(message.data.indexOf("poulemouth") > -1){
@@ -128,7 +129,7 @@ function listenToChannel(message, play){
 	
 	if(message.data.indexOf("leave") > -1){
 		if( !(message.data.indexOf("leave"+play) > -1) ){  //Que pour les joueurs restant dans la partie
-			$("#notifications").text("Joueur "+player+" a quitté la partie");
+			$("#notifications").text("Joueur "+play+" a quitté la partie");
 			$("#notifications").append("<p>La sanction est immédiate: il est éliminé</p>");
 			refreshHand(play);
 		}
