@@ -228,7 +228,7 @@ public class GameModel {
 	
 	public void killPlayer(int pPlayerToKill)
 	{
-		mListPlayers.get( pPlayerToKill - 1 ).setLife(0);
+		mListPlayers.get( pPlayerToKill - 1 ).setLife( -1 ); //life = -1 pour etre sur que le joueur ne soit pas sauvé par un poulemouth
 	}
 	
 	public void addPlayer (String name, String token, String mail, String login)

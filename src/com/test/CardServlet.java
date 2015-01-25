@@ -66,7 +66,7 @@ public class CardServlet extends HttpServlet {
 			}
 			
 			ChannelService channelService = ChannelServiceFactory.getChannelService();
-			if( gameModel.EndOfAction().equals(""))
+			if( gameModel.EndOfAction().equals("") )
 			{
 				channelService.sendMessage(new ChannelMessage("player1", "refreshHand"));
 				channelService.sendMessage(new ChannelMessage("player2", "refreshHand"));
@@ -76,10 +76,11 @@ public class CardServlet extends HttpServlet {
 			else
 			{
 				String lWinner = gameModel.EndOfAction();
-				channelService.sendMessage(new ChannelMessage("player1", lWinner));
-				channelService.sendMessage(new ChannelMessage("player2", lWinner));
-				channelService.sendMessage(new ChannelMessage("player3", lWinner));
-				channelService.sendMessage(new ChannelMessage("player4", lWinner));
+				channelService.sendMessage(new ChannelMessage("player1", "win"+lWinner));
+				channelService.sendMessage(new ChannelMessage("player2", "win"+lWinner));
+				channelService.sendMessage(new ChannelMessage("player3", "win"+lWinner));
+				channelService.sendMessage(new ChannelMessage("player4", "win"+lWinner));
+				cacheManager.clear("game");
 			}
 			
 		}

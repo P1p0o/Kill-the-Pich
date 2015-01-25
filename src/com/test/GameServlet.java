@@ -60,27 +60,30 @@ public class GameServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if( request.getParameter("leave") != null )
 		{
-			System.out.println("bouse"); 
 			
 			int lPlayerToKill = (int) Integer.parseInt(request.getParameter("leave"));
 			GameModel gameModel = (GameModel) cacheManager.get("game");
 			gameModel.killPlayer( lPlayerToKill );
+			cacheManager.put("game", gameModel);
 			
-			//Le jeu commence
 			ChannelService channelService = ChannelServiceFactory.getChannelService();
-			channelService.sendMessage(new ChannelMessage("player1", "leave"+lPlayerToKill));
-			channelService.sendMessage(new ChannelMessage("player2", "leave"+lPlayerToKill));
-			channelService.sendMessage(new ChannelMessage("player3", "leave"+lPlayerToKill));
-			channelService.sendMessage(new ChannelMessage("player4", "leave"+lPlayerToKill));
-			
-			if( !(gameModel.EndOfAction().equals("")) )
+			if(gameModel.EndOfAction().equals(""))
+			{
+				channelService.sendMessage(new ChannelMessage("player1", "leave"+lPlayerToKill));
+				channelService.sendMessage(new ChannelMessage("player2", "leave"+lPlayerToKill));
+				channelService.sendMessage(new ChannelMessage("player3", "leave"+lPlayerToKill));
+				channelService.sendMessage(new ChannelMessage("player4", "leave"+lPlayerToKill));
+			}
+			else
 			{
 				String lWinner = gameModel.EndOfAction();
-				channelService.sendMessage(new ChannelMessage("player1", lWinner));
-				channelService.sendMessage(new ChannelMessage("player2", lWinner));
-				channelService.sendMessage(new ChannelMessage("player3", lWinner));
-				channelService.sendMessage(new ChannelMessage("player4", lWinner));
+				channelService.sendMessage(new ChannelMessage("player1", "win"+lWinner));
+				channelService.sendMessage(new ChannelMessage("player2", "win"+lWinner));
+				channelService.sendMessage(new ChannelMessage("player3", "win"+lWinner));
+				channelService.sendMessage(new ChannelMessage("player4", "win"+lWinner));
+				cacheManager.clear("game");
 			}
+			
 		}
 		else
 		{
