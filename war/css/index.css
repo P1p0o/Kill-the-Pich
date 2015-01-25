@@ -10,13 +10,15 @@ body{
 	
 	height:100%;
 	width:100%;
-	background-color:#3a0303;
+	background-color:#B5B3B3;
 }
 
 #header{
 	height:18%;
 	width:100%;
-	background-color:yellow;
+	background-color:#4c4c4c;
+	color: white;
+	border-bottom: 2px solid black;
 	
 }
 
@@ -29,7 +31,11 @@ body{
 #footer{
 	/*margin-top:5%;*/
 	height:3%;
-	background-color:yellow;
+	color: white;
+	background-color:#4c4c4c;
+	border-top: 2px solid black;
+	border-bottom: 2px solid black;
+	text-align:center;
 }
 
 
@@ -37,7 +43,8 @@ body{
 	width:65%;
 	display:inline-block;
 	vertical-align:middle;
-	color:#3a0303;
+	color:#B5B3B3;
+	font-size:150%;
 }
 #login_area{
 display:inline-block;
@@ -69,6 +76,7 @@ right:0;
 
 
 #start_game{
+	margin-top:7%;
 	display:inline-block;
 	margin-right:2%;
 
@@ -77,9 +85,28 @@ right:0;
 #regle_button{
 	display:inline-block;
 	margin-left:2%;
-
 }
 
 #challenge_button{
 	margin-top:2%;
+}
+
+/* unvisited link */
+a:link {
+    color: white;
+}
+
+/* visited link */
+a:visited {
+    color: white;
+}
+
+/* mouse over link */
+a:hover {
+    color: white;
+}
+
+/* selected link */
+a:active {
+    color: white;
 }

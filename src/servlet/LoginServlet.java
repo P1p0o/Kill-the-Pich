@@ -36,11 +36,11 @@ public class LoginServlet extends HttpServlet {
 		//Create a connection to the datastore ONETIME at the init servlet process
 		datastore = DatastoreServiceFactory.getDatastoreService();
 	}
-	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 	}
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		response.setContentType("text/html");  
@@ -50,6 +50,33 @@ public class LoginServlet extends HttpServlet {
 
 		JSONObject json = new JSONObject();
 
+		if(email.matches(".*<.*")==true||email.matches(".*>.*")||email.matches(".*;.*")||email.matches(".*&.*"))//test
+		{
+			try {
+				json.put("response", "false1");
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			PrintWriter out=response.getWriter();  
+			out.print(json);  
+			out.flush();
+			return;
+		}
+		if(pass.matches(".*<.*")==true||pass.matches(".*>.*")||pass.matches(".*;.*")||pass.matches(".*&.*"))//test
+		{
+			try {
+				json.put("response", "false2");
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			PrintWriter out=response.getWriter();  
+			out.print(json);  
+			out.flush();
+			return;
+		}
+		
 		Query q = new Query("user").setFilter(new Query.FilterPredicate("email", Query.FilterOperator.EQUAL, email));
 		Entity user = datastore.prepare(q).asSingleEntity();
 		if(user!=null)
@@ -64,9 +91,9 @@ public class LoginServlet extends HttpServlet {
 			}
 			String passw = pass + user.getProperty("login") + "killthepich"; // Salting avant hashage
 			md.update(passw.getBytes());
-	
+
 			byte byteData[] = md.digest();
-	
+
 			//convert the byte to hex format method 2
 			StringBuffer hexString = new StringBuffer();
 			for (int i=0;i<byteData.length;i++) {
@@ -75,7 +102,7 @@ public class LoginServlet extends HttpServlet {
 				hexString.append(hex);
 			}
 			String hashedpass = hexString.toString();
-	
+
 			/// fin hashage
 			if(hashedpass.equals(user.getProperty("pass"))){  
 				try {
@@ -101,8 +128,8 @@ public class LoginServlet extends HttpServlet {
 			}  
 		}
 		else{
-				// on passe jamais par la si tout va bien
-				System.out.println("problem_loginservlet");
+			// on passe jamais par la si tout va bien
+			System.out.println("problem_loginservlet");
 		}
 		PrintWriter out=response.getWriter();  
 		out.print(json);  

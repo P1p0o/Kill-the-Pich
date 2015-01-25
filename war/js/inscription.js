@@ -54,10 +54,31 @@ function inscription()
 				url:"inscription",
 				data:json
 			}).then(function(json){
+				if(json.response == "false2")
+				{
+					alert("Veuillez saisir une adresse mail moins longue");
+					return;
+				}
+				if(json.response == "false3")
+				{
+					alert("Caratere interdit : Veuillez saisir une adresse mail correcte");
+					return;
+				}
+				if(json.response == "false4")
+				{
+					alert("Caratere interdit : Veuillez saisir un mot de passe correct");
+					return;
+				}
+				if(json.response == "false5")
+				{
+					alert("Caratere interdit : Veuillez saisir un nom de guerrier correct");
+					return;
+				}
 				if(json.response == "true")
 				{
 					alert("Nouvel utlisateur ajoute avec succes");
 					window.location.href = "index.html";
+					return;
 				}
 				else
 				{

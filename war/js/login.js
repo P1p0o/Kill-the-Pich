@@ -13,8 +13,8 @@ $(document).ready(function(){ //au chargement on affiche tantot la login area, t
 			score = " votre score est de " + json.score;
 			document.getElementById('score').innerHTML = score;
 			$("#joinGameButton").attr('onclick', "joinGame()");
+			return;
 		}
-
 		else
 		{
 			$("#logout_area").hide();
@@ -86,7 +86,24 @@ function login()
 					window.location.replace("index.html");
 					return;
 				}
-
+				if(json.response == "false1")
+				{
+					$("#logout_area").hide();
+					comment="Vous n'etes pas connecte";
+					document.getElementById('errors').innerHTML = comment;
+					$("#joinGameButton").attr('onclick', "alertedNotConnected()");
+					alert("Caractere interdit dans le champ e-mail");
+					return;
+				}
+				if(json.response == "false2")
+				{
+					$("#logout_area").hide();
+					comment="Vous n'etes pas connecte";
+					document.getElementById('errors').innerHTML = comment;
+					$("#joinGameButton").attr('onclick', "alertedNotConnected()");
+					alert("Caractere interdit dans le champ mot de passe");
+					return;
+				}
 				else
 				{
 					comment="Identifiant ou mot de passe incorrect.";

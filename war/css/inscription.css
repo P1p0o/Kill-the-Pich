@@ -10,12 +10,27 @@ html,body{
 body{
 	height:98%;
 	width:100%;
-	background-color:#3a0303;
-	color:yellow;
+	background-color:#B5B3B3;
+	color:black;
+	
 }
 
 #header{
 	height:15%;
+	text-align:center;
+}
+
+.insc_img{
+	display:inline-block;
+	width:35%;
+	height:35%;	
+	margin-top:20%;
+}
+
+#table{
+	display:inline-block;
+	vertical-align:top;
+	margin-top:3%;
 }
 
 #inscription{
@@ -26,8 +41,11 @@ body{
 	height: 3%;
 	/*max-height:20px;*/
 	/*min-height:15px;*/
-	background-color:yellow;
-	color:#3a0303;
+	color: white;
+	background-color:#4c4c4c;
+	border-top: 2px solid black;
+	border-bottom: 2px solid black;
+	text-align:center;
 }
 
 

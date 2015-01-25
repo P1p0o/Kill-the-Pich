@@ -39,14 +39,82 @@ public class InscriptionServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		
+		
 		String login =request.getParameter("login");
 		String pass = request.getParameter("pass");
 		String email = request.getParameter("email");
 		
+		JSONObject json = new JSONObject();
+		
+		/* PROTECTION CHAMPS FORMULAIRE */ 
+		
+		if(email.length()>30) 
+		{
+			try {
+				json.put("response", "false2");
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+
+			PrintWriter out = response.getWriter();
+			out.print(json);
+			out.flush();
+			return;
+		}
+		if(email.matches(".*<.*")==true||email.matches(".*>.*")||email.matches(".*;.*")||email.matches(".*&.*"))
+		{
+			try {
+				json.put("response", "false3");
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+
+			PrintWriter out = response.getWriter();
+			out.print(json);
+			out.flush();
+			return;
+		}
+		if(pass.matches(".*<.*")==true||pass.matches(".*>.*")||pass.matches(".*;.*")||pass.matches(".*&.*"))
+		{
+			try {
+				json.put("response", "false4");
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+
+			PrintWriter out = response.getWriter();
+			out.print(json);
+			out.flush();
+			return;
+		}
+		if(login.matches(".*<.*")==true||login.matches(".*>.*")||login.matches(".*;.*")||login.matches(".*&.*"))
+		{
+			try {
+				json.put("response", "false5");
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+
+			PrintWriter out = response.getWriter();
+			out.print(json);
+			out.flush();
+			return;
+		}
+		
+		/* PREPARATION REQUETE DATASTORE */
+		
 		Query q = new Query("user").setFilter(new Query.FilterPredicate("email", Query.FilterOperator.EQUAL, email));
 		Entity s = datastore.prepare(q).asSingleEntity();
-		
-		JSONObject json = new JSONObject();
+
 		if(s==null)
 		{
 
@@ -75,8 +143,6 @@ public class InscriptionServlet extends HttpServlet {
 			long score = 0;
 			//Create Entity for the datastore
 			Entity user = new Entity("user");
-
-			//String decoded = new String(digest, "UTF-8");
 			user.setProperty("login", login);
 			user.setProperty("pass", hash);//decoded);
 			user.setProperty("email", email);
@@ -92,8 +158,6 @@ public class InscriptionServlet extends HttpServlet {
 		}
 		else
 		{
-			//System.out.println("Un compte est deja associe a cette adresse email.");
-			//return;
 			try {
 				json.put("response", "false");
 			} catch (JSONException e) {
